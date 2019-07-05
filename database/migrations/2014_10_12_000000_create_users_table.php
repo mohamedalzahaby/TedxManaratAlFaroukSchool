@@ -13,15 +13,30 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
+        // Schema::create('user', function (Blueprint $table) {
+        //     // $table->bigIncrements('id');
+        //     // $table->string('name');
+        //     // $table->string('email')->unique();
+        //     // $table->timestamp('email_verified_at')->nullable();
+        //     // $table->string('password');
+        //     // $table->rememberToken();
+        //     $table->timestamps();
+        // });
+        Schema::create('user', function (Blueprint $table) {
+		    $table->engine = 'InnoDB';
+		    $table->bigIncrements('id');
+		    $table->string('fname', 100);
+		    $table->string('lname', 100);
+            $table->string('email', 100);
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+		    $table->integer('userTypeId');
+		    $table->boolean('ismale')->default('0');
+            $table->date('birthDate');
             $table->rememberToken();
-            $table->timestamps();
-        });
+		    $table->timestamps();
+		    $table->integer('isdeleted')->default('0');
+
+		});
     }
 
     /**
