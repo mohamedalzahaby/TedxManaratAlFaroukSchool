@@ -12,10 +12,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="FirstName" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="fname" value="{{ old('name') }}" required autocomplete="First name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,7 +24,22 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="LastName" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="lname" value="{{ old('name') }}" required autocomplete="Lats name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <input type="hidden" name="userTypeId" value = "1">
+                        <input type="radio" name="ismale" value="1"> Male<br>
+                        <input type="radio" name="ismale" value="0"> Female<br>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
