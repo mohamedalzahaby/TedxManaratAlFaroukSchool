@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Password;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,12 +53,47 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'ismale'=> 'required|in:1,2',
-            'birthDate' => 'required|unique:users',
+            'birthDate' => 'required',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
         ]);
 
     }
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function loginvalidator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+    }
+
+ /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storePassword( array $data)
+    {
+        $password = new Password();
+        $password->userId  = 1;
+        $password->password = Hash::make($data['password']);
+
+        $password->save();
+        // return redirect('/about')->with('success' , 'login done');
+    }
+
+
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -67,8 +104,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
-
-        return User::create([
+        $User = new User();
+        $User->create([
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'userTypeId' => $data['userTypeId'],
@@ -77,5 +114,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             // 'password' => Hash::make($data['password']),
         ]);
+        $this->storePassword( $data);
     }
 }
