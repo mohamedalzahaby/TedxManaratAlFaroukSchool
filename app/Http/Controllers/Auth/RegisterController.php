@@ -116,7 +116,9 @@ class RegisterController extends Controller
         $User->ismale = $data['ismale'];
         $User->birthDate = $data['birthDate'];
         $User->email = $data['email'];
+        $User->password = Hash::make($data['password']);
         $User->save();
+        return $User;
 
 
         // $id = $User->create([
