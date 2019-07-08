@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+{{ Html::link('resources\views\layouts\header.blade.php') }}
 
   <!-- Section - Home Start -->
   <section id="home-bg-slideshow" class="bg-gray-dark-2 height-100 no-padding overflow-hidden width-100">
@@ -18,7 +17,7 @@
                     <p class="font-family-alt text-white sm-title-small title-medium font-weight-800">
                     <span class="text-base-color">X = </span>independently organized ted event
                     </p>
-
+                    
                     <!-- <br>
                     <a href="/register/" class="btn btn-base-color sm-btn-medium btn-large">
                       Register Now
@@ -182,7 +181,7 @@
     <div class="display-table-cell vertical-align-middle">
       <div class="container">
         <!-- <video autoplay muted loop id="myVideo">
-          <source src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" type="video/mp4">
+          <source src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" type="video/mp4">    
       </video> -->
         <!-- <iframe class="_1bhzc-a2 _2Sv4MqgQ _2fHiC9V8 NBCgfzab" src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe> -->
         <!-- The video -->
@@ -201,7 +200,7 @@
                 View location on map
               </a>
             </div>
-            <!-- //.col-md-8 -->
+            
           </div> -->
           <!-- //.row -->
         </video>
@@ -213,4 +212,6 @@
   <!-- //Section - Venue End -->
 
 
-  @endsection
+
+
+  <?php include('layouts.footer');?>
