@@ -38,9 +38,14 @@
                             </div>
                         </div>
                         <input type="hidden" name="userTypeId" value = "1">
-                        <input type="radio" name="ismale" value="1"> Male<br>
-                        <input type="radio" name="ismale" value="0"> Female<br>
-                        <input type="date" name="birthDate">
+                            <div class="form-group row">
+                                    <input type="radio" name="ismale" value="1" checked> Male<br>
+                                    <input type="radio" name="ismale" value="0"> Female<br>
+                            </div>
+                            <div class="form-group row">
+                                <input type="date" name="birthDate">
+                            </div>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

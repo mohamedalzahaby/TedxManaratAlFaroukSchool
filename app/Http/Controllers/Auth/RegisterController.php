@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use App\Password;
 use Illuminate\Http\Request;
@@ -82,10 +83,13 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storePassword( array $data)
+    protected function storePassword( $id ,  array $data)
     {
+        // $original = $id['original'];
+        // dd($id);
+        // var_dump($id); die();
         $password = new Password();
-        $password->userId  = 1;
+        $password->userId  = $id;
         $password->password = Hash::make($data['password']);
 
         $password->save();
@@ -104,16 +108,26 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
+
         $User = new User();
-        $User->create([
-            'fname' => $data['fname'],
-            'lname' => $data['lname'],
-            'userTypeId' => $data['userTypeId'],
-            'ismale' => $data['ismale'],
-            'birthDate' => $data['birthDate'],
-            'email' => $data['email'],
-            // 'password' => Hash::make($data['password']),
-        ]);
-        $this->storePassword( $data);
+        $User->fname = $data['fname'];
+        $User->lname = $data['lname'];
+        $User->userTypeId = $data['userTypeId'];
+        $User->ismale = $data['ismale'];
+        $User->birthDate = $data['birthDate'];
+        $User->email = $data['email'];
+        $User->save();
+
+
+        // $id = $User->create([
+        //     'fname' => $data['fname'],
+        //     'lname' => $data['lname'],
+        //     'userTypeId' => $data['userTypeId'],
+        //     'ismale' => $data['ismale'],
+        //     'birthDate' => $data['birthDate'],
+        //     'email' => $data['email'],
+        //     // 'password' => Hash::make($data['password']),
+        // ]);
+        $this->storePassword($User->id ,  $data);
     }
 }

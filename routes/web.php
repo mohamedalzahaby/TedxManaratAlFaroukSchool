@@ -17,9 +17,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('pages.about');
 });
-Route::get('/login', function () {
 
-});
 
 Auth::routes();
 
