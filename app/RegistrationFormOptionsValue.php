@@ -1,5 +1,8 @@
 <?php
-class RegistrationFormOptionsValue extends DBHelper 
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class RegistrationFormOptionsValue extends Model 
 {
     protected $value;
     protected $RegisterationFormsOptionsId;

@@ -1,7 +1,10 @@
 <?php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
 include('product\DBHellper.php');
 
-class ContactNumber extends DBHelper implements Icrud
+class ContactNumber extends Model
 {
     private $contactNumber;
     private $contactTypeId;

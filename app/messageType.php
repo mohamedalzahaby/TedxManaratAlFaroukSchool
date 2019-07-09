@@ -1,5 +1,8 @@
 <?php
-class messageType extends DBHelper 
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class messageType extends Model 
 {
     protected $name;
 

@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class DatePurchase extends DBHelper implements Icrud
+class DatePurchase extends Model 
 {  
     private $dateTime;
 

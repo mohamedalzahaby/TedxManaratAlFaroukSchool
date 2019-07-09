@@ -1,5 +1,10 @@
 <?php
-class DataType extends DBHelper 
+namespace App;
+
+
+use Illuminate\Database\Eloquent\Model;
+
+class DataType extends Model 
 {
 
     public function __construct($id = '')

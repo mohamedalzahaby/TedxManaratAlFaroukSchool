@@ -1,6 +1,8 @@
 <?php
-include('product\DBHellper.php');
-class Purchase extends DBHelper implements Icrud
+use Illuminate\Database\Eloquent\Model;
+namespace App;
+// include('product\DBHellper.php');
+class Purchase extends Model 
 {  
     private $userId;
     private $datePurchaseId;

@@ -1,6 +1,9 @@
 <?php
+namespace App;
 
-class Registeration extends DBHelper 
+use Illuminate\Database\Eloquent\Model;
+
+class Registeration extends Model
 {
     protected $userId;
     

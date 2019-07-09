@@ -1,7 +1,10 @@
 <?php
-require_once('model\DBHelper.php');
-require_once('app\interface\Icrud.php');
-class ProductOptions extends DBHelper implements Icrud
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+// require_once('model\DBHelper.php');
+// require_once('app\interface\Icrud.php');
+class ProductOptions extends Model 
 {
     private $dataType;
     private $productIds;

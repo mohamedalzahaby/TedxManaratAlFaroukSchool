@@ -1,8 +1,12 @@
 <?php
-include('model\DBHelper.php');
-include('app\interface\Icrud.php');
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class UserInterests extends DBHelper implements Icrud
+
+// include('model\DBHelper.php');
+// include('app\interface\Icrud.php');
+
+class UserInterests extends Model implements Icrud
 {
     
     

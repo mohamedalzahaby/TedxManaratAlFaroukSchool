@@ -1,5 +1,8 @@
 <?php
-class Board extends DBHelper implements Icrud
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+class Board extends Model
 {  
     protected $name;
     protected $academicYearId;            

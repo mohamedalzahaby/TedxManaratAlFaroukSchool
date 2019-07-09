@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class ProductType extends DBHelper implements Icrud
+class ProductType extends Model 
 {
     
     private $columnName;

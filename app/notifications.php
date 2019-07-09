@@ -1,5 +1,8 @@
 <?php
-class notifications extends DBHelper implements Isubject
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class notifications extends Model implements Isubject
 {
   private $favorites;
   private $observers;

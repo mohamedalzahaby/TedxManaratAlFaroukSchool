@@ -1,6 +1,7 @@
 <?php
+use Illuminate\Database\Eloquent\Model;
 
-class Event extends DBHelper implements Icrud
+class Event extends Model
 {  
     protected $date;
     protected $eventStart;

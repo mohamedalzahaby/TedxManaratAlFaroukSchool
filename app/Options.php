@@ -1,5 +1,8 @@
 <?php
-class Options extends DBHelper implements Icrud
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Options extends Model implements Icrud
 {
     private $dataTypeId;
     private $productIds;

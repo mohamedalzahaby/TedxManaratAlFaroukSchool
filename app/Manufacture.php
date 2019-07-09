@@ -1,7 +1,11 @@
 <?php
-include('product\DBHellper.php');
+namespace App;
 
-class Manufacture extends DBHelper implements Icrud
+use Illuminate\Database\Eloquent\Model;
+
+// include('product\DBHellper.php');
+
+class Manufacture extends Model
 {
     private $addressId;
     private $contactNumberId;

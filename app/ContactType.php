@@ -1,7 +1,10 @@
 <?php
-include('model/Model');
+namespace App;
 
-class ContactType extends DBHelper implements Icrud
+use Illuminate\Database\Eloquent\Model;
+#include('model/Model');
+
+class ContactType extends Model
 {
 
 

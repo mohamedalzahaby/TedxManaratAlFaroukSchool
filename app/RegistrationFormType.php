@@ -1,5 +1,8 @@
-<?php 
-class RegistrationFormType extends DBHelper implements Icrud
+<?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class RegistrationFormType extends Model implements Icrud
 {   
     public function __construct($id = '')
     {

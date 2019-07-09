@@ -1,5 +1,8 @@
 <?php
-class RegisterationDetails extends DBHelper 
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class RegisterationDetails extends Model 
 {
     protected $registerationId;
     protected $statusId;

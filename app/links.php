@@ -1,7 +1,10 @@
 <?php
-include('model\DBHelper.php');
-require_once('app\interface\Icrud.php');
-class Links extends DBHelper implements Icrud
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+// include('model\DBHelper.php');
+// require_once('app\interface\Icrud.php');
+class Links extends Model
 {  
     private $physicalName;
     private $friendlyName;

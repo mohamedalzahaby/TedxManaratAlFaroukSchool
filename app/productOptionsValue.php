@@ -1,5 +1,8 @@
 <?php
-class ProductOptionsValue extends DBHelper implements Icrud
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class ProductOptionsValue extends Model 
 {
     private $value;
     private $PrOPId;

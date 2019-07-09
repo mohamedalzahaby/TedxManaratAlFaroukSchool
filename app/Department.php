@@ -1,6 +1,8 @@
 <?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class Department extends DBHelper implements Icrud
+class Department extends Model
 {
     
     private $jobDescribtion;
