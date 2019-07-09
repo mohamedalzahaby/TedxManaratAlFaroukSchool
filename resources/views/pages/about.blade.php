@@ -1,4 +1,5 @@
-{{ Html::link('resources\views\layouts\header.blade.php') }}
+@extends('layouts.header')
+@extends('layouts.footer')
 
   <!-- Section - Home Start -->
   <section id="home-bg-slideshow" class="bg-gray-dark-2 height-100 no-padding overflow-hidden width-100">
@@ -211,7 +212,7 @@
   </section>
   <!-- //Section - Venue End -->
 
+  
 
 
-
-  <?php include('layouts.footer');?>
+  
