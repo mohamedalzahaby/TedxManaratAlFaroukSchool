@@ -18,6 +18,14 @@ Route::get('/about', function () {
     return view('pages.about');
 });
 
+Route::get('/events', 'EventController@index');
+
+Route::get('/addNewProduct', function () {
+    $x=new ProductTypeController();
+    $x->getAllTypes();
+    return view('pages.addproduct');
+
+});
 
 Auth::routes();
 
