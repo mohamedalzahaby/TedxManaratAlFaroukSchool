@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
+use App\Password;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,12 +54,50 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'ismale'=> 'required|in:1,2',
-            'birthDate' => 'required|unique:users',
+            'birthDate' => 'required',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
         ]);
 
     }
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function loginvalidator(array $data)
+    {
+        return Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+    }
+
+ /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function storePassword( $id ,  array $data)
+    {
+        // $original = $id['original'];
+        // dd($id);
+        // var_dump($id); die();
+        $password = new Password();
+        $password->userId  = $id;
+        $password->password = Hash::make($data['password']);
+
+        $password->save();
+        // return redirect('/about')->with('success' , 'login done');
+    }
+
+
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -68,14 +109,27 @@ class RegisterController extends Controller
     {
         // dd($data);
 
-        return User::create([
-            'fname' => $data['fname'],
-            'lname' => $data['lname'],
-            'userTypeId' => $data['userTypeId'],
-            'ismale' => $data['ismale'],
-            'birthDate' => $data['birthDate'],
-            'email' => $data['email'],
-            // 'password' => Hash::make($data['password']),
-        ]);
+        $User = new User();
+        $User->fname = $data['fname'];
+        $User->lname = $data['lname'];
+        $User->userTypeId = $data['userTypeId'];
+        $User->ismale = $data['ismale'];
+        $User->birthDate = $data['birthDate'];
+        $User->email = $data['email'];
+        $User->password = Hash::make($data['password']);
+        $User->save();
+        return $User;
+
+
+        // $id = $User->create([
+        //     'fname' => $data['fname'],
+        //     'lname' => $data['lname'],
+        //     'userTypeId' => $data['userTypeId'],
+        //     'ismale' => $data['ismale'],
+        //     'birthDate' => $data['birthDate'],
+        //     'email' => $data['email'],
+        //     // 'password' => Hash::make($data['password']),
+        // ]);
+        $this->storePassword($User->id ,  $data);
     }
 }
