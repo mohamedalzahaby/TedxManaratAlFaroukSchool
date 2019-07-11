@@ -1,7 +1,4 @@
-@extends('layouts.app')
-@section('content')
-
-
+<?php include('views\layouts\header.php'); ?>
 
   <!-- Section - Home Start -->
   <section id="home-bg-slideshow" class="bg-gray-dark-2 height-100 no-padding overflow-hidden width-100">
@@ -20,7 +17,7 @@
                     <p class="font-family-alt text-white sm-title-small title-medium font-weight-800">
                     <span class="text-base-color">X = </span>independently organized ted event
                     </p>
-
+                    
                     <!-- <br>
                     <a href="/register/" class="btn btn-base-color sm-btn-medium btn-large">
                       Register Now
@@ -126,7 +123,7 @@
 
 <!-- Appended Input-->
 <div class="form-group">
-
+  
   <div class="col-md-4">
     <div class="input-group">
       <input id="appendedtext" name="appendedtext" class="form-control" placeholder="Enter URL" type="text"style="positiion:relative;top:-270px;left:600px">
@@ -169,7 +166,7 @@
           <!-- //.row -->
         </div>
         <!-- //.col-sm-6 -->
-
+     
         <div class="col-sm-6 col-md-4 col-md-offset-1 xs-margin-8 xs-no-margin-rl xs-no-margin-bottom">
           <div class="testimonial">
             <div class="bg-white border border-gray-light border-round padding-5 width-100">
@@ -208,7 +205,7 @@
     <div class="display-table-cell vertical-align-middle">
       <div class="container">
         <!-- <video autoplay muted loop id="myVideo">
-          <source src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" type="video/mp4">
+          <source src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" type="video/mp4">    
       </video> -->
         <!-- <iframe class="_1bhzc-a2 _2Sv4MqgQ _2fHiC9V8 NBCgfzab" src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe> -->
         <!-- The video -->
@@ -241,6 +238,4 @@
 
 
 
-
-
-@endsection
+  <?php include('views\layouts\footer.php');?>

@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('pages.about');
 });
+Route::get('/signUp', function () {
+    return view('auth.register');
+});
 
 Route::get('/events', 'EventController@index');
 
