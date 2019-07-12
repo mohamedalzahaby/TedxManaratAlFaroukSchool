@@ -1,7 +1,8 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="page-header text-center">
-       
+
         <h1 id="timeline"style="margin-top:670px;margin-right:25px">Our Events</h1>
     </div>
     <ul class="timeline">
@@ -10,7 +11,7 @@
             // var_dump($data);
             foreach ($data as $key => $value) {
                 $name = $value['name'];
-                if (!$rightSide) 
+                if (!$rightSide)
                 {
                     echo '<li>';
                     echo "<div class='timeline-badge primary'><a><i class='glyphicon glyphicon-record' rel='tooltip' title= '$name' ></i></a></div>";
@@ -44,13 +45,13 @@
 
                 </div>
                 </li>
-                <?php 
+                <?php
                 if($rightSide == true){
                     $rightSide = false;
                 }else{
                     $rightSide = true;
                 }
-            } 
+            }
         ?>
         <li class="clearfix" style="float: none;"></li>
     </ul>

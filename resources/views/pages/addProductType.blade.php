@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 <head>
 	<link rel="shortcut icon" href="res\images\icons\product.png"/>
 	<link rel="stylesheet" type="text/css" href="res\css\addproduct.css">
@@ -7,7 +8,7 @@
 <body background="res\images\addproduct.jpg">
 	<div class="addproduct">
 		<br><br>
-		<h1><b>Add New Product Type</b></h1><hr><br>	
+		<h1><b>Add New Product Type</b></h1><hr><br>
 		<table class="table">
 			<thead>
 				<tr>

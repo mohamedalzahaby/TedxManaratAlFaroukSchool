@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Address;
+use App\Board;
 use App\Event;
+use App\Address;
+use App\AcademicYear;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -13,9 +15,9 @@ class EventController extends Controller
     public function __construct($id = '')
     {
         $this->eventModel= new Event();
-        //  $this->academicYearModel = new academicYear($id);
+         $this->academicYearModel = new AcademicYear();
          $this->addressModel = new Address();
-        // $this->boardModel = new Board();
+        $this->boardModel = new Board();
     }
 
     public function getChilds($id)
@@ -35,11 +37,11 @@ class EventController extends Controller
 
         $addresses = $this->getChilds(0);
         $addresses = $addresses[0]['name'];
-        return view('pages.test')->with('addresses' , $addresses);
 
-        $academicYears = $this->academicYearModel->getAcademicYears();
+        $academicYears =AcademicYear::getAcademicYears();
         $boards = $this->boardModel->getBoards();
         $twoDArr = array('academicYears' => $academicYears, 'boards' => $boards, 'addresses' => $addresses);
+        view('pages.addEvent')->with('addresses' , $twoDArr);
         Controller::view('addEvent', $twoDArr);
 
         $allEvents = $this->eventModel->getEventsdata();

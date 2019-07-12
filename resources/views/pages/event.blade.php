@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 <div class="container">
     <div class="page-header text-center">
         <h1 id="timeline">Our Events</h1>
@@ -43,7 +44,7 @@
                 </div>
                 </li>
                 <?php $rightSide = (true) ? false : true;
-            } 
+            }
         ?>
         <li class="clearfix" style="float: none;"></li>
     </ul>

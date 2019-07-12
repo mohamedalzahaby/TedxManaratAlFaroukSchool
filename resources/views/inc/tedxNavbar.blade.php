@@ -20,84 +20,88 @@
           <ul class="nav navbar-nav font-family-alt letter-spacing-1 text-uppercase font-weight-700" style="position:relative;
               top:-70px">
             <li><a href="/about" class="line-height-unset headerTextcolor" style="margin-top:75px;margin-right:20px">About</a></li>
-            @if ( !Auth::guest() )
-                <li><a href="/product" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Product</a></li>
-            @endif
+            <?php if ( !Auth::guest() ) : ?>
+            <li><a href="/product" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Product</a></li>
+            <?php endif ?>
             <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">contact</a></li>
-            <li><a href="/Board" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
-            <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">sendMail</a></li>
+            <li><a href="/Board"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
+
+            @if (!Auth::guest())
+                <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">sendMail</a></li>
+            @endif
             <li><a href="/events" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">events</a></li>
             <li class="bg-base-color">
-                <a href="/register" class="line-height-unset headerTextcolor width-100"style="margin-top:75px">
-                    Register
-                </a>
+              <a href="/register" class="line-height-unset headerTextcolor width-100"style="margin-top:75px">
+                Register
+              </a>
             </li>
-            @if ( Auth::guest() )
-            <li>
-                    <a href="/login" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">SignIn</a>
-                </li>
-                <li>
-                    <a href="/signUp" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Sign Up</a>
-                </li>
-            @else
-                <li class="nav-item">
-                <a href="signOut" class="line-height-unset headerTextcolor">Sign Out</a>
-                </li>
-                <li>
-                  <div ng-app="demoApp" class="ng-app">
-                    <div class="wrapper" ng-controller="demoController">
-                      <div class="nav-bar">
-                        <ul>
-                          <li>
-                            <div class="dropdowns-wrapper">
-                              <div class="dropdown-container" style="top:-15px">
-                                <div class="notifications dropdown dd-trigger" ng-click="showNotifications($event)">
-                                    @if (isset($_SESSION['notifications']) && $_SESSION['NewnotificationsCtr'] != 0 )
-                                      <span class="count animated" id="notifications-count"><?php echo $_SESSION['NewnotificationsCtr'];?></span>
-                                    @endif
-                                  <span class="fa fa-bell-o"></span>
+            @if (Auth::guest())
+                <li><a href="/login"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">signin</a></li>
+                <li><a href="/signUp"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">signup</a></li>
+            @endif
+
+            <?php if ( !Auth::guest() ) : ?>
+              <li>
+                <div ng-app="demoApp" class="ng-app">
+                  <div class="wrapper" ng-controller="demoController">
+                    <div class="nav-bar">
+                      <ul>
+                        <li>
+                          <div class="dropdowns-wrapper">
+                            <div class="dropdown-container" style="top:-15px">
+                              <div class="notifications dropdown dd-trigger" ng-click="showNotifications($event)">
+                                  <?php if (isset($_SESSION['notifications']) && $_SESSION['NewnotificationsCtr'] != 0 ){   ?>
+                                    <span class="count animated" id="notifications-count"><?php echo $_SESSION['NewnotificationsCtr'];?></span>
+                                  <?php } ?>
+                                <span class="fa fa-bell-o"></span>
+                              </div>
+                              <div class="dropdown-menu animated" id="notification-dropdown">
+                                <div class="dropdown-header">
+                                  <span class="triangle"></span>
+                                  <span class="heading">Notifications</span>
+
+                                  <?php if (isset($_SESSION['notifications']) && $_SESSION['NewnotificationsCtr'] != 0 ) { ?>
+                                    <span class="count" id="dd-notifications-count"><?php echo $_SESSION['NewnotificationsCtr'];?></span>
+                                  <?php } ?>
                                 </div>
-                                <div class="dropdown-menu animated" id="notification-dropdown">
-                                  <div class="dropdown-header">
-                                    <span class="triangle"></span>
-                                    <span class="heading">Notifications</span>
-
-                                    @if (isset($_SESSION['notifications']) && $_SESSION['NewnotificationsCtr'] != 0 )
-                                      <span class="count" id="dd-notifications-count"><?php echo $_SESSION['NewnotificationsCtr'];?></span>
-                                    @endif
-                                  </div>
-                                  <div class="dropdown-body">
-                                    @if (isset($_SESSION['notifications']))
-                                      {{ $notification = $_SESSION['notifications'] }}
+                                <div class="dropdown-body">
+                                  <?php if (isset($_SESSION['notifications'])) { $notification = $_SESSION['notifications']; ?>
                                       <div class="notification new">
-                                          <div class="notification-image-wrapper"></div>
-                                          <div class="notification-text">
-                                              <span class="highlight"><?php echo $notification;?></span>
-                                          </div>
+                                        <div class="notification-image-wrapper">
+                                        </div>
+                                        <div class="notification-text">
+                                          <span class="highlight"><?php echo $notification;?></span>
+                                        </div>
                                       </div>
-                                      @endif
-                                    <!-- <div class="notification">
-                                      <div class="notification-image-wrapper">
-                                      </div>
-                                      <div class="notification-text">
-                                        <span class="highlight">abdalah</span> heloo
-                                      </div>
+                                    <?php } ?>
+                                  <!-- <div class="notification">
+                                    <div class="notification-image-wrapper">
+                                    </div>
+                                    <div class="notification-text">
+                                      <span class="highlight">abdalah</span> heloo
+                                    </div>
 
-                                    </div> -->
-                                  </div>
+                                  </div> -->
                                 </div>
                               </div>
-
                             </div>
-                          </li>
 
-                        </ul>
-                      </div>
+                          </div>
+                        </li>
 
+                      </ul>
                     </div>
+
                   </div>
-                </li>
-            @endif
+                </div>
+              </li>
+              <li>
+                  <a class="line-height-unset headerTextcolor" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </li>
+              <?php endif ?>
           </ul>
           </li>
           </ul>
