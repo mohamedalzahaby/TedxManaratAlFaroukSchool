@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 
 <!-- Section - Contact Start -->
 <section id="contact" class="bg-white-2">
@@ -9,7 +10,7 @@
           Our Events
         </h2>
         <span class="bg-base-color xs-margin-6 xs-no-margin-rl margin-3 no-margin-rl separator-line-extra-thick-long"></span>
-      </div>  
+      </div>
 
       <div class="col-md-5 no-padding-rl">
         <div class="row text-center">
@@ -42,4 +43,4 @@
 
 
 
-<?php include('views\layouts\footer.php');?>
+@endsection

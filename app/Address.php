@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     protected $parentId;
+    protected $table;
 
     public function __construct()
     {
-        $this->tableName = 'Address';
+        $this->table = 'Address';
         $this->columnNamesArr = array('name','parentId');
     }
 
@@ -29,19 +30,9 @@ class Address extends Model
         return $completeAddressName;
     }
 
-    public function getChilds($id)
-    {
-        // return Parent::getData($this->tableName , 'name' );
-        $Columns = array('id','name');
-        $addresses = Parent::selectWhere($Columns , $this->tableName , "`parentId` = $id" );
-        return $addresses;
-    }
     public function store($request)
     {
         $sql = "INSERT INTO `address`(`name`, `parentId`) VALUES ($request , 3)";
     }
-    public function update($request){}
-    public function delete($request){}
-    public function search($request){}
 
 }

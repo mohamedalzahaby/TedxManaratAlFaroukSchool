@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 
   <!-- Section - Contact Start -->
   <section id="contact" class="bg-white-2">
@@ -70,7 +71,7 @@
           <!-- //.row -->
           <div class="row text-center">
             <div class="margin-8 no-margin-bottom no-margin-rl map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.248386076548!2d31.41383351497699!3d30.058413924867693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458473a2f638611%3A0x470a665556112987!2sManaret+Al+Farouk+Islamic+Language+School!5e0!3m2!1sen!2seg!4v1555595230804!5m2!1sen!2seg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>  
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.248386076548!2d31.41383351497699!3d30.058413924867693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458473a2f638611%3A0x470a665556112987!2sManaret+Al+Farouk+Islamic+Language+School!5e0!3m2!1sen!2seg!4v1555595230804!5m2!1sen!2seg" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             <!-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.2906312479427!2d77.28254455362033!3d28.56103426474026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfb09de6f2e8596e7!2sJamia+Millia+Islamia!5e0!3m2!1sen!2sin!4v1497486772213"
                 frameborder="0"
@@ -91,4 +92,4 @@
 
 
 
-  <?php include('views\layouts\footer.php');?>
+  @endsection

@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 
 
   <!-- Section - Team Start -->
@@ -140,7 +141,6 @@
           </p>
         </div>
 
-        
 
         <!-- Member Box Start -->
         <div class="member-box col-xs-6 col-sm-4 col-md-3">
@@ -162,7 +162,6 @@
         </div>
         <!-- //Member Box End -->
 
-        
       </div>
       <!-- //.row -->
 
@@ -208,4 +207,4 @@
 
 
 
-<?php include('views\layouts\footer.php');?>
+@endsection

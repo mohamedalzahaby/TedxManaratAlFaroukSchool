@@ -7,7 +7,6 @@
   <!--[if gt IE 8]><!-->
   <html class="no-js" lang="en">
   <!--<![endif]-->
-    
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -129,6 +128,7 @@
                 </li>
               <?php endif ?>
               
+
                 <li>
                   <div ng-app="demoApp" class="ng-app">
                     <div class="wrapper" ng-controller="demoController">
@@ -147,7 +147,6 @@
                                   <div class="dropdown-header">
                                     <span class="triangle"></span>
                                     <span class="heading">Notifications</span>
-                                    
                                     <?php if (isset($_SESSION['notifications']) && $_SESSION['NewnotificationsCtr'] != 0 ) { ?>
                                       <span class="count" id="dd-notifications-count"><?php echo $_SESSION['NewnotificationsCtr'];?></span>
                                     <?php } ?>
@@ -158,7 +157,7 @@
                                           <div class="notification-image-wrapper">
                                           </div>
                                           <div class="notification-text">
-                                            <span class="highlight"><?php echo $notification;?></span> 
+                                            <span class="highlight"><?php echo $notification;?></span>
                                           </div>
                                         </div>
                                       <?php } ?>
@@ -194,8 +193,8 @@
       <!-- //.container -->
     </nav>
     <!-- //Navigation End -->
-  <?php else :  ?>
-  
+<?php else :  ?>
+
     <!DOCTYPE html>
     <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
     <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->

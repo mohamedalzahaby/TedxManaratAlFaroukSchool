@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 
 
   <!-- Section - Alumni Start -->
@@ -87,4 +88,4 @@
 
 
 
-  <?php include('views\layouts\footer.php');?>
+  @endsection

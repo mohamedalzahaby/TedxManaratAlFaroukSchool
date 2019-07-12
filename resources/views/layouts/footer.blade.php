@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="footer-logo xs-text-center">
-            <img src="res/images/logos/TEDx.png" alt="tedxLogo">
+            <img src="{{ asset('images/logos/TEDx.png') }}" alt="tedxLogo">
           </div>
           <!-- //.footer-logo -->
           <p class="disclaimer xs-text-center">
@@ -70,39 +70,36 @@
 
 
   <!-- jQuery -->
-  <script src="res/js/jquery.min.js"></script>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
 
   <!-- Bootstrap -->
-  <script src="res/js/bootstrap.min.js"></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
   <!-- Plugins -->
-  <script src="res/js/pace.min.js"></script>
-  <script src="res/js/debouncer.min.js"></script>
-  <script src="res/js/jquery.easing.min.js"></script>
-  <script src="res/js/jquery.inview.min.js"></script>
-  <script src="res/js/jquery.matchHeight.js"></script>
-  <script src="res/js/isotope.pkgd.min.js"></script>
-  <script src="res/js/imagesloaded.pkgd.min.js"></script>
-  <script src="res/js/flickity.pkgd.min.js"></script>
-  <script src="res/js/jquery.magnific-popup.min.js"></script>
-  <script src="res/js/jquery.validate.min.js"></script>
+  <script src="{{ asset('js/pace.min.js') }}"></script>
+  <script src="{{ asset('js/debouncer.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.inview.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.matchHeight.js') }}"></script>
+  <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="{{ asset('js/flickity.pkgd.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 
   <!-- BG Parallax JS -->
-  <script src="res/js/TweenMax.min.js"></script>
-  <script src="res/js/ScrollMagic.min.js"></script>
-  <script src="res/js/animation.gsap.min.js"></script>
+  <script src="{{ asset('js/TweenMax.min.js') }}"></script>
+  <script src="{{ asset('js/ScrollMagic.min.js') }}"></script>
+  <script src="{{ asset('js/animation.gsap.min.js') }}"></script>
 
   <!-- Theme -->
-  <script src="res/js/main.js"></script>
+  <script src="{{ asset('js/main.js') }}"></script>
 
   <!-- Countdown -->
-  <script src="res/js/jquery.countdown.min.js"></script>
-  <script src="res/js/countdown.js"></script>
+  <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+  <script src="{{ asset('js/countdown.js') }}"></script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-animate.js'></script>
-    <script src="res\js\notificationIndex.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-animate.js'></script>
+  <script src="{{ asset('js/notificationIndex.js') }}"></script>
 
-</body>
-
-</html>

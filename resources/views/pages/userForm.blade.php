@@ -1,4 +1,5 @@
-<?php include('views\layouts\header.php'); ?>
+@extends('layouts.app')
+@section('content')
 <br><br><br><br><br><br><br>
 <form action="<?php echo $GLOBALS['ASSET'].$GLOBALS['showForm'];?>" method="post" class="form-horizontal">
     <fieldset>
@@ -38,7 +39,7 @@
 
             </div>
         </div>
-        <?php 
+        <?php
         if(!isset($_SESSION['userTypeId'])){ $_SESSION['userTypeId'] = 1; }?>
         <!-- Text input-->
         <div class="form-group">
@@ -80,4 +81,5 @@
     </fieldset>
 </form>
 
-<?php include('views\layouts\footer.php'); ?>
+@endsection
+

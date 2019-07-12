@@ -1,6 +1,8 @@
 @extends('layouts.header')
 @extends('layouts.footer')
 
+
+
   <!-- Section - Home Start -->
   <section id="home-bg-slideshow" class="bg-gray-dark-2 height-100 no-padding overflow-hidden width-100">
     <!-- BG Slideshow -->
@@ -117,6 +119,24 @@
 
 
   <!-- Section - About Start -->
+  <form class="form-horizontal">
+<fieldset>
+
+
+
+<!-- Appended Input-->
+<div class="form-group">
+
+  <div class="col-md-4">
+    <div class="input-group">
+      <input id="appendedtext" name="appendedtext" class="form-control" placeholder="Enter URL" type="text"style="positiion:relative;top:-270px;left:600px">
+      <input type="submit"  style="position:relative;top:-250px;left:700px;border-radius:10px;"value="Submit">
+    </div>
+
+  </div>
+</div>
+</fieldset>
+</form>
   <section id="about" class="bg-white-3 pull-up">
     <div class="container">
       <div class="row">
@@ -139,6 +159,9 @@
                 event strategically allocates a window for collaboration of arts,
                 sciences, entrepreneurship and women empowerment - ideas that are close
                 to our central theme: <b>Igniting Minds</b>.
+                <div>
+        <input type="submit" name="submit" style="border-radius:10px;width:200px;margin-top:20px;margin-left:150px;"value="Edit">
+</div>
               </p>
             </div>
             <!-- //.col-sm-6 -->
@@ -162,6 +185,9 @@
                 events are branded with TEDx, where x = an independently organized
                 TED event. The TED Conference provides general guidance for the
                 TEDx program, but individual TEDx events are self-organized.
+                <div>
+        <input type="submit" name="submit" style="border-radius:10px;width:200px;margin-top:20px;margin-left:60px;"value="Edit">
+</div>
               </p>
             </div>
             <!-- //.bg-white -->
@@ -215,4 +241,8 @@
   
 
 
-  
+
+
+
+
+@endsection
