@@ -24,7 +24,7 @@
             <li><a href="/product" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Product</a></li>
             <?php endif ?>
             <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">contact</a></li>
-            <li><a href="/Board"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
+            <li><a href="/ourTeam"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
 
             @if (!Auth::guest())
                 <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">sendMail</a></li>
