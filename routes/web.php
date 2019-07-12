@@ -29,9 +29,6 @@ Route::get('/ourTeam', function () {
 Route::get('/sendMail', function () {
     return view('pages.sendMail');
 });
-Route::get('/Board', function () {
-    return view('pages.Board');
-});
 Route::get('/signUp', function () {
     return view('auth.register');
 });
