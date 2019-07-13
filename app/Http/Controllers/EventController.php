@@ -7,41 +7,22 @@ use App\Board;
 use App\Event;
 use App\Address;
 use App\AcademicYear;
+use phpDocumentor\Reflection\Types\Parent_;
 
 class EventController extends Controller
 {
     private $AcademicYear;
 
-
+/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->AcademicYear = new AcademicYear();
+        $this->Address = new Address();
     }
-
-
-    public function getChilds($id)
-    {
-        $Columns = array('id','name');
-        $addresses = Address::select($Columns)->where('parentId', $id)->get();
-        return $addresses;
-    }
-    // public function getBoards()
-    // {
-    //     $array =  DB::table('board')->select('name')->get();
-    //     $boards = [];
-    //     foreach ($array as $key => $value) {
-    //         $array2 = (array) $value;
-    //         $boardName = $array2['name'];
-    //        array_push($boards , $boardName);
-    //     }
-    //     return $boards;
-    // }
-    // public function getAcademicYears()
-    // {
-    //     $academicYears = AcademicYear::all();
-    //     var_dump($academicYears);die();
-    //     return $academicYears['name'];
-    // }
 
     /**
      * Display a listing of the resource.
@@ -50,23 +31,90 @@ class EventController extends Controller
      */
     public function index()
     {
+        /*GET COUNTRIES*/
+        $addresses = $this->GET_COUNTRIES();
 
-        $addresses = $this->getChilds(0);
-        $addresses = $addresses[0]['name'];
-        $academicYears = $this->AcademicYear->getAcademicYears();
-        // die('function');
-        dd($academicYears);
-        $boards = $this->boardModel->getBoards();
-        $twoDArr = array('academicYears' => $academicYears, 'boards' => $boards, 'addresses' => $addresses);
-        view('pages.addEvent')->with('addresses' , $twoDArr);
-        Controller::view('addEvent', $twoDArr);
+        /*GET ACADEMIC YEARS NAME+ID*/
+        $academicYears = $this->GET_ACADEMIC_YEARS();
 
-        $allEvents = $this->eventModel->getEventsdata();
-        foreach ($allEvents as $key => $event) {
-            array_push($allEvents[$key], $this->addressModel->getWholeAddress($event['addressId']));
+        /*GET BOARDS NAME+ID*/
+        $boards = $this->GET_BOARDS();
+        // $boards = (array)$boards;
+        // var_dump($boards[0]->id);die();
+
+        /*GET EVENTS AND ADDRESSES STRINGS NAME+ID*/
+        $events = $this->getAllEventsAndItsAdresses();
+
+
+        $data = array('academicYears' => $academicYears,
+                        'boards' => $boards,
+                        'addresses' => $addresses,
+                        'events' => $events,
+                        'eventController' => new EventController());
+
+
+        // return view('pages.addEvent')->with('data' , $data);
+
+        return view('pages.addEvent')->with('data' , $data);
+        // Controller::view('event', $allEvents);
+    }
+
+
+
+
+    public function getChilds($id)
+    {
+        $Columns = array('id','name');
+        $addresses = Address::select($Columns)->where('parentId', $id)->get();
+        return $addresses;
+    }
+    public function getBoards()
+    {
+        $array =  DB::table('board')->select('name')->get();
+        $boards = [];
+        foreach ($array as $key => $value) {
+            $array2 = (array) $value;
+            $boardName = $array2['name'];
+           array_push($boards , $boardName);
         }
+        return $boards;
+    }
+    // public function getAcademicYears()
+    // {
+    //     $academicYears = AcademicYear::all();
+    //     var_dump($academicYears);die();
+    //     return $academicYears['name'];
+    // }
 
-        Controller::view('event', $allEvents);
+
+    public function GET_BOARDS()
+    {
+        $boardColumns = array('id' , 'name' );
+        $boards = Parent::getCertainColumns('board' , $boardColumns);
+        return $boards;
+    }
+    public function GET_ACADEMIC_YEARS()
+    {
+        $academicYearsColumns = array('id' , 'name');
+        $academicYears = Parent::getCertainColumns('academicYear' , $academicYearsColumns);
+        return $academicYears;
+    }
+    public function GET_COUNTRIES()
+    {
+        $addresses = $this->getChilds(0);
+        return $addresses;
+    }
+
+
+
+    public function getAllEventsAndItsAdresses()
+    {
+        $allEvents = Event::all();
+        foreach ($allEvents as $key => $event) {
+
+            $event['eventAddressString'] =  $this->Address->getWholeAddress($event['addressId']);
+        }
+        return $allEvents;
     }
 
     /**
@@ -134,4 +182,24 @@ class EventController extends Controller
     {
         //
     }
+
+
+    public function addressHtml($data)
+    {
+
+        echo  "<select name=':addressId' onchange='myFunction(this.value)' id='mySelect'>
+                    <option value='0'>add new place</option>";
+                    foreach ($data as $key1 => $places) {
+                        foreach ($places as $key => $SinglePlace) {
+                            if ($key1 == 'addresses') {
+                                $id = $SinglePlace['id'];
+                                $name = $SinglePlace['name'];
+                                echo "<option id='myOption' name='$id' value='$id'> $name </option>";
+                            }
+                    }
+                }
+        echo "</select>";
+
+    }
+
 }
