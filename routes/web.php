@@ -35,7 +35,7 @@ Route::get('/signUp', function () {
 });
 
 Route::get('/registeration', 'RegisterationController@index');
-
+Route::resource('RegisterationTypes', 'RegisterationTypeController');
 
 Route::get('/events', 'EventController@index');
 

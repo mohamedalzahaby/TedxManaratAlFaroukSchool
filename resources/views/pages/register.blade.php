@@ -16,21 +16,20 @@
             </div>
             <!-- //.row -->
 
-            <form method="POST" action="{{'addRegisterationType'}}" class="form-horizontal">
+            <form method="POST" action="RegisterationTypes" class="form-horizontal">
+                    @method('POST')
+                    {{ csrf_field() }}
                 <fieldset>
-                    <!-- Form Name -->
                     <legend>Add Form Type</legend>
-
-                    <!-- Appended Input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="appendedtext">Add registration Type</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input id="registrationTypeName" name="name" class="form-control" placeholder="registration Type" type="text">
+                                <label class="col-md-4 control-label" for="RegisterAs">isForEvent</label>
+                                <input name="isForEvent" class="form-control" placeholder="isForEvent" type="checkbox">
                                 <button type="submit" name='submit' id="registrationTypeNameButton" ><span class="input-group-addon">ADD</span></button>
-                            </div>
-                            <p class="help-block">enter new registration Type</p>
-                        </div>
+                            </div><p class="help-block">enter new registration Type</p></div>
                     </div>
                 </fieldset>
         </form>

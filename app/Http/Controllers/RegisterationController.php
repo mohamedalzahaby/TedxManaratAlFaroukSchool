@@ -49,6 +49,7 @@ class RegisterationController extends Controller
         return view('pages.register')->with('data' , $data);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +68,8 @@ class RegisterationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        
     }
 
     /**
