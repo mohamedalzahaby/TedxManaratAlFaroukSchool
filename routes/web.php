@@ -1,6 +1,5 @@
 <?php
-use Illuminate\Console\Scheduling\Event;
-// use DB;
+
 include('Globals.php');
 /*
 |--------------------------------------------------------------------------
@@ -34,17 +33,13 @@ Route::get('/sendMail', function () {
 Route::get('/signUp', function () {
     return view('auth.register');
 });
+
 Route::get('/registeration', 'RegisterationController@index');
 
 
 Route::get('/events', 'EventController@index');
 
-Route::get('/addNewProduct', function () {
-    $x=new ProductTypeController();
-    $x->getAllTypes();
-    return view('pages.addproduct');
-
-});
+Route::get('/addNewProduct','ProductTypeController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 

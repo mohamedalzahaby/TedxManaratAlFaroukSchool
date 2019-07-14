@@ -16,7 +16,7 @@
             </div>
             <!-- //.row -->
 
-            <form method="POST" action="<?php echo $GLOBALS['ASSET'].$GLOBALS['addRegisterationType']; ?>" class="form-horizontal">
+            <form method="POST" action="{{'addRegisterationType'}}" class="form-horizontal">
                 <fieldset>
                     <!-- Form Name -->
                     <legend>Add Form Type</legend>
