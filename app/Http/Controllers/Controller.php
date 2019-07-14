@@ -23,7 +23,7 @@ class Controller extends BaseController
 	{
 		echo "<select id='$id' name='$name' $class>";
 		foreach ($optionData as $key => $option) {
-			echo '<option value="'.$option["$optionDataValue"].'">'.$option["$optionDataName"].'</option>';
+			echo '<option value="'.$option->$optionDataValue.'">'.$option->$optionDataName.'</option>';
 		}
 		echo '</select>';
 

@@ -7,14 +7,7 @@ class RegistrationFormType extends Model
 {
     protected $table = 'registrationformtype';
 
-    public function __construct($id = '')
-    {
-        if ($id != '') {
-            $this->id = $id;
-            $row = getAllById($this->tableName,$this->id);
-            $this->name = $row['name'];
-        }
-    }
+
 
     public function getAllTypes()
     {

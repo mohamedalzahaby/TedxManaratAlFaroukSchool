@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
+use App\RegistrationFormType;
 
 class RegisterationTypeController extends Controller
 {
@@ -14,6 +16,7 @@ class RegisterationTypeController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -34,16 +37,21 @@ class RegisterationTypeController extends Controller
      */
     public function store(Request $request)
     {
-        // return "heloooooooo";
-        dd($request->input('isForEvent'));
-        // $this->validate($request ,[
-        //     'name' => 'required|nullable'
-        //     ]);
 
-        // $registrationFormType = new RegistrationFormType();
-        // $registrationFormType->body  = $request->input('name');
-        // $registrationFormType->save();
-        // return redirect('/posts')->with('success' , 'Post Created');
+        $this->validate($request ,[
+                'name' => 'required|nullable'
+                ]);
+
+            // dd($request->input('isForEvent'));
+        $registrationFormType = new RegistrationFormType();
+        $registrationFormType->name  = $request->input('name');
+
+        /* is the checkbox checked */
+        $value = ( empty( $request->input('isForEvent') ) ) ? 0 : 1 ;
+
+        $registrationFormType->isForEvent  = $value;
+        $registrationFormType->save();
+        return redirect('/registeration')->with('success' , 'Registration Form Type Added');
     }
 
     /**
@@ -86,8 +94,9 @@ class RegisterationTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('registerationFormType');
+        DB::update('update registrationformtype set isdeleted = 1 where id = ?', [$id]);
     }
 }

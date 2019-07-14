@@ -36,6 +36,7 @@ Route::get('/signUp', function () {
 
 Route::get('/registeration', 'RegisterationController@index');
 Route::resource('RegisterationTypes', 'RegisterationTypeController');
+Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
 
 Route::get('/events', 'EventController@index');
 

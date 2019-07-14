@@ -43,10 +43,9 @@ class RegisterationController extends Controller
         $userTypes = Parent::getCertainColumns('UserType' , $Columns);
         $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype' , $Columns);
         $data = array('userTypes' => $userTypes,
-        'RegistrationFormTypes' => $RegistrationFormTypes,
         'forms' => $openedForms ,
         'controller' => new Controller);
-        return view('pages.register')->with('data' , $data);
+        return view('pages.register' , compact('RegistrationFormTypes'))->with('data' , $data);
     }
 
 
@@ -69,7 +68,7 @@ class RegisterationController extends Controller
     public function store(Request $request)
     {
 
-        
+
     }
 
     /**

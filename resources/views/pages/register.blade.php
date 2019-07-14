@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
 <!-- Section - ADD Registration start -->
 @if (!Auth::guest())
     <section id="registration" class="bg-white-2">
         <div class="container">
+
             <div class="row no-padding-rl">
                 <div class="col-md-12">
                     <h2 class="font-family-alt font-weight-700 sm-title-large title-extra-large-2 text-gray-dark-2">
@@ -17,8 +17,8 @@
             <!-- //.row -->
 
             <form method="POST" action="RegisterationTypes" class="form-horizontal">
-                    @method('POST')
-                    {{ csrf_field() }}
+                @method('POST')
+                {{ csrf_field() }}
                 <fieldset>
                     <legend>Add Form Type</legend>
                     <div class="form-group">
@@ -32,7 +32,31 @@
                             </div><p class="help-block">enter new registration Type</p></div>
                     </div>
                 </fieldset>
-        </form>
+            </form>
+
+
+            <form method="POST" action="{{ 'RegisterationTypesDestroy'}}" class="form-horizontal">
+                @method("POST")
+                @csrf
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Add Registeration Form</legend>
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
+                        <div class="col-md-4">
+                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Button -->
+                <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <div class="col-md-4">
+                    <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary">
+                </div>
+                </div>
+            </form>
 
 
             <form method="POST" action="<?php echo $GLOBALS['ASSET'].$GLOBALS['register'].$GLOBALS['addForm'];?>" class="form-horizontal">
@@ -43,7 +67,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                     <div class="col-md-4">
-                    <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $data['RegistrationFormTypes'],'id' , 'name' ,'class="form-control"'); ?>
+                    <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); ?>
                     </div>
                 </div>
 
