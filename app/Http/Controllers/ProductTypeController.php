@@ -22,13 +22,16 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-
+        $ProductTypeConteoller=new ProductTypeController();
+        $ProductTypeConteoller->getAllTypes();
     }
     public function getAllTypes()
     {
         $ProductType = new ProductType();
 
-        $ProductTypes = $ProductType->getData($id,'name');
+        $ProductTypes = $ProductType->getData('name');
+        return $ProductTypes;
+       view('pages.addProduct');
     }
 
 

@@ -4,11 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductType extends Model
-{
-    public function getData($id,$columname){
-    $Columns= array('id',$columname);
-    $data = ProductType::select($Columns)->where('isdeleted', 0)->get();
-    return $data;
-}
-}
+    class ProductType extends Model
+    {
+    protected $table;
+
+    public function __construct()
+    {
+        $this->table='ProductType';
+    }
+        public function getData($columname) 
+       {
+        $Columns= array($columname,'id');
+        $data = ProductType::select($Columns)->where('isdeleted', 0)->get();
+        return $data;
+        }
+    }

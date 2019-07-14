@@ -1,4 +1,6 @@
 <?php
+use App\Http\Controllers\ProductTypeController;
+
 include('Globals.php');
 /*
 |--------------------------------------------------------------------------
@@ -37,13 +39,11 @@ Route::get('/signUp', function () {
 });
 
 Route::get('/events', 'EventController@index');
+Route::get('/addNewProduct','ProductTypeController@index');
 
-Route::get('/addNewProduct', function () {
-    $x=new ProductTypeController();
-    $x->getAllTypes();
-    return view('pages.addproduct');
 
-});
+  
+
 
 Auth::routes();
 
