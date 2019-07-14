@@ -31,7 +31,7 @@
             @endif
             <li><a href="/events" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">events</a></li>
             <li class="bg-base-color">
-              <a href="/register" class="line-height-unset headerTextcolor width-100"style="margin-top:75px">
+              <a href="/registeration" class="line-height-unset headerTextcolor width-100"style="margin-top:75px">
                 Register
               </a>
             </li>

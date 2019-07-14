@@ -1,28 +1,31 @@
 <?php
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\Controller;
 
-class RegistrationFormType extends Model implements Icrud
-{   
+class RegistrationFormType extends Model
+{
+    protected $table = 'registrationformtype';
+
     public function __construct($id = '')
     {
-        $this->tableName = 'registrationformtype';
         if ($id != '') {
             $this->id = $id;
             $row = getAllById($this->tableName,$this->id);
             $this->name = $row['name'];
-        } 
+        }
     }
 
     public function getAllTypes()
-    {   
+    {
         //returns an array of id and names
-        return $this->getData($this->tableName , 'name');
+        $Columns = array('id' , 'name' );
+        return Parent::getCertainColumns($this->table , $Columns);
     }
-    
-    
-    
-    
+
+
+
+
 
     public function store($request)
     {
@@ -45,10 +48,8 @@ class RegistrationFormType extends Model implements Icrud
         return $isForEvent;
 
     }
-    public function update($request){}
-    public function delete($request){}
-    public function search($request){}
 
 
-    
+
+
 }

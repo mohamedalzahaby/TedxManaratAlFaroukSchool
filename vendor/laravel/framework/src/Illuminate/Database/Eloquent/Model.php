@@ -2,6 +2,7 @@
 
 namespace Illuminate\Database\Eloquent;
 
+use DB;
 use Exception;
 use ArrayAccess;
 use JsonSerializable;
@@ -1648,5 +1649,12 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
     public function __wakeup()
     {
         $this->bootIfNotBooted();
+    }
+
+
+    public function getCertainColumns($tableName , $Columns)
+    {
+        $data = DB::table($tableName)->select($Columns)->where('isdeleted', 0)->get();
+        return $data;
     }
 }

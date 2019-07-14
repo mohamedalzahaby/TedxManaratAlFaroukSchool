@@ -32,6 +32,8 @@ Route::get('/sendMail', function () {
 Route::get('/signUp', function () {
     return view('auth.register');
 });
+Route::get('/registeration', 'RegisterationController@index');
+    
 
 Route::get('/events', 'EventController@index');
 
@@ -41,9 +43,7 @@ Route::get('/addNewProduct', function () {
     return view('pages.addproduct');
 
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 
