@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Console\Scheduling\Event;
+// use DB;
 include('Globals.php');
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +35,7 @@ Route::get('/signUp', function () {
     return view('auth.register');
 });
 Route::get('/registeration', 'RegisterationController@index');
-    
+
 
 Route::get('/events', 'EventController@index');
 
