@@ -39,7 +39,7 @@ Route::get('/signUp', function () {
 });
 
 Route::get('/events', 'EventController@index');
-Route::get('/addNewProduct','ProductTypeController@index');
+Route::get('/tedx/addNewProduct','ProductTypeController@index');
 
 
   

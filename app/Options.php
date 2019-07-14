@@ -28,17 +28,17 @@ class Options extends Model
 
         }
 
-        for ($i=0; $i <$request['ctr'] ; $i++) { 
-            $I = $i+1;
-            $option->name=$request->input('name');
-            $option->dataTypeId=$request->input('dataTypeId');
-            $option->save();
+        // for ($i=0; $i <$request['ctr'] ; $i++) { 
+        //     $I = $i+1;
+        //     $option->name=$request->input('name');
+        //     $option->dataTypeId=$request->input('dataTypeId');
+        //     $option->save();
             
            
-            $productId = $productObj->getProductId($_POST['name']);
-            $optionId = $this->getLastInsertedId();
-            $this->insertRelationData($productId['id'] , $optionId['LastId']);
+        //     $productId = $productObj->getProductId($_POST['name']);
+        //     $optionId = $this->getLastInsertedId();
+        //     $this->insertRelationData($productId['id'] , $optionId['LastId']);
 
-        }
+        // }
     }
 }
