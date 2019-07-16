@@ -33,14 +33,12 @@
                     </div>
                 </fieldset>
             </form>
-
-
             <form method="POST" action="{{ 'RegisterationTypesDestroy'}}" class="form-horizontal">
                 @method("POST")
                 @csrf
                 <fieldset>
                     <!-- Form Name -->
-                    <legend>Add Registeration Form</legend>
+                    <legend>Delete Form Type</legend>
                     <!-- Select Basic -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
@@ -51,40 +49,62 @@
                 </fieldset>
                 <!-- Button -->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
                     <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary">
                 </div>
                 </div>
             </form>
-
-
-            <form method="POST" action="<?php echo $GLOBALS['ASSET'].$GLOBALS['register'].$GLOBALS['addForm'];?>" class="form-horizontal">
+            <form method="POST" action="{{ 'RegisterationTypesUpdate'}}" class="form-horizontal">
+                @method("POST")
+                @csrf
                 <fieldset>
-                <!-- Form Name -->
-                <legend>Add Registeration Form</legend>
-                <!-- Select Basic -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
-                    <div class="col-md-4">
-                    <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); ?>
+                    <!-- Form Name -->
+                    <legend>Update Form Type</legend>
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type Name</label>
+                        <div class="col-md-4">
+                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                            <input type="text" name="updatedName" class="form-control" placeholder="Update Name" >
+                        </div>
                     </div>
-                </div>
-
-                <!-- Select Basic -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="RegisterAs">Applicant Register as</label>
-                    <div class="col-md-4">
-                    <?php $data['controller']->selectTag('RegisterAs', 'RegisterAs', $data['userTypes'],'id' , 'name', 'class="form-control"'); ?>
-                    </div>
-                </div>
                 </fieldset>
                 <!-- Button -->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary">
+                    <input type="submit" id="singlebutton" value="Update" name="singlebutton" class="btn btn-primary">
                 </div>
+                </div>
+            </form>
+            <form method="POST" action="/registeration/create" class="form-horizontal" enctype="multipart/form-data">
+                 @method('GET')
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Add Registeration Form</legend>
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Form Type</label>
+                        <div class="col-md-4">
+                            <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); ?>
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="RegisterAs">Applicant Register as</label>
+                        <div class="col-md-4">
+                            <?php $data['controller']->selectTag('RegisterAs', 'RegisterAs', $data['userTypes'],'id' , 'name', 'class="form-control"'); ?>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary">
+                    </div>
                 </div>
             </form>
         </div>

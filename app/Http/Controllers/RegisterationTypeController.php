@@ -37,21 +37,26 @@ class RegisterationTypeController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate($request ,[
-                'name' => 'required|nullable'
-                ]);
-
-            // dd($request->input('isForEvent'));
         $registrationFormType = new RegistrationFormType();
         $registrationFormType->name  = $request->input('name');
-
-        /* is the checkbox checked */
-        $value = ( empty( $request->input('isForEvent') ) ) ? 0 : 1 ;
-
+        $this->formTypeValidations($request);
+        $value = $this->getCheckBoxValue($request);
         $registrationFormType->isForEvent  = $value;
         $registrationFormType->save();
         return redirect('/registeration')->with('success' , 'Registration Form Type Added');
+    }
+
+    public function formTypeValidations($request)
+    {
+        $this->validate($request ,[
+            'name' => 'required|nullable'
+            ]);
+    }
+    /* check if the checkbox checked */
+    public function getCheckBoxValue($request)
+    {
+        $value = ( empty( $request->input('isForEvent') ) ) ? 0 : 1 ;
+        return $value;
     }
 
     /**
@@ -83,9 +88,12 @@ class RegisterationTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('registerationFormType');
+        $name = $request->input('updatedName');
+        DB::update("update registrationformtype set name = '$name' where id = ?", [$id]);
+        return redirect('/registeration')->with('success' , 'Registration Form Type Updated');
     }
 
     /**
@@ -98,5 +106,6 @@ class RegisterationTypeController extends Controller
     {
         $id = $request->input('registerationFormType');
         DB::update('update registrationformtype set isdeleted = 1 where id = ?', [$id]);
+        return redirect('/registeration')->with('success' , 'Registration Form Type Deleted');
     }
 }

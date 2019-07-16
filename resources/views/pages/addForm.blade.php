@@ -1,4 +1,7 @@
-<?php include('views\layouts\header.php');?>
+@extends('layouts.app')
+@section('content')
+
+
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,8 +14,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		
-	
+
+
 </head>
 
 	<body>
@@ -25,7 +28,7 @@
 				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
 				<input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs'];?>">
 				<p><b>For which event</b></p>
-				<?php 
+				<?php
 					if ($data['IsForEvent']) : Controller::selectTag('eventId','eventId',$data['events'] , 'id' , 'name');
 					else: Controller::selectTag('departmentId','departmentId',$data['Departments'] , 'id' , 'name');
 					endif;
@@ -40,8 +43,8 @@
 		</div>
 		<br><br><br><br><br><br><br><br><br><br>
 	</body>
-	
-		
+
+
 
 
 
@@ -66,3 +69,4 @@
         });
     });
 </script>
+@endsection

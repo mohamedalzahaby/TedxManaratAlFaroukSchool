@@ -34,9 +34,11 @@ Route::get('/signUp', function () {
     return view('auth.register');
 });
 
-Route::get('/registeration', 'RegisterationController@index');
+Route::resource('/registeration', 'RegisterationController');
+// Route::get('/registeration', 'RegisterationController@index');
 Route::resource('RegisterationTypes', 'RegisterationTypeController');
 Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
+Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
 
 Route::get('/events', 'EventController@index');
 

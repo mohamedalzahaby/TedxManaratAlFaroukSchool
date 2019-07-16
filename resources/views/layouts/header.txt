@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['IsSignedUpIn'])) :  ?>
+{{-- <?php if (isset($_SESSION['IsSignedUpIn'])) :  ?>
 
   <!DOCTYPE html>
   <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -336,4 +336,4 @@
         <!-- //.container -->
       </nav>
       <!-- //Navigation End -->
-    <?php endif ?>
+    <?php endif ?> --}}

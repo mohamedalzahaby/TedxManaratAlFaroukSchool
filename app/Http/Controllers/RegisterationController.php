@@ -54,9 +54,23 @@ class RegisterationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( Request $request )
     {
-        //
+        dd($request);
+        $formTypeId = $request->input('registerationFormType');
+        $this->eventController = new EventController();
+        $DepartmentController = new DepartmentController();
+        $RegistrationFormTypeController = new RegistrationFormTypeController();
+        $events = $this->eventController->getEventsOpenedForRegistering();
+        $Departments = $DepartmentController->getDepartments_Of_CurrentBoard();
+        $IsForEvent = $RegistrationFormTypeController->IsForEvent($formTypeId);
+        $IsForEvent = $IsForEvent['isForEvent'];
+        $formData = array('events' => $events , 'Departments' => $Departments , 'IsForEvent' => $IsForEvent
+                            , 'registerationFormType' => $formTypeId , 'RegisterAs' => $request->input('RegisterAs') );
+
+        Controller::view('addForm' , $formData);
+
+        return view('pages.addForm');
     }
 
     /**
