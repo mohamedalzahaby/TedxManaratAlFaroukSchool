@@ -39,8 +39,6 @@ class EventController extends Controller
 
         /*GET BOARDS NAME+ID*/
         $boards = $this->GET_BOARDS();
-        // $boards = (array)$boards;
-        // var_dump($boards[0]->id);die();
 
         /*GET EVENTS AND ADDRESSES STRINGS NAME+ID*/
         $events = $this->getAllEventsAndItsAdresses();

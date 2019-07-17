@@ -3,26 +3,36 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
+use App\Board;
+use App\Event;
+use App\Options;
 use App\UserType;
+use App\Department;
 use App\Registeration;
 use App\RegisterationForm;
 use App\RegisterationDetails;
 use App\RegistrationFormType;
 use App\RegistrationFormOptionsValue;
 
+
+
 class RegisterationController extends Controller
 {
-    private $Options;
     private $event_M;
+    private $board_M;
+    private $options;
     private $UserType_M;
+    private $department_M;
     private $registration_M;
     private $RegisterationForm;
     private $registrationDetails_M;
     private $RegistrationFormType_M;
     public function __construct()
     {
-        // $this->Options = new Options();
-        // $this->event_M = new Event();
+        $this->options = new Options();
+        $this->department_M = new Department();
+        $this->board_M = new Board();
+        $this->event_M = new Event();
         $this->UserType_M = new UserType();
         $this->registration_M = new Registeration();
         $this->RegisterationForm = new RegisterationForm();
@@ -56,13 +66,14 @@ class RegisterationController extends Controller
      */
     public function create( Request $request )
     {
-        dd($request);
         $formTypeId = $request->input('registerationFormType');
-        $this->eventController = new EventController();
-        $DepartmentController = new DepartmentController();
-        $RegistrationFormTypeController = new RegistrationFormTypeController();
-        $events = $this->eventController->getEventsOpenedForRegistering();
-        $Departments = $DepartmentController->getDepartments_Of_CurrentBoard();
+
+
+        // $RegistrationFormTypeController = new RegistrationFormTypeController();
+        $events = $this->event_M->getEventsOpenedForRegistering();
+        $Departments = $this->getDepartments_Of_CurrentBoard();
+        echo "test";
+        dd($Departments);
         $IsForEvent = $RegistrationFormTypeController->IsForEvent($formTypeId);
         $IsForEvent = $IsForEvent['isForEvent'];
         $formData = array('events' => $events , 'Departments' => $Departments , 'IsForEvent' => $IsForEvent
@@ -128,5 +139,14 @@ class RegisterationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function getDepartments_Of_CurrentBoard()
+    {
+        $boardId = $this->board_M->returnCurrentBoard();
+        $board = Board::find($boardId);
+        return  $board->departments;
     }
 }

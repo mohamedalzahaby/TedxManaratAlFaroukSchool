@@ -18,8 +18,13 @@ class Board extends Model
 
     public function __construct()
     {
-        $this->tableName = 'board';
+        $this->table = 'board';
         $this->columnNamesArr = array('name','academicYearId','openingDate','closingDate');
+    }
+
+    public function departments()
+    {
+        return $this->hasMany('App\Department');
     }
 
     public function getBoards()
@@ -58,15 +63,13 @@ class Board extends Model
     }
     public function returnCurrentBoard()
     {
-        $db = Controller::getInstance();
-        // $id_AND_Name = array('id', 'name');
         $currentDate = date("Y-m-d");
-        // $currentBoard = $this->selectWhere($id_AND_Name , $this->tableName , "`closingDate` > '$currentDate'");
-        $sql = "SELECT `id` FROM `$this->tableName` WHERE `closingDate` > '$currentDate';";
-        // $query = $db->query($sql);
-        $currentBoard = $db->queryFetchRowAssoc($sql);
-        $currentBoard = $currentBoard['id'];
-        return $currentBoard;
+        $where  =  array(
+            array('closingDate' , '>' , $currentDate),
+            array('isdeleted' ,  '=' , 0 )
+         );
+        $currentBoardId = DB::table($this->table)->select('id')->where($where)->first();
+        return $currentBoardId->id;
     }
 
 
