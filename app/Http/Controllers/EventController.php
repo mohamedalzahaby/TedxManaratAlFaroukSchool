@@ -184,7 +184,6 @@ class EventController extends Controller
 
     public function addressHtml($data)
     {
-
         echo  "<select name=':addressId' onchange='myFunction(this.value)' id='mySelect'>
                     <option value='0'>add new place</option>";
                     foreach ($data as $key1 => $places) {

@@ -10,12 +10,12 @@
                         <input type="text" name=":name" style="height:55px">
                     </div>
                 </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label>date: </label>
-                    <input type="date" name=":date">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>date: </label>
+                        <input type="date" name=":date">
+                    </div>
                 </div>
-            </div>
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>Event start time: </label>
@@ -30,28 +30,28 @@
                         <input type="time" name=":eventEnd" style="height:50px">
                     </div>
                 </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label>Event description: </label>
-                    <input type="text" name=":description">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Event description: </label>
+                        <input type="text" name=":description">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label id="newAddressLabel">address: </label>
-                    <?php $data['eventController']->addressHtml($data); ?>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label id="newAddressLabel">address: </label>
+                        <?php $data['eventController']->addressHtml($data); ?>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label>academicYear: </label>
-                    <select name=":academicYearId">
-                        @foreach ($data['academicYears'] as $value)
-                            <option value="{{ $value->id }}">{{ $value->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>academicYear: </label>
+                        <select name=":academicYearId">
+                            @foreach ($data['academicYears'] as $value)
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
                 <div class="col-md-12">
                     <label>board: </label>
                     <select name=":boardId">
@@ -64,16 +64,16 @@
             <div class="col-md-12">
                     <label>Event description: </label>
                     <!-- <input type="text" name=":description"> -->
-                    <textarea rows="7" cols="50">
-            </textarea>
-        </div>
-        <div class="form-group" style="margin-left:600px;">
-                <div class="col-md-4">
-                    <input type="submit" name="submit" style="border-radius:10px;width:300px;">
-                </div>
+                    <textarea rows="7" cols="50"></textarea>
+            </div>
+            <div class="form-group" style="margin-left:600px;">
+                    <div class="col-md-4">
+                        <input type="submit" name="submit" style="border-radius:10px;width:300px;">
+                    </div>
             </div>
         </form>
     @endif
+
     <div class="container">
         <div class="page-header text-center">
             <h1 id="timeline"style="margin-top:670px;margin-right:25px">Our Events</h1>

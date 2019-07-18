@@ -1,6 +1,61 @@
 @extends('layouts.app')
 @section('content')
 
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+@if (!Auth::guest())
+        <h1 style="margin-left:600px;margin-top:10px">Add New Event</h1>
+        <form id="form" action=" /Board/submit" method="POST">
+            <div class="container" >
+                <div class="col-md-12">
+                    <div class="form-group" style="margin-top:20px">
+                        <div class="col-md-4">
+                            <label>name: </label>
+                            <input type="text" name=":name" style="height:55px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label>Opening date: </label>
+                            <input type="date" name=":Opendate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label>Closing date: </label>
+                            <input type="date" name=":closedate">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>academicYear: </label>
+                        <select name=":academicYearId">
+
+                        </select>
+                    </div>
+                </div>
+
+                </div>
+                <div class="col-md-12">
+                        <label>Board description: </label>
+                       <input type="text" name=":description">
+                        <textarea rows="7" cols="50">
+                </textarea>
+                </div>
+                <div class="form-group" style="margin-left:600px;">
+                        <div class="col-md-4">
+                            <input type="submit" name="submit" style="border-radius:10px;width:300px;">
+                        </div>
+                </div>
+             </div>
+        </form>
+@endif
+
+
 
   <!-- Section - Team Start -->
   <section id="team" class="bg-white">
