@@ -78,8 +78,7 @@ class RegisterationController extends Controller
         'Departments' => $Departments ,
         'IsForEvent' => $IsForEvent,
         'registerationFormType' => $formTypeId ,
-        'RegisterAs' => $request->input('RegisterAs') ,
-        'controller' => new Controller() );
+        'RegisterAs' => $request->input('RegisterAs'));
         return view('pages.addForm')->with('data' , $data);
     }
 

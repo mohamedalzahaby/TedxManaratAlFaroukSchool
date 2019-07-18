@@ -22,7 +22,7 @@
 		<div class="addproduct" >
 			<br><br>
 			<h1><b>Add Form Queastions</b></h1><br><br><hr><br>
-			<form id="form" action='<?php echo $GLOBALS['ASSET'].$GLOBALS['register'].'/'.$GLOBALS['addForm'].$GLOBALS['submit'];?>' method='POST'>
+			<form id="form" action='register/addForm/submit' method='POST'>
 				<p><b>Form Title</b></p>
 				<input type="text" name="name" placeholder="Enter product name here" required><br><br>
 				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
