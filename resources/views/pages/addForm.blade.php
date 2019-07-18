@@ -28,11 +28,20 @@
 				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
 				<input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs'];?>">
 				<p><b>For which event</b></p>
-                @php
-					if ($data['IsForEvent']) : $data['controller']->selectTag('eventId','eventId',$data['events'] , 'id' , 'name');
-					else: Controller::selectTag('departmentId','departmentId',$data['Departments'] , 'id' , 'name');
-					endif;
-                @endphp
+                @if ($data['IsForEvent'])
+                    <select name="eventId" id="eventId">
+                        @foreach ($data['events'] as $event)
+                            <option value="{{$event->id}}">{{$event->name}}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <select name="departmentId" id="departmentId">
+                            @foreach ($data['Departments'] as $Department)
+                                <option value="{{$Department->id}}">{{$Department->name}}</option>
+                            @endforeach
+                    </select>
+
+                @endif
 				<br><br><br><br>
 				<?php echo'<div id="myOptions"></div><br>';  ?>
 				<button class="submit" type="submit" name="next" value="submit">next</button><br><br>

@@ -43,7 +43,11 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
                 </fieldset>
@@ -63,12 +67,17 @@
                     <legend>Update Form Type</legend>
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type Name</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                             <input type="text" name="updatedName" class="form-control" placeholder="Update Name" >
                         </div>
                     </div>
+
                 </fieldset>
                 <!-- Button -->
                 <div class="form-group">
@@ -85,17 +94,26 @@
                     <legend>Add Registeration Form</legend>
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Form Type</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); ?>
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
-
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterAs">Applicant Register as</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Register As</label>
                         <div class="col-md-4">
-                            <?php $data['controller']->selectTag('RegisterAs', 'RegisterAs', $data['userTypes'],'id' , 'name', 'class="form-control"'); ?>
+                            <select name="RegisterAs" id="RegisterAs" class="form-control">
+                                @foreach ($data['userTypes'] as $type)
+                                    @if ($type->parentId != 0)
+                                        <option value=" {{$type->id}} ">{{$type->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </fieldset>

@@ -28,13 +28,5 @@ class Controller extends BaseController
 		}
 		echo '</select>';
 	}
-    public function userTypeSelectTag($id , $name , $optionData , $optionDataValue , $optionDataName , $class = '' )
-	{
-		echo "<select id='$id' name='$name' $class>";
-        foreach ($optionData as $key => $option)
-        {
-			echo '<option value="'.$option->$optionDataValue.'>'.$option->$optionDataName.'</option>';
-		}
-		echo '</select>';
-	}
+
 }
