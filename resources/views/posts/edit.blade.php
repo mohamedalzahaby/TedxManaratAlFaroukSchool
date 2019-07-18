@@ -1,21 +1,27 @@
 @extends('layouts.app')
 @section('content')
-<br>
+<br><br><br><br><br><br><br>
 <h3>Edit Post</h3>
-{!! Form::open(array('action' => ['PostsController@update' , $posts->id],'method' => 'POST' , 'enctype'=>'multipart/form-data')) !!}
-<div class="form-group">
-    {{ Form::label('mytitle', 'title') }}
-    {{ Form::text('title', $posts->title , ['class'=>"form-control", 'placeholder'=>"Title"]) }}
-</div>
-<div class="form-group">
-    {{ Form::label('mybody', 'body') }}
-    {{ Form::textarea('body', $posts->body , [ 'id'=>'article-ckeditor', 'class'=>"form-control", 'placeholder'=>"Body Text"]) }}
-</div>
-<div class="form-group">
-        {!! Form::file('cover_image')!!}
+<form action="../../posts/{{$posts->id}}" method="post"  enctype = 'multipart/form-data'>
+    @method('PUT')
+    @csrf
+
+    <div class="form-group">
+        <label for="mytitle">title</label>
+        <input type="text" name="title" value = "{{$posts->title}}" class = "form-control" placeholder = "Title">
     </div>
-{{ Form::hidden('_method', 'PUT') }}
-{{ Form::submit('Submit' ,['class' => 'btn btn-primary']) }}
-{!! Form::close() !!}
+    <div class="form-group">
+            <label for="mybody">body</label>
+            <textarea name="body" id="article-ckeditor"  class="form-control" >{{$posts->body}}</textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" name="cover_image">
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+
+
 
 @endsection

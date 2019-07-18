@@ -14,8 +14,9 @@
 @if (!Auth::guest())
     @if (Auth::user()->id == $posts->user_id)
         <a href="/posts/{{$posts->id}}/edit" class="btn btn-default">Edit</a>
-        <form action="Posts/{{$posts->id}}" method="post" class = 'pull-right'>
-            <input type="hidden" name="DELETE">
+        <form action="../posts/{{$posts->id}}" method="post" class = 'pull-right'>
+            @csrf
+            @method("DELETE")
             <input type="submit" value="Delete" class = 'btn btn-danger'>
         </form>
     @endif

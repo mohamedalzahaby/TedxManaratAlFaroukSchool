@@ -30,7 +30,7 @@ class PostController extends Controller
         // $posts = Post::where('title' , 'post two')->get();
         // $posts = Post::orderBy('title','asc')->take(1)->get();
         // $posts = Post::orderBy('title','asc')->paginate(1);
-        $posts = Post::all();
+        $posts = Post::all()->where('isdeleted', 0);
         return view('posts.index')->with('posts' , $posts);
     }
 
@@ -56,7 +56,8 @@ class PostController extends Controller
             $coverimage => 'image|nullable|max:1999'
             ]);
         // check if file is selected
-        if ($request->hasFile($coverimage)) {
+        if ($request->hasFile($coverimage))
+        {
             # get file name with extension
             $filenameWithExt = $request->file($coverimage)->getClientOriginalName();
             //get just filename
@@ -91,7 +92,12 @@ class PostController extends Controller
     public function show($id)
     {
         $posts = Post::find($id);
-        return view('posts.show')->with('posts' , $posts);
+        if ($posts->isdeleted == 1) {
+            return redirect('/posts')->with('error' , 'This post was deleted');
+        }
+        else{
+            return view('posts.show')->with('posts' , $posts);
+        }
     }
 
     /**
@@ -171,10 +177,8 @@ class PostController extends Controller
             $imageRoute =  $this->imagesFolderRoutes.'/'.$post->cover_Image;
             Storage::delete( $imageRoute );
         }
-        $post->delete();
+        $post->isdeleted = 1;
+        $post->save();
         return redirect('/posts')->with('success' , 'Post Deleted');
-
-
-
     }
 }
