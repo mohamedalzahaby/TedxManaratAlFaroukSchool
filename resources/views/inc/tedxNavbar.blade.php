@@ -20,9 +20,10 @@
             <ul class="nav navbar-nav font-family-alt letter-spacing-1 text-uppercase font-weight-700" style="position:relative;
               top:-70px">
               <li><a href="/about" class="line-height-unset headerTextcolor" style="margin-top:75px;margin-right:20px">About</a></li>
-                @if (!Auth::guest())
+                {{-- @if (!Auth::guest())
                     <li><a href="/product" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Product</a></li>
-                @endif
+                @endif --}}
+                <li><a href="/posts" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Blog</a></li>
                 <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">contact</a></li>
                 <li><a href="/ourTeam"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
 

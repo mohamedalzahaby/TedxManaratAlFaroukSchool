@@ -7,6 +7,7 @@ use App\Board;
 use App\Event;
 use App\Options;
 use App\UserType;
+use App\DataType;
 use App\Department;
 use App\Registeration;
 use App\RegisterationForm;
@@ -20,8 +21,9 @@ class RegisterationController extends Controller
 {
     private $event_M;
     private $board_M;
-    private $options;
+    private $options_M;
     private $UserType_M;
+    private $DataType_M;
     private $department_M;
     private $registration_M;
     private $RegisterationForm;
@@ -29,11 +31,12 @@ class RegisterationController extends Controller
     private $RegistrationFormType_M;
     public function __construct()
     {
-        $this->options = new Options();
-        $this->department_M = new Department();
         $this->board_M = new Board();
         $this->event_M = new Event();
+        $this->options_M = new Options();
+        $this->DataType_M = new DataType();
         $this->UserType_M = new UserType();
+        $this->department_M = new Department();
         $this->registration_M = new Registeration();
         $this->RegisterationForm = new RegisterationForm();
         $this->registrationDetails_M = new RegisterationDetails();
@@ -67,21 +70,16 @@ class RegisterationController extends Controller
     public function create( Request $request )
     {
         $formTypeId = $request->input('registerationFormType');
-
-
-        // $RegistrationFormTypeController = new RegistrationFormTypeController();
         $events = $this->event_M->getEventsOpenedForRegistering();
         $Departments = $this->getDepartments_Of_CurrentBoard();
-        echo "test";
-        dd($Departments);
-        $IsForEvent = $RegistrationFormTypeController->IsForEvent($formTypeId);
-        $IsForEvent = $IsForEvent['isForEvent'];
-        $formData = array('events' => $events , 'Departments' => $Departments , 'IsForEvent' => $IsForEvent
-                            , 'registerationFormType' => $formTypeId , 'RegisterAs' => $request->input('RegisterAs') );
-
-        Controller::view('addForm' , $formData);
-
-        return view('pages.addForm');
+        $IsForEvent = $this->RegistrationFormType_M->getIsForEventValue($formTypeId);
+        $data = array('events' => $events ,
+        'Departments' => $Departments ,
+        'IsForEvent' => $IsForEvent,
+        'registerationFormType' => $formTypeId ,
+        'RegisterAs' => $request->input('RegisterAs') ,
+        'controller' => new Controller() );
+        return view('pages.addForm')->with('data' , $data);
     }
 
     /**
@@ -149,4 +147,12 @@ class RegisterationController extends Controller
         $board = Board::find($boardId);
         return  $board->departments;
     }
+
+
+    public function getOptionsDataTypes()
+{
+    $data = DataType::all();
+    return view('pages.anotherQuestion')->with('data' , $data);
+
+}
 }

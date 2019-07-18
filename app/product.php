@@ -1,72 +1,30 @@
 <?php
 namespace App;
 use Illuminate\Database\Eloquent\Model;
+use DB;
+use PDO;
+use Illuminate\Support\Facades\Request;
 
-// require_once('model\DBHelper.php');
-// require_once('app\interface\Icrud.php');
 class Product extends Model
 {
-    private $price;
-    private $quantity;
-    private $currencyId;
-    private $productTypeId;
-    private $productOptionsIds;
+    protected $table;
 
     public function __construct()
     {
-        $this->tableName = 'Product';
-        $this->productOptionsIds = [];
-        $this->columnNamesArr = array('name','price','quantity','productTypeId');
+        $this->table='Product';
     }
-    
 
-
-    public function insertOptionId($optionId)
+    public function store(Request $request)
     {
-        array_push($this->productOptionsIds , $optionId);
+        $Product=new Product();
+        $Product->name = $request->input('name');
+        $Product->price=$request->input('price');
+        $Product->quantity=$request->input('quantity');
+        $Product->save();
+        return redirect('addNewProduct')->with('sucess','Product added');
     }
-    
-
-    public function store($request)
-    {
-        $this->name = $request['name'];
-        $this->price = $request['price'];
-        $this->quantity = $request['quantity'];
-        $this->productTypeId = $request['productTypeId'];
-		$this->columnValuesArr = array( $this->name, $this->price, $this->quantity, $this->productTypeId); 		
-		$this->insert($this->columnNamesArr , $this->columnValuesArr , $this->tableName);
-    }
-
-    public function update($request)
-    {
-        $valueArr = array('ss', 50, 100, 44);
-        $this->dynamicUpdate($this->tableName, $this->columnNamesArr, $valueArr , $where = 'id = 1' );
-    }
-
-    public function getProducts()
-    {
-        return $this->getData($this->tableName , 'name');
-    }
-
     public function getProductId($name)
     {
-        return $this->getId($this->tableName , 'name' , $name);
+       return  DB::select('id')->where('name' , $name)->get();
     }
-
-    public function delete($request){}
-    public function search($request){}
-
-   
-    
 }
-
-
-
-    // public function inserOptionIds($request)
-    // {
-    //     for ($i=0; $i < $request['ctr'] ; $i++) { 
-    //         # code...
-    //     }
-    //     inserOptionId($optionId)
-    //     array_push($this->productOptionsIds , $optionId);
-    // }

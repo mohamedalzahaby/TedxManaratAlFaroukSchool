@@ -8,10 +8,10 @@ use App\ProductType;
 class ProductTypeController extends Controller
 {
 
-    private $ProductType;
+    private $User;
     public function __construct()
     {
-        $this->ProductType=new ProductType();
+        $this->User=new ProductType();
     }
 
 
@@ -22,13 +22,14 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        $productTypes = $this->getAllTypes();
-        return view('pages.addProduct')->with('productTypes' , $productTypes);
+        $this->getAllTypes();
     }
     public function getAllTypes()
     {
-        $ProductTypes = $this->ProductType->getData('name');
+        $ProductType = new ProductType();
+        $ProductTypes = $ProductType->getData('name');
         return $ProductTypes;
+       view('pages.addProduct');
     }
 
 

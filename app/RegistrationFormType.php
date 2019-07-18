@@ -1,5 +1,6 @@
 <?php
 namespace App;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 
@@ -30,16 +31,10 @@ class RegistrationFormType extends Model
         //  die($sql);
         $query = $Model->query($sql);
     }
-    public function IsForEvent($formTypeId)
+    public function getIsForEventValue($formTypeId)
     {
-        $db = controller::getInstance();
-        $sql = "SELECT `isForEvent` FROM `$this->tableName` WHERE `id` = $formTypeId;";
-        // var_dump($sql);
-        // echo "<br>";
-        // die();
-        $isForEvent = $db->queryFetchRowAssoc($sql);
+        $isForEvent = DB::table($this->table)->select('isForEvent')->where('id' ,$formTypeId)->first()->isForEvent;
         return $isForEvent;
-
     }
 
 
