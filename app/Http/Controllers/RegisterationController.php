@@ -31,7 +31,7 @@ class RegisterationController extends Controller
     private $RegistrationFormType_M;
     public function __construct()
     {
-        $this->board_M = new Board();
+        // $this->board_M = new Board();
         $this->event_M = new Event();
         $this->options_M = new Options();
         $this->DataType_M = new DataType();
