@@ -4,7 +4,6 @@ namespace App;
 
 use DB;
 use PDO;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 
 class Product extends Model

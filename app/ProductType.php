@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
     class ProductType extends Model
     {
-    protected $table;
+    protected $table = 'ProductType';
 
     public function __construct()
     {
         $this->table='ProductType';
     }
-        public function getData($columname) 
-       {
+    public function getData($columname)
+    {
         $Columns= array($columname,'id');
         $data = ProductType::select($Columns)->where('isdeleted', 0)->get();
         return $data;
-        }
+    }
     }

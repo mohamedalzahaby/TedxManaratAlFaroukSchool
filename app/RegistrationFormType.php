@@ -1,28 +1,25 @@
 <?php
 namespace App;
+use DB;
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\Controller;
 
-class RegistrationFormType extends Model implements Icrud
-{   
-    public function __construct($id = '')
-    {
-        $this->tableName = 'registrationformtype';
-        if ($id != '') {
-            $this->id = $id;
-            $row = getAllById($this->tableName,$this->id);
-            $this->name = $row['name'];
-        } 
-    }
+class RegistrationFormType extends Model
+{
+    protected $table = 'registrationformtype';
+
+
 
     public function getAllTypes()
-    {   
+    {
         //returns an array of id and names
-        return $this->getData($this->tableName , 'name');
+        $Columns = array('id' , 'name' );
+        return Parent::getCertainColumns($this->table , $Columns);
     }
-    
-    
-    
-    
+
+
+
+
 
     public function store($request)
     {
@@ -34,21 +31,13 @@ class RegistrationFormType extends Model implements Icrud
         //  die($sql);
         $query = $Model->query($sql);
     }
-    public function IsForEvent($formTypeId)
+    public function getIsForEventValue($formTypeId)
     {
-        $db = controller::getInstance();
-        $sql = "SELECT `isForEvent` FROM `$this->tableName` WHERE `id` = $formTypeId;";
-        // var_dump($sql);
-        // echo "<br>";
-        // die();
-        $isForEvent = $db->queryFetchRowAssoc($sql);
+        $isForEvent = DB::table($this->table)->select('isForEvent')->where('id' ,$formTypeId)->first()->isForEvent;
         return $isForEvent;
-
     }
-    public function update($request){}
-    public function delete($request){}
-    public function search($request){}
 
 
-    
+
+
 }

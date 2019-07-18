@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'TedxManaratAlFaroukSchool') }}</title>
     {{-- <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
@@ -75,5 +75,12 @@
     @include('inc.messages')
     @yield('content')
     @include('layouts.footer')
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+            CKEDITOR.replace( 'article-ckeditor' );
+    </script>
 </body>
 </html>

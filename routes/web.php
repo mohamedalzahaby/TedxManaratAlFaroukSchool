@@ -1,5 +1,4 @@
 <?php
-use App\Http\Controllers\ProductTypeController;
 
 include('Globals.php');
 /*
@@ -12,6 +11,8 @@ include('Globals.php');
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/posts/submit', 'PostController@store');
+Route::resource('posts', 'PostController');
 
 Route::get('/', function () {
     return view('pages.about');
@@ -19,6 +20,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('pages.about');
 });
+
+Route::get('/addForm/addQuestion', 'RegisterationController@getOptionsDataTypes');
+
 Route::get('/contact', function () {
     return view('pages.contact');
 });
@@ -31,22 +35,23 @@ Route::get('/ourTeam', function () {
 Route::get('/sendMail', function () {
     return view('pages.sendMail');
 });
-Route::get('/Board', function () {
-    return view('pages.Board');
-});
 Route::get('/signUp', function () {
     return view('auth.register');
 });
 
+Route::resource('/registeration', 'RegisterationController');
+Route::resource('RegisterationTypes', 'RegisterationTypeController');
+Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
+Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
+
 Route::get('/events', 'EventController@index');
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
-
-
-  
-
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('/home', function () {
+    return redirect('/about');
+});
+// dd($_SERVER['REQUEST_URI']);
 

@@ -4,22 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DataType extends Model 
+class DataType extends Model
 {
-
+protected $table;
     public function __construct($id = '')
     {
-        $this->tableName = 'dataTypes';
-        if ($id != '') {
-            $this->id = $id;
-            $data = $this->getAllById($this->tableName,$this->name);
-            $this->name = $data['name'];
-        }
+        $this->table = 'dataTypes';
+
     }
 
     public function SelectAllDataTypes()
     {
-        return $this->SelectAll($this->tableName);
+        return $this->SelectAll($this->table);
     }
     public function store($request)
     {

@@ -73,6 +73,4 @@
     });
 </script>
 
-</body>
-
-</html>
+@endsection

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Registeration extends Model
 {
     protected $userId;
-    
-    
+
+
 
     public function __construct($id = '')
     {
@@ -17,7 +17,7 @@ class Registeration extends Model
             $row = getAllById($this->tableName,$this->id);
             $this->userId = $row['userId'];
             $this->academicYearId = $row['academicYearId'];
-        } 
+        }
     }
 
     public function store($id)
@@ -26,7 +26,7 @@ class Registeration extends Model
         $sql = "INSERT INTO `registeration`(`userId`, `academicYearId`) VALUES ($id , 1)";
         $db->query($sql);
         $lastId = $db->lastInsertId('registeration');
-        $this->id = $lastId; 
+        $this->id = $lastId;
     }
 
     public function getLastId()
@@ -37,7 +37,7 @@ class Registeration extends Model
     {
         return $this->userId;
     }
-    
+
     public function getUserRegisterations($id)
     {
         $db = Controller::getInstance();
@@ -51,13 +51,13 @@ class Registeration extends Model
         $ids = [];
         $vv = NULL;
         foreach ($query as $key1 => $value) {
-            foreach ($value as $key2 => $v) {            
+            foreach ($value as $key2 => $v) {
                 array_push($ids ,$v);
-            }    
+            }
         }
         return $ids;
     }
 
-    
+
 
 }

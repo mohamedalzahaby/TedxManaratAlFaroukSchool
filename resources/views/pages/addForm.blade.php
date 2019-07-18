@@ -1,4 +1,7 @@
-<?php include('views\layouts\header.php');?>
+@extends('layouts.app')
+@section('content')
+
+
 
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,8 +14,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		
-	
+
+
 </head>
 
 	<body>
@@ -25,11 +28,11 @@
 				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
 				<input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs'];?>">
 				<p><b>For which event</b></p>
-				<?php 
-					if ($data['IsForEvent']) : Controller::selectTag('eventId','eventId',$data['events'] , 'id' , 'name');
+                @php
+					if ($data['IsForEvent']) : $data['controller']->selectTag('eventId','eventId',$data['events'] , 'id' , 'name');
 					else: Controller::selectTag('departmentId','departmentId',$data['Departments'] , 'id' , 'name');
 					endif;
-				?>
+                @endphp
 				<br><br><br><br>
 				<?php echo'<div id="myOptions"></div><br>';  ?>
 				<button class="submit" type="submit" name="next" value="submit">next</button><br><br>
@@ -40,21 +43,23 @@
 		</div>
 		<br><br><br><br><br><br><br><br><br><br>
 	</body>
-	
-		
+
+
 
 
 
 <script>
     var myctr = 1;
     $(document).ready(function() {
+
         $("#AnotherOption").click(function() {
+        alert(document);
             $.ajax({
                 type: 'POST',
                 data: ({
                     ctr: myctr
                 }),
-                url: '<?php echo $GLOBALS['ASSET'].$GLOBALS['addForm'].$GLOBALS['addQuestion'];?>',
+                url: '/addForm/addQuestion',
 
                 success: function(data) {
 
@@ -66,3 +71,4 @@
         });
     });
 </script>
+@endsection
