@@ -47,7 +47,7 @@ class BoardController extends Controller
             'description' => 'required'
             ]);
 
-
+            
         if ($request->hasFile($image))
         {
           
