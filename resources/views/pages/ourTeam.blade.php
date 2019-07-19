@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 @if (!Auth::guest())
-        <h1 style="margin-left:600px;margin-top:10px">Add New Event</h1>
+        <h1 style="margin-left:650px;margin-top:130px">Add New Event</h1>
         <form id="form" action=" /Board/submit" method="POST">
             <div class="container" >
                 <div class="col-md-12">
@@ -46,7 +46,7 @@
                         <textarea rows="7" cols="50">
                 </textarea>
                 </div>
-                <div class="form-group" style="margin-left:600px;">
+                <div class="form-group" style="margin-left:450px;">
                         <div class="col-md-4">
                             <input type="submit" name="submit" style="border-radius:10px;width:300px;">
                         </div>

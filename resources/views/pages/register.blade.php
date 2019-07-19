@@ -26,11 +26,16 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input id="registrationTypeName" name="name" class="form-control" placeholder="registration Type" type="text">
-                                <label class="col-md-4 control-label" for="RegisterAs">isForEvent</label>
-                                <input name="isForEvent" class="form-control" placeholder="isForEvent" type="checkbox">
-                                <button type="submit" name='submit' id="registrationTypeNameButton" ><span class="input-group-addon">ADD</span></button>
-                            </div><p class="help-block">enter new registration Type</p></div>
+                                <label style="position:relative;left:-170px;margin-top:30px" for="RegisterAs">isForEvent</label>
+                                <input name="isForEvent" style="position:relative;bottom:40px;height:30px;margin-right:10px"  type="checkbox">
+
+                            </div><p class="help-block">enter new registration Type</p>
+
+                            <button class="btn btn-primary" type="submit" name='submit' id="registrationTypeNameButton"style="height:45px;width:100px;background-color:#e62b1e;border-radius:10px" >ADD</button>
+                        </div>
+
                     </div>
+
                 </fieldset>
             </form>
             <form method="POST" action="{{ 'RegisterationTypesDestroy'}}" class="form-horizontal">
@@ -55,7 +60,7 @@
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary">
+                    <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                 </div>
                 </div>
             </form>
@@ -83,7 +88,7 @@
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="singlebutton" value="Update" name="singlebutton" class="btn btn-primary">
+                    <input type="submit" id="singlebutton" value="Update" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                 </div>
                 </div>
             </form>
@@ -121,7 +126,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
-                        <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary">
+                        <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                     </div>
                 </div>
             </form>

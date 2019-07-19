@@ -71,7 +71,11 @@
 
 </head>
 <body id="page-top">
-    @include('inc.tedxNavbar')
+    @if (Auth::guest())
+        @include('inc.logoutNavbar')
+    @else
+        @include('inc.loginNavbar')
+    @endif
     @include('inc.messages')
     @yield('content')
     @include('layouts.footer')

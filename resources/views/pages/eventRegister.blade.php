@@ -10,9 +10,9 @@
         <!-- //.col-md-12 -->
       </div>
       <!-- //.row -->
-  
-  
-  
+
+
+
       <span class="bg-gray-light-2 separator-line-full"></span>
       <div class="row margin-5 no-margin-rl no-margin-bottom">
         <?php foreach ($data as $key => $form) { ?>
@@ -31,7 +31,7 @@
                       </span> -->
                       <a href="<?php echo $GLOBALS['ASSET'].$GLOBALS['userForm'].'?id='.$form['id'];?>">
                       <span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">Register</span></a>
-                </form>  
+                </form>
               </div>
             </div>
             <br><br><br><br><br><br><br><br><br><br><br><br>
@@ -51,7 +51,7 @@
               <a href="<?php echo $GLOBALS['ASSET'].$GLOBALS['userForm'].'?id='.$form['id'];?>"><span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">Register</span></a>
               </div>
             </div>
-            
+
             <!-- //.col-md-6 -->
           <?php endif; ?>
           <?php } ?>
@@ -60,4 +60,3 @@
     </div>
     <!-- //.container -->
   </section>
-  

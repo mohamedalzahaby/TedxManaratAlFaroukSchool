@@ -2,12 +2,13 @@
 @section('content')
 
 <!-- Section - Contact Start -->
+
 <section id="contact" class="bg-white-2">
   <div class="container">
     <div class="row no-padding-rl">
       <div class="col-md-12">
         <h2 class="font-family-alt font-weight-700 sm-title-large title-extra-large-2 text-gray-dark-2">
-          Our Events
+          Our Eventss
         </h2>
         <span class="bg-base-color xs-margin-6 xs-no-margin-rl margin-3 no-margin-rl separator-line-extra-thick-long"></span>
       </div>

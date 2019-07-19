@@ -11,7 +11,7 @@
           </button>
 
           <a class="navbar-brand font-family-alt letter-spacing-1 text-extra-large text-uppercase" href="/about">
-            <img class="logo-navbar-dark" src="{{ asset('images/logos/tedxWhite.png') }}" alt="TEDx" />
+            <img class="logo-navbar-dark" src="{{ asset('images/logos/tedxWhite.png') }}" alt="TEDx"/>
 
           </a>
         </div>
@@ -19,20 +19,20 @@
         <div id="navbar" class="navbar-collapse collapse col-lg-9 col-sm-12 col-md-12 pull-right" style="height: 20px !important;">
             <ul class="nav navbar-nav font-family-alt letter-spacing-1 text-uppercase font-weight-700" style="position:relative;
               top:-70px">
-              <li><a href="/about" class="line-height-unset headerTextcolor" style="margin-top:75px;margin-right:20px">About</a></li>
+              <li><a href="/about" class="line-height-unset headerTextcolor" style="margin-right:20px">About</a></li>
                 {{-- @if (!Auth::guest())
                     <li><a href="/product" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Product</a></li>
                 @endif --}}
-                <li><a href="/posts" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">Blog</a></li>
-                <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">contact</a></li>
-                <li><a href="/ourTeam"   class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">ourTeam</a></li>
+                <li><a href="/posts" class="line-height-unset headerTextcolor"style="margin-right:20px">Blog</a></li>
+                <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-right:20px">contact</a></li>
+                <li><a href="/ourTeam"   class="line-height-unset headerTextcolor"style="margin-right:20px">ourTeam</a></li>
 
                 @if (!Auth::guest())
-                    <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">sendMail</a></li>
+                    <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-right:20px">sendMail</a></li>
                 @endif
-                <li><a href="/events" class="line-height-unset headerTextcolor"style="margin-top:75px;margin-right:20px">events</a></li>
+                <li><a href="/events" class="line-height-unset headerTextcolor"style="margin-right:20px">events</a></li>
                 <li class="bg-base-color">
-                <a href="/registeration" class="line-height-unset headerTextcolor width-100"style="margin-top:75px">
+                <a href="/registeration" class="line-height-unset headerTextcolor width-100">
                     Register
                 </a>
                 </li>

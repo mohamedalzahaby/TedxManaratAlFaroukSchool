@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<br><br><br><br><br><br><br><br>
-<h3>posts</h3>
-<a href="/posts/create" class="btn btn-primary">Create Post</a><br>
+
+<h1 style="margin-top:130px;margin-left:20px;margin-bottom:10px">Posts</h1>
+<a href="/posts/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Post</a><br>
 @if (count($posts) > 0)
 @foreach ($posts as $post)
-    <div class="well">
-        <div class="row">
+    <div class="well"style="margin:15px">
+        <div class="row" >
             <div class="col-md-4 col-sm-4">
             <img src="/storage//cover_images/{{$post->cover_Image}}" style="width:100%" alt="{{$post->cover_Image}}">
             </div>
