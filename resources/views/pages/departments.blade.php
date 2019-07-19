@@ -1,12 +1,14 @@
 @extends('layouts.app')
 @section('content')
-
-<br><br><br><br><br><br><br><br><br><br>
+@php
+  //  dd($departments);                           
+@endphp
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 @if (!Auth::guest())
 
 
-        <h1 style="margin-left:600px;margin-top:10px">Add New Board</h1>
-        <form id="form" action="../addboard/submit" method="POST">
+        <h1 style="margin-left:600px;margin-top:10px">Add New Department</h1>
+        <form id="form" action="../departments/submit" method="POST">
           @method('POST')
           @csrf
             <div class="container" >
@@ -18,44 +20,34 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label>Opening date: </label>
-                            <input type="date" name="Opendate">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label>Closing date: </label>
-                            <input type="date" name="closedate">
-                        </div>
-                    </div>
+                      <div class="col-md-4">
+                          <label>Board: </label>
+                          <select name="board_id">
+                            @foreach ($departments as $department )
+                            <option value={{ $department->id }}>{{ $department->name }}</option>       
+                            @endforeach
+                         
+                          </select>
+                         
+                      </div>
+                  </div>
+                   
+                    
 
                 </div>
                 <div class="col-md-12">
 
 
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label>academicYear: </label>
-                        <select name="academicYearId">
-                          @foreach ( $boards as $board )
-                          <option value={{ $board->id }}> {{  $board->name  }}</option>     
-                          @endforeach
-                         
-                        </select>
-                    </div>
-                </div>
-
+                
                 </div>  
                 <div class="col-md-12">
-                        <label>Board description: </label>
+                        <label>Department description: </label>
                        
-                        <textarea rows="7" cols="50" name="description">
+                        <textarea rows="7" cols="50" name="jobDescribtion">
                 </textarea>
                 </div>
                 <div class="form-group">
-                  <input type="file" name="image" id="">
-                  <img src="/storage//cover_images/{{$board->image}}" style="width:100%" alt="{{$board->image}}">
+                  <input type="file" name="image">
               </div>
           
                 <div class="form-group" style="margin-left:600px;">
@@ -82,14 +74,15 @@
         <!-- //.col-md-10 -->
       </div>
       <!-- //.row -->
-@foreach ($boards as $board)    
+@foreach ($departments as $department)
+      
   <div class="row">
     <div class="col-md-8 col-md-offset-2 text-center">
       <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
-      {{  $board->name  }}
+      {{  $department->name  }}
       </h3>
       <p class="margin-5 no-margin-rl text-gray-dark-2">
-        {{ $board->description }}
+        {{ $department->jobDescribtion }}
       </p>
     </div>
 
@@ -104,7 +97,7 @@
         <!-- //.position-relative -->
         <div class="bg-gray-light no-padding-rl padding-6 position-relative text-center">
           <span class="display-block font-family-alt font-weight-700 letter-spacing-2 text-gray-dark-2 text-small text-uppercase">
-            <a href="/departments">departments</a><br><a href="/board/update">Update Board</a>
+            
           </span>
         </div>
         <!-- //.bg-gray-light -->

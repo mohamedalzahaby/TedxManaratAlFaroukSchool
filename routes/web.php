@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 include('Globals.php');
 /*
@@ -12,6 +13,10 @@ include('Globals.php');
 |
 */
 Route::post('/posts/submit', 'PostController@store');
+Route::post('/addboard/submit', 'BoardController@store'); 
+Route::post('/departments/submit', 'DepartmentController@store');
+
+
 Route::resource('posts', 'PostController');
 
 Route::get('/', function () {
@@ -29,15 +34,16 @@ Route::get('/contact', function () {
 Route::get('/product', function () {
     return view('pages.product');
 });
-Route::get('/ourTeam', function () {
-    return view('pages.ourTeam');
-});
+Route::get('/ourTeam', 'BoardController@index' );
+Route::get('/departments' ,'DepartmentController@index');
 Route::get('/sendMail', function () {
     return view('pages.sendMail');
 });
 Route::get('/signUp', function () {
     return view('auth.register');
 });
+
+
 
 Route::resource('/registeration', 'RegisterationController');
 Route::resource('RegisterationTypes', 'RegisterationTypeController');

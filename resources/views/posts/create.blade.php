@@ -15,6 +15,7 @@
         <label for="mybody">body</label>
         <textarea name="body" id="article-ckeditor" cols="30" rows="10" class = "form-control"  placeholder ="Body Text"></textarea>
     </div>
+    
     <div class="form-group">
         <input type="file" name="cover_image" id="">
     </div>

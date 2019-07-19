@@ -14,7 +14,7 @@ class Department extends Model
  {
 
         $this->table = 'Department';
-        $this->culomnNameArr = array('jobDescribtion','boardId');
+       
 
 
     }

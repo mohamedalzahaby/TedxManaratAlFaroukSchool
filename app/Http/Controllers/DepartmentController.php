@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Department;
 
 class DepartmentController extends Controller
 {
@@ -13,7 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments=Department::all();
+        return view('pages.departments')->with('departments',$departments);
     }
 
     /**
@@ -34,7 +36,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Department=new Department();
+        $Department->name=$request->input('name');
+        $Department->jobDescribtion=$request->input('jobDescribtion');
+        $Department->image = $request->input('image');
+        $Department->board_id=$request->input('board_id');
+        
+        $Department->save();
+        return redirect('/departments')->with('success','department Created');
+        
     }
 
     /**
