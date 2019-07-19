@@ -31,7 +31,7 @@ class RegisterationController extends Controller
     private $RegistrationFormType_M;
     public function __construct()
     {
-        // $this->board_M = new Board();
+        $this->board_M = new Board();
         $this->event_M = new Event();
         $this->options_M = new Options();
         $this->DataType_M = new DataType();
@@ -53,8 +53,9 @@ class RegisterationController extends Controller
     {
         $Columns = array('id' , 'name' );
         $openedForms = $this->RegisterationForm->getOpenedForms();
-        $userTypes = Parent::getCertainColumns('UserType' , $Columns);
+        $userTypes = UserType::all()->where('isdeleted' , 0);
         $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype' , $Columns);
+        // dd($RegistrationFormTypes);
         $data = array('userTypes' => $userTypes,
         'forms' => $openedForms ,
         'controller' => new Controller);
@@ -77,8 +78,7 @@ class RegisterationController extends Controller
         'Departments' => $Departments ,
         'IsForEvent' => $IsForEvent,
         'registerationFormType' => $formTypeId ,
-        'RegisterAs' => $request->input('RegisterAs') ,
-        'controller' => new Controller() );
+        'RegisterAs' => $request->input('RegisterAs'));
         return view('pages.addForm')->with('data' , $data);
     }
 

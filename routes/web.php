@@ -53,11 +53,11 @@ Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
 Route::get('/events', 'EventController@index');
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
 Auth::routes();
+// Route::get('/home', function () {
+//     return view('pages.about');
+// });
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/home', function () {
-    return redirect('/about');
-});
 // dd($_SERVER['REQUEST_URI']);
 

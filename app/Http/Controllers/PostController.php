@@ -96,7 +96,7 @@ class PostController extends Controller
             return redirect('/posts')->with('error' , 'This post was deleted');
         }
         else{
-            return view('posts.show')->with('posts' , $posts);
+            return view('posts.show')->with('posts' , $posts)->with('id' , $id);
         }
     }
 

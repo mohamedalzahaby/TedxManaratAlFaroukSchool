@@ -12,6 +12,7 @@ use phpDocumentor\Reflection\Types\Parent_;
 class EventController extends Controller
 {
     private $AcademicYear;
+    private $event;
 
 /**
      * Create a new controller instance.
@@ -22,6 +23,7 @@ class EventController extends Controller
     {
         $this->AcademicYear = new AcademicYear();
         $this->Address = new Address();
+        $this->event = new Event();
     }
 
     /**
@@ -133,7 +135,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
+        $event=new Event();
+        $event->name=$request->input('name');
+        // $event->
+
+
     }
 
     /**

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
+
     @if (!Auth::guest())
-        <h1 style="margin-left:600px;margin-top:10px">Add New Event</h1>
+        <h1 style="margin-left:600px;margin-top:130px">Add New Event</h1>
         <form id="form" action=" {{ $GLOBALS['ASSET'] .$GLOBALS['events'].$GLOBALS['submit'] }} " method="POST">
             <div class="col-md-12">
                 <div class="form-group" style="margin-top:20px">
@@ -52,6 +53,12 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Event Cover Image: </label>
+                        <input type="file" name="coverImage" >
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <label>board: </label>
                     <select name=":boardId">
@@ -71,14 +78,15 @@
                         <input type="submit" name="submit" style="border-radius:10px;width:300px;">
                     </div>
             </div>
+
         </form>
     @endif
 
     <div class="container">
         <div class="page-header text-center">
-            <h1 id="timeline"style="margin-top:670px;margin-right:25px">Our Events</h1>
+            <h1 id="timeline"style="margin-top:780px;margin-right:70px">Our Events</h1>
         </div>
-        <ul class="timeline">
+        <ul class="timeline" style="float:left;">
             <?php $rightSide = true; ?>
             @foreach ($data['events'] as $value)
                 @if (!$rightSide)
@@ -90,8 +98,8 @@
                 @endif
                 <div class="timeline-panel col-md-2">
                     <div class="timeline-heading">
-                        <h3 style="padding-top:10px;padding-bottom:10px;margin-left:15px"><b> {{ $value->name }} </b></h3>
-                        <img class="img-responsive" src=" {{ asset('images/bg-home-2.jpg') }}" />
+                        <h1 style="padding-top:10px;padding-bottom:10px;margin-left:15px"><b> {{ $value->name }} </b></h1>
+                        <img  src=" {{ asset('images/bg-home-2.jpg') }}"  />
                     </div>
                     <div class="timeline-body">
                         <p> {{ $value->description }} </p>
@@ -100,8 +108,7 @@
                         <label>Date:</label> <?php echo $value->date . ' From ' . $value->eventStart . ' To ' . $value->eventEnd; ?>
                         <br>
                         <label>Address:</label> <p>{{ $value->eventAddressString }}</p>
-                        <br>
-                        <br>
+                        <br><br>
                         <!-- <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
                                             <a><i class="glyphicon glyphicon-share"></i></a> -->
                         @if ($value->isRegisterationOpened == 1)

@@ -1,10 +1,12 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
+
     <div class="page-header text-center">
-        <h1 id="timeline">Our Events</h1>
+        <h1 id="timeline" style="margin-top:130px">Our Events</h1>
     </div>
-    <ul class="timeline">
+    <ul class="timeline" >
         <?php
             $rightSide = true;
             // var_dump($data);
@@ -19,9 +21,9 @@
                 }
                 ?>
 
-                <div class="timeline-panel">
+                <div class="timeline-panel"style="margin-left:50%">
                     <div class="timeline-heading">
-                        <h3><b><?php echo $name; ?></b></h3>
+                        <h3 ><b><?php echo $name; ?></b></h3>
                         <img class="img-responsive" src="res\images\bg-home-2.jpg" />
 
                     </div>

@@ -203,34 +203,28 @@
 
 
 
-  <!-- Section - Venue Start -->
-  <section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" >
+  <section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100">
     <div class="display-table-cell vertical-align-middle">
       <div class="container">
-        <!-- <video autoplay muted loop id="myVideo">
-          <source src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" type="video/mp4">    
-      </video> -->
-        <!-- <iframe class="_1bhzc-a2 _2Sv4MqgQ _2fHiC9V8 NBCgfzab" src="https://video.wixstatic.com/video/613cba_e331e21294d2463f930953e4895db73c/720p/mp4/file.mp4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe> -->
-        <!-- The video -->
-          <!-- <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-              <h3 class="display-block font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-extra-large-4 title-extra-large-4">
-                Venue
-              </h3>
-              <br>
-              <p class="font-family-alt letter-spacing-1 margin-3 no-margin-bottom no-margin-rl text-white xs-title-small title-large text-uppercase font-weight-700">
-                Manarat AlFarouk Islamic School
-              </p>
-              <br>
-              <a href="https://goo.gl/maps/o7HoyfXQCes" target="_blank"
-                  class="btn btn-outline-white sm-btn-medium btn-large margin-4-5 no-margin-bottom no-margin-rl">
-                View location on map
-              </a>
-            </div>
-            
-          </div> -->
-          <!-- //.row -->
-        </video>
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <h3 class="display-block font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-extra-large-4 title-extra-large-4">
+              Venue
+            </h3>
+            <br>
+            <p class="font-family-alt letter-spacing-1 margin-3 no-margin-bottom no-margin-rl text-white xs-title-small title-large text-uppercase font-weight-700">
+              Dr. M. A. Ansari Auditorium,<br>
+              Jamia Millia Islamia
+            </p>
+            <br>
+            <a href="https://goo.gl/maps/4Y14DhZe4Fu" target="_blank"
+                class="btn btn-outline-white sm-btn-medium btn-large margin-4-5 no-margin-bottom no-margin-rl">
+              View location on map
+            </a>
+          </div>
+          <!-- //.col-md-8 -->
+        </div>
+        <!-- //.row -->
       </div>
       <!-- //.container -->
     </div>
@@ -239,6 +233,7 @@
   <!-- //Section - Venue End -->
 
   
+
 
 
 

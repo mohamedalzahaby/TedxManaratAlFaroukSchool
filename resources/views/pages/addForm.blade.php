@@ -22,17 +22,26 @@
 		<div class="addproduct" >
 			<br><br>
 			<h1><b>Add Form Queastions</b></h1><br><br><hr><br>
-			<form id="form" action='<?php echo $GLOBALS['ASSET'].$GLOBALS['register'].'/'.$GLOBALS['addForm'].$GLOBALS['submit'];?>' method='POST'>
+			<form id="form" action='register/addForm/submit' method='POST'>
 				<p><b>Form Title</b></p>
 				<input type="text" name="name" placeholder="Enter product name here" required><br><br>
 				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
 				<input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs'];?>">
 				<p><b>For which event</b></p>
-                @php
-					if ($data['IsForEvent']) : $data['controller']->selectTag('eventId','eventId',$data['events'] , 'id' , 'name');
-					else: Controller::selectTag('departmentId','departmentId',$data['Departments'] , 'id' , 'name');
-					endif;
-                @endphp
+                @if ($data['IsForEvent'])
+                    <select name="eventId" id="eventId">
+                        @foreach ($data['events'] as $event)
+                            <option value="{{$event->id}}">{{$event->name}}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <select name="departmentId" id="departmentId">
+                            @foreach ($data['Departments'] as $Department)
+                                <option value="{{$Department->id}}">{{$Department->name}}</option>
+                            @endforeach
+                    </select>
+
+                @endif
 				<br><br><br><br>
 				<?php echo'<div id="myOptions"></div><br>';  ?>
 				<button class="submit" type="submit" name="next" value="submit">next</button><br><br>

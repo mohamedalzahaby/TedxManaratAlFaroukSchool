@@ -26,11 +26,16 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input id="registrationTypeName" name="name" class="form-control" placeholder="registration Type" type="text">
-                                <label class="col-md-4 control-label" for="RegisterAs">isForEvent</label>
-                                <input name="isForEvent" class="form-control" placeholder="isForEvent" type="checkbox">
-                                <button type="submit" name='submit' id="registrationTypeNameButton" ><span class="input-group-addon">ADD</span></button>
-                            </div><p class="help-block">enter new registration Type</p></div>
+                                <label style="position:relative;left:-170px;margin-top:30px" for="RegisterAs">isForEvent</label>
+                                <input name="isForEvent" style="position:relative;bottom:40px;height:30px;margin-right:10px"  type="checkbox">
+
+                            </div><p class="help-block">enter new registration Type</p>
+
+                            <button class="btn btn-primary" type="submit" name='submit' id="registrationTypeNameButton"style="height:45px;width:100px;background-color:#e62b1e;border-radius:10px" >ADD</button>
+                        </div>
+
                     </div>
+
                 </fieldset>
             </form>
             <form method="POST" action="{{ 'RegisterationTypesDestroy'}}" class="form-horizontal">
@@ -43,7 +48,11 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
                 </fieldset>
@@ -51,7 +60,7 @@
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary">
+                    <input type="submit" id="singlebutton" value="Delete" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                 </div>
                 </div>
             </form>
@@ -63,18 +72,23 @@
                     <legend>Update Form Type</legend>
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type Name</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            @php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); @endphp
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                             <input type="text" name="updatedName" class="form-control" placeholder="Update Name" >
                         </div>
                     </div>
+
                 </fieldset>
                 <!-- Button -->
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="singlebutton"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="singlebutton" value="Update" name="singlebutton" class="btn btn-primary">
+                    <input type="submit" id="singlebutton" value="Update" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                 </div>
                 </div>
             </form>
@@ -85,17 +99,26 @@
                     <legend>Add Registeration Form</legend>
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Form Type</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
-                            <?php $data['controller']->selectTag('RegisterationType', 'registerationFormType', $RegistrationFormTypes,'id' , 'name' ,'class="form-control"'); ?>
+                            <select name="registerationFormType" id="RegisterationType" class="form-control">
+                            @foreach ($RegistrationFormTypes as $type)
+                                <option value=" {{$type->id}} ">{{$type->name}}</option>
+                            @endforeach
+                            </select>
                         </div>
                     </div>
-
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="RegisterAs">Applicant Register as</label>
+                        <label class="col-md-4 control-label" for="RegisterationType">Register As</label>
                         <div class="col-md-4">
-                            <?php $data['controller']->selectTag('RegisterAs', 'RegisterAs', $data['userTypes'],'id' , 'name', 'class="form-control"'); ?>
+                            <select name="RegisterAs" id="RegisterAs" class="form-control">
+                                @foreach ($data['userTypes'] as $type)
+                                    @if ($type->parentId != 0)
+                                        <option value=" {{$type->id}} ">{{$type->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </fieldset>
@@ -103,7 +126,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
-                        <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary">
+                        <input type="submit" id="singlebutton" value="submit" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
                     </div>
                 </div>
             </form>

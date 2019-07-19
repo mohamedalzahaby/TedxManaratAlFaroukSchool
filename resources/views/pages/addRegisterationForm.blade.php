@@ -10,13 +10,13 @@
         <!-- //.col-md-12 -->
       </div>
       <!-- //.row -->
-  
+
       <form method="POST" action="<?php echo $GLOBALS['ASSET'].$GLOBALS['addRegisterationType']; ?>" class="form-horizontal">
         <fieldset>
-  
+
           <!-- Form Name -->
           <legend>Add Form Type</legend>
-  
+
           <!-- Appended Input-->
           <div class="form-group">
             <label class="col-md-4 control-label" for="appendedtext">Add registration Type</label>
@@ -26,12 +26,12 @@
                 <button type="submit" name='submit' id="registrationTypeNameButton" ><span class="input-group-addon">ADD</span></button>
               </div>
               <p class="help-block">enter new registration Type</p>
-            </div>    
+            </div>
           </div>
         </fieldset>
   </form>
-  
-  
+
+
       <form method="POST" action="<?php echo $GLOBALS['ASSET'].$GLOBALS['register'].$GLOBALS['addForm'];?>" class="form-horizontal">
         <fieldset>
           <!-- Form Name -->
@@ -43,7 +43,7 @@
               <?php Controller::selectTag('RegisterationType', 'registerationFormType', $data['RegistrationFormTypes'],'id' , 'name' ,'class="form-control"'); ?>
             </div>
           </div>
-  
+
           <!-- Select Basic -->
           <div class="form-group">
             <label class="col-md-4 control-label" for="RegisterAs">Applicant Register as</label>
@@ -60,4 +60,3 @@
           </div>
         </div>
       </form>
-  
