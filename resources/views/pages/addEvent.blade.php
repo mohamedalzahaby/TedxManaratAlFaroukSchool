@@ -56,9 +56,7 @@
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>Event Cover Image: </label>
-                        <select name=":coverImage">
-
-                        </select>
+                        <input type="file" name="coverImage" >
                     </div>
                 </div>
                 <div class="col-md-12">

@@ -1,3 +1,6 @@
+@php
+    $css = '85px';
+@endphp
 @extends('layouts.app')
 @section('content')
 
