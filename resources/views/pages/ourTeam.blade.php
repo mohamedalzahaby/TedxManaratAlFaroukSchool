@@ -3,7 +3,7 @@
 
 
 @if (!Auth::guest())
-        <h1 style="margin-left:650px;margin-top:130px">Add New Event</h1>
+        <h1 style="margin-left:650px;margin-top:130px">Add New Board</h1>
         <form id="form" action=" /Board/submit" method="POST">
             <div class="container" >
                 <div class="col-md-12">
@@ -89,7 +89,7 @@
           <div class="overflow-hidden position-relative width-100">
             <div class="position-relative">
               <div class="img-wrapper">
-                <img src="res/images/team/zahaby.jpg" alt=""/>
+                <img src="../images/team/zahaby.jpg" alt=""/>
               </div>
             </div>
             <!-- //.position-relative -->

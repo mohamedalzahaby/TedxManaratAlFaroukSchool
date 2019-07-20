@@ -137,7 +137,15 @@ class EventController extends Controller
     {
         dd($request);
         $event=new Event();
-        $event->name=$request->input('name');
+        $event->name = $request->input("name");
+        $event->date= $request->input("date");
+        $event->eventStart= $request->input("eventStart");
+        $event->eventEnd= $request->input("eventEnd");
+        $event->addressId= $request->input("addressId");
+        $event->academicYearId= $request->input("academicYearId");
+        $event->coverImage= $request->input("coverImage");
+        $event->boardId= $request->input("boardId");
+        $event->save();
         // $event->
 
 
@@ -174,7 +182,17 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
+        $event=new Event();
+        $event->name = $request->input("name");
+        $event->date= $request->input("date");
+        $event->eventStart= $request->input("eventStart");
+        $event->eventEnd= $request->input("eventEnd");
+        $event->addressId= $request->input("addressId");
+        $event->academicYearId= $request->input("academicYearId");
+        $event->coverImage= $request->input("coverImage");
+        $event->boardId= $request->input("boardId");
+        $event->save();
     }
 
     /**
@@ -191,7 +209,7 @@ class EventController extends Controller
 
     public function addressHtml($data)
     {
-        echo  "<select name=':addressId' onchange='myFunction(this.value)' id='mySelect'>
+        echo  "<select name='addressId' onchange='myFunction(this.value)' id='mySelect'>
                     <option value='0'>add new place</option>";
                     foreach ($data as $key1 => $places) {
                         foreach ($places as $key => $SinglePlace) {
