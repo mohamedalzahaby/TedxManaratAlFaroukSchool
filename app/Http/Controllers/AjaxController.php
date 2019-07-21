@@ -39,7 +39,7 @@ class AjaxController extends Controller
         $value =  "value = '$ctr'";
         $mystring .=  "<input type='text' name ='ctr' $value>";
         ++$this->ctr;
-        return response()->json(['success' => $mystring ]);
+        return response()->json(['optionTypes' => $optionTypes ]);
     }
 
     public function myajax(Request $request)

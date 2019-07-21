@@ -11,15 +11,15 @@
     <body>
         <br><br><br><br><br><br><br><br>
       <div class="container">
-         <div class="alert alert-success" style="display:none"></div>
+            <div class="alert alert-success" style="display:none"></div>
 
-        <button class="btn btn-primary" id="addq">add question</button>
-        <div id="tita">zahaby</div>
-    </div>
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
-               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-               crossorigin="anonymous">
-      </script>
+            <button class="btn btn-primary" id="addq">add question</button>
+            <div id="tita"></div>
+        </div>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous">
+        </script>
       <script>
           myctr = 0;
          jQuery(document).ready(function(){
@@ -34,10 +34,33 @@
                   url: "{{ url('/addquestion') }}",
                   method: 'post',
                   success: function(result){
-                    document.getElementById("tita").innerHTML = result.success;
+
+                    var optionTypes = result.optionTypes;
+                    // alert(optionTypes[0].id);
+                    var name = 'OptionType' . i;
+                    var selectTag = document.createElement("SELECT");
+                    selectTag.setAttribute('name',name );
+                    optionTypes.forEach(myFunction);
+
+                    function myFunction(item, index) {
+                        var optionTag = document.createElement("OPTION");
+                        optionTag.setAttribute('value',item.id);
+                        optionTag.innerHTML = item.name;
+                        selectTag.appendChild(optionTag);
+                    }
+                    /*for (let i = 1; i <= optionTypes.length; i++) {
+                        var optionTag = document.createElement("OPTION");
+                        optionTag.setAttribute('value',optionTypes[i].id);
+                        optionTag.innerHTML = optionTypes[i].name;
+                        selectTag.appendChild(optionTag);
+                    }*/
+                    // document.getElementById("tita").appendChild(optionTag);
+                    // document.getElementById("tita").innerHTML = optionTypes[0]->id;
+                    document.getElementById("tita").appendChild(selectTag);
+                    alert(selectTag.innerHTML);
                     //  jQuery('tita').show();
-                    // jQuery('tita').html(result.success);
-                     alert(result.success);
+                    // // jQuery('tita').html(result.success);
+                    //  alert(result.success);
                   }});
                });
             });

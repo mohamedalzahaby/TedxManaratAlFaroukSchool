@@ -1,82 +1,104 @@
 @extends('layouts.app')
 @section('content')
 
-
-
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-		<!-- <link rel="shortcut icon" href="res\images\icons\product.png"/> -->
-		<link rel="stylesheet" type="text/css" href="res\css\addproduct.css">
-		<!-- <link rel="stylesheet" type="text/css" href="res\css\addproduct.css"> -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-</head>
 
-	<body>
-		<div class="addproduct" >
-			<br><br>
-			<h1><b>Add Form Queastions</b></h1><br><br><hr><br>
-			<form id="form" action='register/addForm/submit' method='POST'>
-				<p><b>Form Title</b></p>
-				<input type="text" name="name" placeholder="Enter product name here" required><br><br>
-				<input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType'];?>">
-				<input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs'];?>">
-				<p><b>For which event</b></p>
-                @if ($data['IsForEvent'])
-                    <select name="eventId" id="eventId">
-                        @foreach ($data['events'] as $event)
-                            <option value="{{$event->id}}">{{$event->name}}</option>
-                        @endforeach
-                    </select>
-                @else
-                    <select name="departmentId" id="departmentId">
-                            @foreach ($data['Departments'] as $Department)
-                                <option value="{{$Department->id}}">{{$Department->name}}</option>
-                            @endforeach
-                    </select>
+        <meta name="_token" content="{{csrf_token()}}" />
 
-                @endif
-				<br><br><br><br>
-				<?php echo'<div id="myOptions"></div><br>';  ?>
-				<button class="submit" type="submit" name="next" value="submit">next</button><br><br>
+    </head>
+<br><br><br><br><br><br><br><br><br>
+<div class="addproduct">
+    <div class="container">
+        <h1><b>Add Form Queastions</b></h1><br><br>
+        <hr><br>
+        <form id="form" action='register/addForm/submit' method='POST'>
+            <p><b>Form Title</b></p>
+            <input type="text" name="name" placeholder="Enter product name here" required><br><br>
+            <input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType']; ?>">
+            <input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs']; ?>">
+            <p><b>For which event</b></p>
+            @if ($data['IsForEvent'])
+                <select name="eventId" id="eventId">
+                    @foreach ($data['events'] as $event)
+                        <option value="{{$event->id}}">{{$event->name}}</option>
+                    @endforeach
+                </select>
+            @else
+            <select name="departmentId" id="departmentId">
+                @foreach ($data['Departments'] as $Department)
+                <option value="{{$Department->id}}">{{$Department->name}}</option>
+                @endforeach
+            </select>
 
-				</select>
-			</form>
-			<button type="button" name="AnotherOption"  id="AnotherOption">add Option</button>
-		</div>
-		<br><br><br><br><br><br><br><br><br><br>
-	</body>
+            @endif
+            <br><br><br><br>
+            <div id="myOptions"></div><br>
+            <button class="submit" type="submit" name="next" value="submit">next</button><br><br>
+
+            </select>
+        </form>
+        <button type="button" name="AnotherOption" id="addq">add Option</button>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
 
 
 
 
 
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous">
+        </script>
 <script>
-    var myctr = 1;
-    $(document).ready(function() {
+    var ctr = 0;
 
-        $("#AnotherOption").click(function() {
-        alert(document);
-            $.ajax({
-                type: 'POST',
-                data: ({
-                    ctr: myctr
-                }),
-                url: '/addForm/addQuestion',
-
-                success: function(data) {
-
-                    $("#myOptions").append(data);
+    jQuery(document).ready(function() {
+        jQuery('#addq').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                 }
-
             });
-            myctr++;
+            jQuery.ajax({
+                url: "{{ url('/addquestion') }}",
+                method: 'post',
+                success: function(result) {
+                    var p = document.createElement("P");
+                    p.innerHTML = "<b>Question name</b>";
+                    document.getElementById("myOptions").appendChild(p);
+
+                    /*<<start setting input Tag */
+                        var name = 'OptionName'+ctr++;
+                        var inputTag = document.createElement("INPUT");
+                        inputTag.setAttribute('type' , 'text');
+                        inputTag.setAttribute('name' , name);
+                        inputTag.setAttribute('placeholder' , 'Question');
+                        inputTag.setAttribute('required' , true);
+                        document.getElementById("myOptions").appendChild(inputTag);
+                    /*end setting select Tag >>*/
+                    /*<<start setting select Tag */
+                        var optionTypes = result.optionTypes;
+                        var type = 'OptionType'.i;
+                        var selectTag = document.createElement("SELECT");
+                        selectTag.setAttribute('name', type);
+                        optionTypes.forEach(setSelectTag);
+                        function setSelectTag(item, index) {
+                            var optionTag = document.createElement("OPTION");
+                            optionTag.setAttribute('value', item.id);
+                            optionTag.innerHTML = item.name;
+                            selectTag.appendChild(optionTag);
+                        }
+                        var label = document.createElement("LABEL");
+                        label.innerHTML = '<b>Question Type</b>';
+                        document.getElementById("myOptions").appendChild(label);
+                        document.getElementById("myOptions").appendChild(selectTag);
+                    /*end setting select Tag >>*/
+                }
+            });
         });
     });
 </script>
