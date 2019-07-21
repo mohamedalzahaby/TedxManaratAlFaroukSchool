@@ -48,7 +48,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $coverimage = 'cover_image';
         $this->validate($request ,[
             'title' => 'required',
@@ -68,7 +67,6 @@ class PostController extends Controller
             $fileNameToStore = $filename.'_'.time().'.'.$extension;
             //upload
             $path = $request->file($coverimage)->storeAs('public/cover_images',$fileNameToStore);
-
         }
         else {
             $fileNameToStore ='noimage.jpg';

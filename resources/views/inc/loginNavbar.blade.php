@@ -1,11 +1,13 @@
 @php
 $css = '55px';
     if (strstr($_SERVER['REQUEST_URI'], "/posts/") != false) {
+        if (strstr($_SERVER['REQUEST_URI'], "/posts/create") != true) {
 
             if ($_SERVER['REQUEST_URI'] == "/posts/$posts->id") {
                 $css = '85px';
             }
         }
+    }
 
     else {
         $css = '55px';

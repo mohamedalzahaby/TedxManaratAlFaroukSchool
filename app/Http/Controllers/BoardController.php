@@ -7,6 +7,14 @@ use App\AcademicYear;
 use Illuminate\Support\Facades\Storage;
 class BoardController extends Controller
 {
+    protected $board;
+
+    public function __construct()
+    {
+        $this->board = new Board();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -36,8 +44,7 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {   
-        $image = 'image';
-        
+        $image = 'cover_image';
         // dd($request);
         
         $this->validate($request ,[
@@ -69,14 +76,22 @@ class BoardController extends Controller
         
 
         // dd($request);
-        $Board=new board();
+        $Board=$this->board;
         
         $Board->name=$request->input('name');
+        
         $Board->openingDate=$request->input('Opendate');
+        
         $Board->closingDate=$request->input('closedate');
+        
         $Board->description=$request->input('description');
-        $Board->academicYearId = $request->input('academicYearId');
-        $Board->image  = $fileNameToStore;
+        
+        // $Board->academicYearId = $request->input('academicYearId');
+        $Board->academicYearId = 1;
+        
+        // var_dump($request->input('academicYearId')); die();
+        $Board->cover_Image  =$request->input('image');
+        // dd($fileNameToStore);
 
         $Board->save();
        return redirect('/ourTeam')->with('success','Board Created');

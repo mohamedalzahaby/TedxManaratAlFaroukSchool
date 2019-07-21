@@ -390,6 +390,7 @@ class ComposerStaticInitb927a65f37c795b022de9ee99b6dc1fa
     public static $classMap = array (
         'App\\AcademicYear' => __DIR__ . '/../..' . '/app/AcademicYear.php',
         'App\\Address' => __DIR__ . '/../..' . '/app/Address.php',
+        'App\\Board' => __DIR__ . '/../..' . '/app/board.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\ContactNumber' => __DIR__ . '/../..' . '/app/ContactNumber.php',
         'App\\ContactType' => __DIR__ . '/../..' . '/app/ContactType.php',
@@ -447,7 +448,6 @@ class ComposerStaticInitb927a65f37c795b022de9ee99b6dc1fa
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserInterests' => __DIR__ . '/../..' . '/app/Interests.php',
         'App\\UserType' => __DIR__ . '/../..' . '/app/UserType.php',
-        'App\\board' => __DIR__ . '/../..' . '/app/board.php',
         'App\\message' => __DIR__ . '/../..' . '/app/message.php',
         'App\\messageType' => __DIR__ . '/../..' . '/app/messageType.php',
         'App\\notifications' => __DIR__ . '/../..' . '/app/notifications.php',

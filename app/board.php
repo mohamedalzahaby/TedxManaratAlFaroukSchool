@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use PDO;
+
 class Board extends Model
 {
     protected $name;
@@ -13,11 +13,11 @@ class Board extends Model
     protected $openingDate;
     protected $closingDate;
     protected $BoardImage;
-    public function __construct()
-    {
-        $this->table = 'board';
-        $this->columnNamesArr = array('name','academicYearId','openingDate','closingDate');
-    }
+    // public function __construct()
+    // {
+    //     $this->table = 'board';
+    //     $this->columnNamesArr = array('name','academicYearId','openingDate','closingDate');
+    // }
     public function departments()
     {
         return $this->hasMany('App\Department');
