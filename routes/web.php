@@ -55,7 +55,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/events', 'EventController');
 // dd($_SERVER['REQUEST_URI']);
 
-Route::get('ajax',function() {
+Route::get('/ajax',function() {
+
     return view('message');
  });
- Route::post('/getmsg','AjaxController@index');
+ Route::post('/addquestion','AjaxController@myajaxagain');
