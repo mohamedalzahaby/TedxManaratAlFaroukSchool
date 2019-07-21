@@ -2,19 +2,17 @@
 @section('content')
 
 <head>
-
-
-
-        <meta name="_token" content="{{csrf_token()}}" />
-
-    </head>
+    <meta name="_token" content="{{csrf_token()}}" />
+</head>
 <br><br><br><br><br><br><br><br><br>
 <div class="addproduct">
     <div class="container">
         <h1><b>Add Form Queastions</b></h1><br><br>
         <hr><br>
-        <form id="form" action='register/addForm/submit' method='POST'>
+        <form id="form" action='/registeration' method='POST'>
             <p><b>Form Title</b></p>
+            @csrf
+            <input type="hidden" name="ctr" id ='hidden'>
             <input type="text" name="name" placeholder="Enter product name here" required><br><br>
             <input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType']; ?>">
             <input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs']; ?>">
@@ -26,18 +24,17 @@
                     @endforeach
                 </select>
             @else
-            <select name="departmentId" id="departmentId">
-                @foreach ($data['Departments'] as $Department)
-                <option value="{{$Department->id}}">{{$Department->name}}</option>
-                @endforeach
-            </select>
-
+                <select name="departmentId" id="departmentId">
+                    @foreach ($data['Departments'] as $Department)
+                    <option value="{{$Department->id}}">{{$Department->name}}</option>
+                    @endforeach
+                </select>
             @endif
-            <br><br><br><br>
+            <br><br>
             <div id="myOptions"></div><br>
             <button class="submit" type="submit" name="next" value="submit">next</button><br><br>
 
-            </select>
+
         </form>
         <button type="button" name="AnotherOption" id="addq">add Option</button>
     </div>
@@ -97,6 +94,9 @@
                         document.getElementById("myOptions").appendChild(label);
                         document.getElementById("myOptions").appendChild(selectTag);
                     /*end setting select Tag >>*/
+                    document.getElementById("hidden").setAttribute('value' , ctr);
+
+                    alert(jQuery('#hidden').val());
                 }
             });
         });
