@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Options extends Model
 {
+    public function events()
+    {
+        return $this->belongsToMany('App\Event' , 'registrationformoptions');
+    }
 
     public function insertOptionsData(Request $request , $productObj)
     {

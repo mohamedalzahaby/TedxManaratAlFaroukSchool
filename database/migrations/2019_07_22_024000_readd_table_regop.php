@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableDepartmentRegistration extends Migration
+class ReaddTableRegop extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateTableDepartmentRegistration extends Migration
      */
     public function up()
     {
-        Schema::create('departmentRegistrationDetails', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('registerationId');
-            $table->integer('departmentId');
-            $table->integer('registrationFormId');
-            $table->integer('statusId');
+        Schema::dropIfExists('registrationformoptions');
+        Schema::create('registrationformoptions', function(Blueprint $table) {
+		    $table->engine = 'InnoDB';
+
+		    $table->bigIncrements('rid');
+		    $table->integer('registeration_form_id');
+		    $table->integer('options_id');
 		    $table->boolean('isdeleted')->default('0');
 		    $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
-        });
+
+		});
     }
 
     /**
@@ -32,6 +34,6 @@ class CreateTableDepartmentRegistration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departmentRegistrationDetails');
+        Schema::dropIfExists('registrationformoptions');
     }
 }

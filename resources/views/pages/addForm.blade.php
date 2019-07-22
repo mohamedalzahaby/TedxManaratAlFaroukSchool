@@ -69,7 +69,7 @@
                     document.getElementById("myOptions").appendChild(p);
 
                     /*<<start setting input Tag */
-                        var name = 'OptionName'+ctr++;
+                        var name = 'OptionName'+ctr;
                         var inputTag = document.createElement("INPUT");
                         inputTag.setAttribute('type' , 'text');
                         inputTag.setAttribute('name' , name);
@@ -79,7 +79,7 @@
                     /*end setting select Tag >>*/
                     /*<<start setting select Tag */
                         var optionTypes = result.optionTypes;
-                        var type = 'OptionType'.i;
+                        var type = 'OptionType'+ctr;
                         var selectTag = document.createElement("SELECT");
                         selectTag.setAttribute('name', type);
                         optionTypes.forEach(setSelectTag);
@@ -96,7 +96,7 @@
                     /*end setting select Tag >>*/
                     document.getElementById("hidden").setAttribute('value' , ctr);
 
-                    alert(jQuery('#hidden').val());
+                    ctr++;
                 }
             });
         });
