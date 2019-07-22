@@ -55,10 +55,8 @@ class RegisterationController extends Controller
         $openedForms = $this->RegisterationForm->getOpenedForms();
         $userTypes = UserType::all()->where('isdeleted' , 0);
         $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype' , $Columns);
-        // dd($RegistrationFormTypes);
         $data = array('userTypes' => $userTypes,
-        'forms' => $openedForms ,
-        'controller' => new Controller);
+        'forms' => $openedForms);
         return view('pages.register' , compact('RegistrationFormTypes'))->with('data' , $data);
     }
 
@@ -93,6 +91,7 @@ class RegisterationController extends Controller
         $form = new RegisterationForm();
         $this->storeInForm($form , $request);
         $this->storeOptions($form , $request);
+        return redirect('/register')->with('success' , 'Form Add Successfully');
 
     }
 
@@ -124,7 +123,6 @@ class RegisterationController extends Controller
             array_push($ids ,$option->id );
         }
         $form->options()->attach($ids);
-        dd($form->options()->get());
     }
 
     /**
