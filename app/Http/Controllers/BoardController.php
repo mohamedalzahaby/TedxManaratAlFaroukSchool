@@ -105,7 +105,13 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        //
+        $boards=Board::find($id);
+        if($boards->isdeleted==1)
+        {
+            return redirect('/ourTeam')->with('error','this board was deleted');
+        }
+        // still not filled yet
+
     }
 
     /**
@@ -116,7 +122,7 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        //
+        return  view('pages.ourTeam');
     }
 
     /**
@@ -128,7 +134,24 @@ class BoardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Board=$this->board;
+        
+        $Board->name=$request->input('name');
+        
+        $Board->openingDate=$request->input('Opendate');
+        
+        $Board->closingDate=$request->input('closedate');
+        
+        $Board->description=$request->input('description');
+        
+        // $Board->academicYearId = $request->input('academicYearId');
+        $Board->academicYearId = 1;
+        
+        // var_dump($request->input('academicYearId')); die();
+        $Board->cover_Image  =$request->input('image');
+        // dd($fileNameToStore);
+
+        $Board->save();
     }
 
     /**
