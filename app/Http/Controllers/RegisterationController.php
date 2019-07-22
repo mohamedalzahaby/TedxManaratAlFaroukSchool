@@ -133,7 +133,11 @@ class RegisterationController extends Controller
      */
     public function show($id)
     {
-        //
+        $form = RegisterationForm::find($id);
+        $formEvent = $form->events()->get()->where('isdeleted' , 0)->first();
+        $formQuestions = $form->options()->get()->where('isdeleted' , 0);
+
+        return view('pages.showForm')->with( 'form' , $form)->with( 'formEvent' , $formEvent)->with( 'formQuestions' , $formQuestions)->with( 'dataTypesObj' , new DataType());
     }
 
     /**

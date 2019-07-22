@@ -1,27 +1,26 @@
 @extends('layouts.app')
 @section('content')
-<form action="<?php echo $GLOBALS['ASSET'].$GLOBALS['showForm'].$GLOBALS['submit'];?>" method="post" class="form-horizontal">
-<fieldset>
+    <form action="{{'../FormOptionValues'}}" method="post" class="form-horizontal">
+        @csrf
+        <fieldset>
+        <input type="hidden" name="formId" value="{{$form->id}}">
+            <br><br><br><br><br><br><br><br><br>
+            @foreach ($formQuestions as $question)
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">{{$question->name}}</label>
+                    <div class="col-md-4">
 
-<br><br><br><br><br><br><br><br><br>
-<?php foreach ($data as $key => $question) {?>
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput"><?php echo $question['name'];?></label>
-    <div class="col-md-4">
-    <input type="<?php echo $question['dataTypeId'];?>"  name="<?php echo $question['id'];?>" placeholder="<?php echo $question['name'];?>" >
-
-    </div>
-  </div>
-  <?php } ?>
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput"></label>
-    <div class="col-md-4">
-    <input type="submit" value="submit"  class="form-control input-md">
-    </div>
-  </div>
-
-</fieldset>
-
-</form>
-<?php include('views\layouts\footer.php'); ?>
+                        <input type="{{$dataTypesObj->find($question->dataTypeId)->name}}"  name="{{$question->id}}" placeholder="{{$question->name}}" >
+                    </div>
+                </div>
+            @endforeach
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"></label>
+                <div class="col-md-4">
+                    <input type="submit" value="submit"  class="form-control input-md">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+@endsection

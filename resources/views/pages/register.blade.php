@@ -172,7 +172,7 @@
                                 <!-- <span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">
                                 Register
                                 </span> -->
-                                <a href="<?php echo $GLOBALS['ASSET'].$GLOBALS['userForm'].'?id='.$form->id;?>">
+                                <a href='{{"registeration/{$form->id}"}}'>
                                 <span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">Register</span></a>
                             </form>
                         </div>
@@ -191,7 +191,7 @@
                                 <input type="hidden" name="<?php //echo $form['id'];?>">
                                 <input  value="Register" type="submit" name="submit">
                             </form>   -->
-                            <a href="<?php echo $GLOBALS['ASSET'].$GLOBALS['userForm'].'?id='.$form->id;?>"><span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">Register</span></a>
+                            <a href='{{"registeration/{$form->id}"}}'><span  class="btn btn-outline-base-color sm-btn-medium btn-large no-margin-rl">Register</span></a>
                             </div>
                         </div>
                         <!-- //.col-md-6 -->

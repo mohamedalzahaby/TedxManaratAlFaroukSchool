@@ -19,4 +19,9 @@ class AcademicYear extends Model
         }
         return $academicYears;
     }
+
+    public function CurrentAcademicYear()
+    {
+        # code...
+    }
 }

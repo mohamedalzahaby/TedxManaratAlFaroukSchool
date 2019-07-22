@@ -7,12 +7,12 @@ class RegisterationForm extends Model
 {
 
     protected $table = 'registerationform';
-    protected $registrationFormTypeId;
-    protected $registerAs;
-    protected $isRegistrationClosed;
-    protected $OptionsIds;
-    protected $eventIds;
-    protected $departmentIds;
+    // protected $registrationFormTypeId;
+    // protected $registerAs;
+    // protected $isRegistrationClosed;
+    // protected $OptionsIds;
+    // protected $eventIds;
+    // protected $departmentIds;
 
 
 

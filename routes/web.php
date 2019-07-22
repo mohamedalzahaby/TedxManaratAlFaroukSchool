@@ -1,4 +1,5 @@
 <?php
+use App\DataType;
 
 include('Globals.php');
 /*
@@ -38,9 +39,9 @@ Route::get('/sendMail', function () {
 Route::get('/signUp', function () {
     return view('auth.register');
 });
-
 Route::resource('/registeration', 'RegisterationController');
 Route::resource('RegisterationTypes', 'RegisterationTypeController');
+Route::resource('/FormOptionValues', 'RegistrationFormsOptionsValueController');
 Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
 Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
 
