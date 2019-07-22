@@ -55,10 +55,8 @@ class RegisterationController extends Controller
         $openedForms = $this->RegisterationForm->getOpenedForms();
         $userTypes = UserType::all()->where('isdeleted' , 0);
         $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype' , $Columns);
-        // dd($RegistrationFormTypes);
         $data = array('userTypes' => $userTypes,
-        'forms' => $openedForms ,
-        'controller' => new Controller);
+        'forms' => $openedForms);
         return view('pages.register' , compact('RegistrationFormTypes'))->with('data' , $data);
     }
 
@@ -90,8 +88,41 @@ class RegisterationController extends Controller
      */
     public function store(Request $request)
     {
+        $form = new RegisterationForm();
+        $this->storeInForm($form , $request);
+        $this->storeOptions($form , $request);
+        return redirect('/register')->with('success' , 'Form Add Successfully');
 
+    }
 
+    public function storeInForm( $form ,  Request $request)
+    {
+        $form->name = $request->input("name"); // => "tedx2019Form"
+        $form->registrationFormTypeId = $request->input("registerationFormTypeId"); // => "3"
+        $form->RegisterAs = $request->input("RegisterAs"); // => "4"
+        $form->save();
+        $formType = RegistrationFormType::find($request->input("registerationFormTypeId"));
+        if ($formType->isForEvent) {
+            $form->events()->sync([$request->input("eventId")]);
+        } else {
+            $form->departments()->sync([$request->input("departmentId")]);
+        }
+
+    }
+    public function storeOptions( $form , Request $request)
+    {
+
+        $ctr = (integer) $request->input("ctr"); // => "1"
+
+        $ids = [];
+        for ($i=0; $i <= $ctr ; $i++) {
+            $option = new Options();
+            $option->name = $request->input("OptionName$i");
+            $option->dataTypeId = $request->input("OptionType$i");
+            $option->save();
+            array_push($ids ,$option->id );
+        }
+        $form->options()->attach($ids);
     }
 
     /**

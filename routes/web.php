@@ -50,7 +50,7 @@ Route::resource('RegisterationTypes', 'RegisterationTypeController');
 Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
 Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
 
-Route::get('/events', 'EventController@index');
+Route::resource('/events', 'EventController');
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
 Auth::routes();
 // Route::get('/home', function () {
@@ -58,6 +58,11 @@ Auth::routes();
 // });
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+Route::resource('/events', 'EventController');
 // dd($_SERVER['REQUEST_URI']);
 
+Route::get('/ajax',function() {
+
+    return view('message');
+ });
+ Route::post('/addquestion','AjaxController@myajaxagain');

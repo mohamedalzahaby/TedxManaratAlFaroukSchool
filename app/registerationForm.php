@@ -14,21 +14,45 @@ class RegisterationForm extends Model
     protected $eventIds;
     protected $departmentIds;
 
-    public function __construct($id = '')
+
+
+
+    public function events()
     {
-        $this->columnNamesArr = array('name' , 'registrationFormTypeId', 'registerAs' );
-        if ($id != '') {
-            $this->id = $id;
-            $row = $this->getAllById($this->table,$this->id);
-            $this->name = $row[0]['name'];
-            $this->registrationFormTypeId = $row[0]['registrationFormTypeId'];
-            $this->registerAs = $row[0]['registerAs'];
-            $this->isRegistrationClosed = $row[0]['isRegistrationClosed'];
-            $this->setOptionIds($this->id);
-            $this->setEventIds($this->id);
-            $this->setDepartmentIds($this->id);
-        }
+        return $this->belongsToMany('App\Event'  , 'eventform');
     }
+
+    public function departments()
+    {
+        return $this->belongsToMany('App\Department');
+    }
+
+    public function options()
+    {
+        return $this->belongsToMany('App\Options' , 'registrationformoptions');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function getRegistrationFormName($formId)
     {

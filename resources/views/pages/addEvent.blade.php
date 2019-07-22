@@ -3,24 +3,26 @@
 
     @if (!Auth::guest())
         <h1 style="margin-left:600px;margin-top:130px">Add New Event</h1>
-        <form id="form" action=" {{ $GLOBALS['ASSET'] .$GLOBALS['events'].$GLOBALS['submit'] }} " method="POST">
+        <form id="form" action="/events" method="POST">
+            @method('POST')
+            @csrf
             <div class="col-md-12">
                 <div class="form-group" style="margin-top:20px">
                     <div class="col-md-4">
                         <label>name: </label>
-                        <input type="text" name=":name" style="height:55px">
+                        <input type="text" name="name" style="height:55px">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>date: </label>
-                        <input type="date" name=":date">
+                        <input type="date" name="date">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>Event start time: </label>
-                        <input type="time" name=":eventStart">
+                        <input type="time" name="eventStart">
                     </div>
                 </div>
             </div>
@@ -28,13 +30,7 @@
                 <div class="form-group" style="margin-top:20px">
                     <div class="col-md-4">
                         <label>Event end time: </label>
-                        <input type="time" name=":eventEnd" style="height:50px">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label>Event description: </label>
-                        <input type="text" name=":description">
+                        <input type="time" name="eventEnd" style="height:50px">
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,7 +42,7 @@
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>academicYear: </label>
-                        <select name=":academicYearId">
+                        <select name="academicYearId">
                             @foreach ($data['academicYears'] as $value)
                                 <option value="{{ $value->id }}">{{ $value->name }}</option>
                             @endforeach
@@ -61,7 +57,7 @@
                 </div>
                 <div class="col-md-12">
                     <label>board: </label>
-                    <select name=":boardId">
+                    <select name="boardId">
                         @foreach ($data['boards'] as $value)
                             <option value="{{ $value->id }}">{{ $value->name }}</option>
                         @endforeach
@@ -70,7 +66,7 @@
             </div>
             <div class="col-md-12">
                     <label>Event description: </label>
-                    <!-- <input type="text" name=":description"> -->
+                    <!-- <input type="text" name="description"> -->
                     <textarea rows="7" cols="50"></textarea>
             </div>
             <div class="form-group" style="margin-left:600px;">

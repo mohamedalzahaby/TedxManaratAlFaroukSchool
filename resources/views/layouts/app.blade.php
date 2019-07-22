@@ -69,6 +69,11 @@
         });
       </script>
 
+
+
+
+
+
 </head>
 <body id="page-top">
     @if (Auth::guest())
