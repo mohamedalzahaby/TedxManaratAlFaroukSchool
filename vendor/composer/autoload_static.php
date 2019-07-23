@@ -413,6 +413,7 @@ class ComposerStaticInitb927a65f37c795b022de9ee99b6dc1fa
         'App\\Http\\Controllers\\ProductTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductTypeController.php',
         'App\\Http\\Controllers\\RegisterationController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterationController.php',
         'App\\Http\\Controllers\\RegisterationTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterationTypeController.php',
+        'App\\Http\\Controllers\\RegistrationFormsOptionsValueController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegistrationFormsOptionsValueController.php',
         'App\\Http\\Controllers\\UserTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserTypeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

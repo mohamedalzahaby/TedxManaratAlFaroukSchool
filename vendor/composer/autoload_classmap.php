@@ -31,6 +31,7 @@ return array(
     'App\\Http\\Controllers\\ProductTypeController' => $baseDir . '/app/Http/Controllers/ProductTypeController.php',
     'App\\Http\\Controllers\\RegisterationController' => $baseDir . '/app/Http/Controllers/RegisterationController.php',
     'App\\Http\\Controllers\\RegisterationTypeController' => $baseDir . '/app/Http/Controllers/RegisterationTypeController.php',
+    'App\\Http\\Controllers\\RegistrationFormsOptionsValueController' => $baseDir . '/app/Http/Controllers/RegistrationFormsOptionsValueController.php',
     'App\\Http\\Controllers\\UserTypeController' => $baseDir . '/app/Http/Controllers/UserTypeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

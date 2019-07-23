@@ -1,8 +1,6 @@
 @php
-    use App\Address;
-    $Address = new Address();
     $lastEventData = DB::table('Event')->latest()->first();
-    $eventAddressString =  $Address->getWholeAddress($lastEventData->addressId);
+    $eventAddressString =  $lastEventData->address;
 @endphp
 <!-- Section - Event banner start -->
 <section id="event-banner" class="bg-white pull-up">

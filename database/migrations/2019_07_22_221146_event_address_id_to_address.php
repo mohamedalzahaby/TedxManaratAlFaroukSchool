@@ -13,8 +13,10 @@ class EventAddressIdToAddress extends Migration
      */
     public function up()
     {
-        Schema::table('address', function (Blueprint $table) {
-            //
+        Schema::table('event', function (Blueprint $table) {
+            $table->dropColumn('addressId');
+            $table->string('address');
+
         });
     }
 
@@ -25,8 +27,9 @@ class EventAddressIdToAddress extends Migration
      */
     public function down()
     {
-        Schema::table('address', function (Blueprint $table) {
-            //
+        Schema::table('event', function (Blueprint $table) {
+            $table->string('addressId');
+            $table->dropColumn('address');
         });
     }
 }
