@@ -37,15 +37,17 @@ trait AuthenticatesUsers
         // the IP address of the client making these requests into this application.
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
             $this->hasTooManyLoginAttempts($request)) {
+
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
 
         if ($this->attemptLogin($request)) {
+
             return $this->sendLoginResponse($request);
         }
-
+        dd('after conditions:login');
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -103,6 +105,7 @@ trait AuthenticatesUsers
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();
+
 
         $this->clearLoginAttempts($request);
 

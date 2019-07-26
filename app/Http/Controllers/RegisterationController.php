@@ -91,7 +91,8 @@ class RegisterationController extends Controller
         $form = new RegisterationForm();
         $this->storeInForm($form , $request);
         $this->storeOptions($form , $request);
-        return redirect('/register')->with('success' , 'Form Add Successfully');
+        // dd('register store');
+        return redirect('/registeration')->with('success' , 'Form Add Successfully');
 
     }
 

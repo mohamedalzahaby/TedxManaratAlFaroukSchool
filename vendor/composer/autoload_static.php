@@ -446,6 +446,7 @@ class ComposerStaticInitb927a65f37c795b022de9ee99b6dc1fa
         'App\\RegisterationForm' => __DIR__ . '/../..' . '/app/registerationForm.php',
         'App\\RegistrationFormOptionsValue' => __DIR__ . '/../..' . '/app/RegistrationFormOptionsValue.php',
         'App\\RegistrationFormType' => __DIR__ . '/../..' . '/app/RegistrationFormType.php',
+        'App\\RegistrationFormsOptions' => __DIR__ . '/../..' . '/app/RegistrationFormsOptions.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserInterests' => __DIR__ . '/../..' . '/app/Interests.php',
         'App\\UserType' => __DIR__ . '/../..' . '/app/UserType.php',

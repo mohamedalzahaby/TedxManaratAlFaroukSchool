@@ -64,6 +64,7 @@ return array(
     'App\\RegisterationForm' => $baseDir . '/app/registerationForm.php',
     'App\\RegistrationFormOptionsValue' => $baseDir . '/app/RegistrationFormOptionsValue.php',
     'App\\RegistrationFormType' => $baseDir . '/app/RegistrationFormType.php',
+    'App\\RegistrationFormsOptions' => $baseDir . '/app/RegistrationFormsOptions.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserInterests' => $baseDir . '/app/Interests.php',
     'App\\UserType' => $baseDir . '/app/UserType.php',
