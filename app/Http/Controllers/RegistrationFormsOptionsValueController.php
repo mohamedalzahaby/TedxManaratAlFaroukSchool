@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use App\Board;
+use App\UserType;
 use App\AcademicYear;
 use App\Registeration;
 use App\RegisterationForm;
@@ -44,6 +45,7 @@ class RegistrationFormsOptionsValueController extends Controller
         $form = RegisterationForm::find($formId);
         $questions = $form->options()->get();
         $All_Users_QandA = [] ;
+        $values = [] ;
         $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
         // dd($allRegisterationDetails);
 
@@ -59,22 +61,21 @@ class RegistrationFormsOptionsValueController extends Controller
             {
                 $relation = RegistrationFormsOptions::all()->where('registeration_form_id' , $formId)->where('options_id' , $question->id)->first();
                 $value = RegistrationFormOptionsValue::all()->where('registration_forms_options_id' ,$relation->rid )->first();
-                // dd($value);
-                $QandA = array(
-                    'question' => $question ,
-                    'value' => $value
-                    );
+                array_push($values, $value);
             }
+
             $AllQandA_of_One_User = array(
                 'user' => $user ,
-                'QandA' => $QandA
+                'questions' => $questions,
+                'values' => $values
+
             );
             array_push($All_Users_QandA, $AllQandA_of_One_User);
         }
-
-        dd($All_Users_QandA);
-
-
+        return view('pages.showSubmittedForms')
+        ->with('All_Users_QandA' , $All_Users_QandA)
+        ->with('form',$form)
+        ->with('userType', new UserType());
     }
 
     /**

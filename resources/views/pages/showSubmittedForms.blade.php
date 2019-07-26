@@ -1,6 +1,3 @@
-@php
-    // dd($data);
-@endphp
 @extends('layouts.app')
 @section('content')
 <br><br><br><br><br><br><br><br>
@@ -18,48 +15,57 @@
             <div class="scroll-scroller-inner"></div>
         </div>
         <ul class="scroll-legend">
-            <li class="scroll-legend-title">Lorem Ipsum</li>
-            <li class="scroll-legend-row">1</li>
-            <li class="scroll-legend-row">2</li>
-            <li class="scroll-legend-row">3</li>
-            <li class="scroll-legend-row">4</li>
-            <li class="scroll-legend-row">5</li>
-            <li class="scroll-legend-row">6</li>
-            <li class="scroll-legend-row">7</li>
-            <li class="scroll-legend-row">8</li>
-            <li class="scroll-legend-row">9</li>
-            <li class="scroll-legend-row">10</li>
-            <li class="scroll-legend-row">11</li>
-            <li class="scroll-legend-row">12</li>
+        <li class="scroll-legend-title">{{ $form->name }}</li>
+        @foreach ($All_Users_QandA as $index => $value)
+            <li class="scroll-legend-row">{{$index+1}}</li>
+        @endforeach
         </ul>
         <div class="scroll-overflow">
             <table class="scroll-table">
                 <thead>
                     <tr>
-                        <th>fname</th>
-                        @foreach ($data as $item)
-                            <th>{{$item->question}}</th>
-                        @endforeach 
+                        <th>first name</th>
+                        <th>last name</th>
+                        <th>email</th>
+                        <th>user Type</th>
+                        <th>gender</th>
+                        <th>birth Date</th>
+                        @foreach ($All_Users_QandA as $item)
+                            @php
+                                $user = $item['user'];
+                                $questions = $item['questions'];
+                                $values = $item['values'];
+                            @endphp
+                            @foreach ($questions as $question)
+                                <th>{{ $question->name }}</th>
+                            @endforeach
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                         @foreach ($data as $item)
-                            <td>{{$item->answer}}</td>
-                        @endforeach 
-                     
-                    </tr>
-                   
+                    @foreach ($All_Users_QandA as $item)
+                            @php
+                                $user = $item['user'];
+                                $answers = $item['values'];
+                            @endphp
+                        <tr>
+                                <td>{{$user->fname}}</td>
+                                <td>{{$user->lname}}</td>
+                                <td>{{$user->email}}</td>
+                                <td>{{$userType::find($user->userTypeId)->name }}</td>
+                                <td>{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}</td>
+                                <td>{{$user->birthDate}}</td>
+                            @foreach ($answers as $answer)
+                                <td>{{$answer->value}}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
     </div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="{{asset("js/table.js")}}"></script>
-
-
-
-
-
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection
