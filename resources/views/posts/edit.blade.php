@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <br><br><br><br><br><br><br>
-<h3>Edit Post</h3>
+<div class = "container">
+    <h3>Edit Post</h3>
 <form action="../../posts/{{$posts->id}}" method="post"  enctype = 'multipart/form-data'>
     @method('PUT')
     @csrf
@@ -22,6 +23,6 @@
 </form>
 
 
-
+</div>
 
 @endsection

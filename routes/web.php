@@ -61,3 +61,8 @@ Route::get('/ajax',function() {
     return view('message');
  });
  Route::post('/addquestion','AjaxController@myajaxagain');
+ Route::get('/showtable','RegistrationFormsOptionsValueController@showTables');
+
+//  Route::get('showtable', function () {
+//      return view('pages.showSubmittedForms');
+//  });

@@ -11,6 +11,11 @@ class RegistrationFormOptionsValue extends Model
         $this->table = "registrationformoptionsvalue";
     }
 
+    public function RegistrationFormsOptions()
+    {
+        return $this->belongsTo('App\RegistrationFormsOptions');
+    }
+
 
 
 

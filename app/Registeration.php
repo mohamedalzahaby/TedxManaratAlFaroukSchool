@@ -17,6 +17,20 @@ class Registeration extends Model
 
     }
 
+
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
+    
+    public function RegisterationDetails()
+    {
+        return $this->hasMany('App\RegisterationDetails');
+    }
+
+    
+
+
     public function getLastId()
     {
         return $this->id;

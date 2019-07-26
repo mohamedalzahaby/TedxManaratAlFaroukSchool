@@ -74,6 +74,8 @@
 
 
 
+
+
 </head>
 <body id="page-top">
     @if (Auth::guest())
@@ -91,5 +93,6 @@
     <script>
             CKEDITOR.replace( 'article-ckeditor' );
     </script>
+  
 </body>
 </html>

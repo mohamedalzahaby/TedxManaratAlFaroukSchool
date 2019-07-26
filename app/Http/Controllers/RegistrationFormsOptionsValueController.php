@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use App\RegistrationFormOptionsValue;
-use App\Board;
-use App\Registeration;
-use App\AcademicYear;
-use App\RegisterationDetails;
-use App\RegisterationForm;
+
 use DB;
+use App\Board;
+use App\AcademicYear;
+use App\Registeration;
+use App\RegisterationForm;
+use App\RegisterationDetails;
+use App\RegistrationFormsOptions;
+use App\RegistrationFormOptionsValue;
 
 class RegistrationFormsOptionsValueController extends Controller
 {
@@ -34,7 +35,46 @@ class RegistrationFormsOptionsValueController extends Controller
      */
     public function index()
     {
-        //
+        
+    }
+
+    public function showTables()
+    {
+        $formId = 24;
+        $registeration = new Registeration();
+        $data = DB::select('SELECT `value` AS `answer` , `options`.name AS `question` , `users`.`id` AS `userId` , `users`.`fname`,`users`.`lname` , `users`.`email`,`users`.`ismale`,`users`.`birthDate` , `usertype`.`name` AS `user Type` FROM `registrationformoptionsvalue` JOIN `registrationformoptions` ON `registrationformoptionsvalue`.`registrationFormOptionsId` = `registrationformoptions`.`rid` JOIN `options` ON `options`.`id` = `registrationformoptions`.`options_id` JOIN `registerationdetails` ON `registerationdetails`.`id` = `registrationformoptionsvalue`.`registrationDetailsId` JOIN `registeration` ON `registeration`.`id` = `registerationdetails`.`registerationId` JOIN `users` ON `users`.`id` = `registeration`.`userId` JOIN `usertype` ON `usertype`.`id` = `users`.`userTypeId` WHERE `registrationformoptions`.`registeration_form_id` = ? AND `registerationdetails`.`registrationFormId` = ?', [24,24]);
+        return view('pages.showSubmittedForms')->with('data' , $data);
+        
+        // dd(DB::table('Registeration')
+        // ->join('RegisterationDetails', 'Registeration.id', '=', 'RegisterationDetails.RegisterationId')
+        // ->join('RegistrationFormOptionsValue', 'RegisterationDetails.id', '=', 'RegistrationFormOptionsValue.registrationDetailsId')
+        // ->join('registrationformoptions', 'registrationformoptions.rid', '=', 'RegistrationFormOptionsValue.registrationformoptionsId')
+        // ->join('registrationformoptions', 'registerationform.id', '=', 'registrationformoptions.registeration_form_id')
+        // ->select('Registeration.userId', 'RegisterationDetails.status', 'RegistrationFormOptionsValue.value' , 'questionname')
+        // ->where('RegisterationDetails.registrationFormId' , $formId)
+        // ->get());
+        
+        // $RegisterationDetails_of_this_form = RegisterationDetails::all()->where('registrationFormId', 24);
+        // foreach ($RegisterationDetails_of_this_form as $key => $RDtable) {
+        //     $registerationId = $RDtable->registerationId;
+        //     // Registeration::find
+        // }
+        // dd($RegisterationDetails_of_this_form);
+        // // $registration = Registeration::find($RegisterationDetails_of_this_form->registerationId); 
+        
+        // $form = RegisterationForm::find($formId);
+        // $questions = $form->options()->get();
+        // $AllQandA = [] ;
+        // foreach ($questions as $key => $question) {
+        //     $where = array('registeration_form_id' => $formId , 'options_id' => $question->id );
+        //     $relation = RegistrationFormsOptions::all()->where($where)->first();
+        //     $values = $relation->values()->get();
+        //     $QandA = array(
+        //         'question' => $question , 
+        //         'values' => $values
+        //     );
+        //     array_push($AllQandA, $QandA);
+        // }
     }
 
     /**
@@ -46,7 +86,21 @@ class RegistrationFormsOptionsValueController extends Controller
     {
         //
     }
-
+    
+    public function calcAge($birthDate)
+    {
+  
+        //date in mm/dd/yyyy format; or it can be in other formats as well
+        // $birthDate = "12/17/1983";
+        //explode the date to get month, day and year
+        $birthDate = explode("-", $birthDate);
+        //get age from date or birthdate
+        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+            ? ((date("Y") - $birthDate[2]) - 1)
+            : (date("Y") - $birthDate[2]));
+        return $age;
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
