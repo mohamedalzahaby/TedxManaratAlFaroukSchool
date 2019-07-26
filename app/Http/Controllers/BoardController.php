@@ -23,7 +23,7 @@ class BoardController extends Controller
     public function index()
     {
         $boards = Board::all();
-        return view('pages.ourTeam')->with('boards' , $boards);
+        return view('boards.index')->with('boards' , $boards);
     }
 
     /**
@@ -33,7 +33,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        //
+        return view('boards.create');
     }
 
     /**
@@ -47,12 +47,12 @@ class BoardController extends Controller
         $image = 'cover_image';
         // dd($request);
 
-        $this->validate($request ,[
-            'name' => 'required',
-            'Opendate' => 'required',
-            'closedate' => 'required',
-            'description' => 'required'
-            ]);
+        // $this->validate($request ,[
+        //     'name' => 'required',
+        //     'Opendate' => 'required',
+        //     'closedate' => 'required',
+        //     'description' => 'required'
+        //     ]);
 
 
         if ($request->hasFile($image))
@@ -73,6 +73,7 @@ class BoardController extends Controller
         else {
             $fileNameToStore ='noimage.jpg';
         }
+        
 
 
         // dd($request);
@@ -90,11 +91,11 @@ class BoardController extends Controller
         $Board->academicYearId = 1;
         
         // var_dump($request->input('academicYearId')); die();
-        $Board->cover_Image  =$request->input('image');
+        $Board->cover_Image  = $fileNameToStore;
         // dd($fileNameToStore);
 
         $Board->save();
-       return redirect('/ourTeam')->with('success','Board Created');
+       return redirect('/ourTeam');
     }
 
     /**
@@ -105,11 +106,11 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        $boards=Board::find($id);
-        if($boards->isdeleted==1)
-        {
-            return redirect('/ourTeam')->with('error','this board was deleted');
-        }
+        // $boards=Board::find($id);
+        // if($boards->isdeleted==1)
+        // {
+        //     return redirect('/ourTeam')->with('error','this board was deleted');
+        // }
         // still not filled yet
 
     }
@@ -122,7 +123,7 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        return  view('pages.ourTeam');
+        // return  view('pages.boardedit');
     }
 
     /**
@@ -136,43 +137,43 @@ class BoardController extends Controller
     {
         //permissions in laravel
 
-        $coverimage = 'cover_image';
-        $Board = Board::find($id);
+        // $coverimage = 'cover_image';
+        // $Board = Board::find($id);
 
-        $this->validate($request ,[
-            'name' => 'required',
-            'Opendate' => 'required',
-            'closedate' => 'required',
-            'description' => 'required'
-            ]);
+        // $this->validate($request ,[
+        //     'name' => 'required',
+        //     'Opendate' => 'required',
+        //     'closedate' => 'required',
+        //     'description' => 'required'
+        //     ]);
 
-        if ($request->hasFile($coverimage))
-        {
-            # get file name with extension
-            $filenameWithExt = $request->file($coverimage)->getClientOriginalName();
-            //get just filename
-            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
-            //get just extension
-            $extension = $request->file($coverimage)->getClientOriginalExtension();//get extension
-            //fileNameToStore
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            //upload
-            $path = $request->file($coverimage)->storeAs('public/cover_images',$fileNameToStore);
-            $Board->cover_image  = $fileNameToStore;
-        }
-
-
+        // if ($request->hasFile($coverimage))
+        // {
+        //     # get file name with extension
+        //     $filenameWithExt = $request->file($coverimage)->getClientOriginalName();
+        //     //get just filename
+        //     $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+        //     //get just extension
+        //     $extension = $request->file($coverimage)->getClientOriginalExtension();//get extension
+        //     //fileNameToStore
+        //     $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        //     //upload
+        //     $path = $request->file($coverimage)->storeAs('public/cover_images',$fileNameToStore);
+        //     $Board->cover_image  = $fileNameToStore;
+        // }
 
 
 
-        $Board->name=$request->input('name');
-        $Board->openingDate=$request->input('Opendate');
-        $Board->closingDate=$request->input('closedate');
-        $Board->description=$request->input('description');
-        $Board->academicYearId = $request->input('academicYearId');
-        $Board->image  = $fileNameToStore;
 
-        $Board->save();
+
+        // $Board->name=$request->input('name');
+        // $Board->openingDate=$request->input('Opendate');
+        // $Board->closingDate=$request->input('closedate');
+        // $Board->description=$request->input('description');
+        // $Board->academicYearId = $request->input('academicYearId');
+        // $Board->image  = $fileNameToStore;
+
+        // $Board->save();
     }
 
     /**

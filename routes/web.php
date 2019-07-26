@@ -13,11 +13,12 @@ include('Globals.php');
 |
 */
 Route::post('/posts/submit', 'PostController@store');
-Route::post('/addboard/submit', 'BoardController@store'); 
+// Route::post('/addboard/submit', 'BoardController@store'); 
 Route::post('/departments/submit', 'DepartmentController@store');
 
 
 Route::resource('posts', 'PostController');
+Route::resource('boards', 'BoardController');
 
 Route::get('/', function () {
     return view('pages.about');
