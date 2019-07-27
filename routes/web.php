@@ -44,8 +44,9 @@ Route::resource('RegisterationTypes', 'RegisterationTypeController');
 Route::resource('/FormOptionValues', 'RegistrationFormsOptionsValueController');
 Route::post('RegisterationTypesDestroy', 'RegisterationTypeController@destroy');
 Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
-
 Route::resource('/events', 'EventController');
+Route::resource('/registrationForm', 'RegistrationFormController');
+
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
 Auth::routes();
 // Route::get('/home', function () {
