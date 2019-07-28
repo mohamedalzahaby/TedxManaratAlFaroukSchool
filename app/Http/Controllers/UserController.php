@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\UserType;
 
-class UserTypeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,10 @@ class UserTypeController extends Controller
      */
     public function index()
     {
-        $UserTypes = UserType::all()->where('isdeleted' , 0);
-        return view('userType.index')
-        ->with('userTypes',$UserTypes)
-        ->with('parent',new UserType());
+        $users = User::all()->where('isdeleted' , 0);
+        return view('users.index')
+        ->with('users',$users)
+        ->with('userType', new UserType());
     }
 
     /**

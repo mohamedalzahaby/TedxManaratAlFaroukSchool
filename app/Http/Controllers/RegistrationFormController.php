@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\RegisterationForm;
 use App\RegistrationFormType;
 use App\UserType;
+use App\Event;
 
 class RegistrationFormController extends Controller
 {
@@ -20,6 +21,7 @@ class RegistrationFormController extends Controller
         return view('pages.UserView')
                 ->with( 'forms' , $forms )
                 ->with( 'formType' , new RegistrationFormType() )
+                ->with( 'event' , new Event() )
                 ->with( 'userType' , new UserType );
     }
 
@@ -75,7 +77,13 @@ class RegistrationFormController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $form = RegisterationForm::find($id);
+        $form->name = $request->input('name');
+        $form->registrationFormTypeId = $request->input('registrationFormTypeId');
+        $form->registerAs = $request->input('registerAs');
+        $form->isRegistrationClosed = $request->input('isRegistrationClosed');
+        $form->save();
+        return redirect('/registrationForm')->with('success' , 'Form Updated Successfully');
     }
 
     /**
@@ -86,6 +94,9 @@ class RegistrationFormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $form = RegisterationForm::find($id);
+        $form->isDeleted = 1;
+        $form->save();
+        return redirect('/registrationForm')->with('success' , 'Form Deleted Successfully');
     }
 }
