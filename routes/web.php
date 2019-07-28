@@ -3,22 +3,22 @@ use Illuminate\Support\Facades\Route;
 
 include('Globals.php');
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// |--------------------------------------------------------------------------
+// | Web Routes
+// |--------------------------------------------------------------------------
+// |
+// | Here is where you can register web routes for your application. These
+// | routes are loaded by the RouteServiceProvider within a group which
+// | contains the "web" middleware group. Now create something great!
+// |
+// */
 Route::post('/posts/submit', 'PostController@store');
 // Route::post('/addboard/submit', 'BoardController@store'); 
 Route::post('/departments/submit', 'DepartmentController@store');
 
 
 Route::resource('posts', 'PostController');
-Route::resource('boards', 'BoardController');
+Route::resource('ourTeam', 'BoardController');
 
 Route::get('/', function () {
     return view('pages.about');
@@ -35,7 +35,6 @@ Route::get('/contact', function () {
 Route::get('/product', function () {
     return view('pages.product');
 });
-Route::get('/ourTeam', 'BoardController@index' );
 Route::get('/departments' ,'DepartmentController@index');
 Route::get('/sendMail', function () {
     return view('pages.sendMail');
@@ -54,13 +53,13 @@ Route::post('RegisterationTypesUpdate', 'RegisterationTypeController@Update');
 Route::resource('/events', 'EventController');
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
 Auth::routes();
-// Route::get('/home', function () {
-//     return view('pages.about');
-// });
+Route::get('/home', function () {
+    return view('pages.about');
+});
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/events', 'EventController');
-// dd($_SERVER['REQUEST_URI']);
+
 
 Route::get('/ajax',function() {
 

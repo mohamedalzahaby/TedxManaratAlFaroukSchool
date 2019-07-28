@@ -17,13 +17,13 @@
         <!-- //.col-md-10 -->
       </div>
       <!-- //.row -->
-      <a href="/boards/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
+      <a href="/ourTeam/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
 @foreach ($boards as $board)
     
       <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
           <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
-            {{ $board->name }}
+          <a href="/ourTeam/{{ $board->id }}"> {{ $board->name }} </a>
           </h3>
           <p class="margin-5 no-margin-rl text-gray-dark-2">
                 {{ $board->description}}

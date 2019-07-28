@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
-@if (!Auth::guest())
+{{-- @if (!Auth::guest()) --}}
         <h1 style="margin-left:650px;margin-top:130px">Add New Board</h1>
-        <form id="form" action=" /boards" method="POST" enctype = 'multipart/form-data'>
+        <form id="form" action=" /ourTeam" method="POST" enctype = 'multipart/form-data'>
             @csrf
             <div class="container" >
                 <div class="col-md-12">
@@ -71,7 +71,7 @@
         </div>
   </form>
   <br><br><br><br><br>
-@endif
+{{-- @endif --}}
 @endsection
 
 
