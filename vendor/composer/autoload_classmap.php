@@ -50,6 +50,7 @@ return array(
     'App\\PaymentMethod' => $baseDir . '/app/PaymentMethod.php',
     'App\\PaymentMethodOptionValue' => $baseDir . '/app/PaymentMethodOptionValue.php',
     'App\\PaymentOptions' => $baseDir . '/app/PaymentOptions.php',
+    'App\\Permission' => $baseDir . '/app/Permission.php',
     'App\\Post' => $baseDir . '/app/Post.php',
     'App\\Product' => $baseDir . '/app/product.php',
     'App\\ProductOptions' => $baseDir . '/app/ProductOptions.php',

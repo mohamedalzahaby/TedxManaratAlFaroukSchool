@@ -14,7 +14,6 @@ trait RedirectsUsers
 
 
         if (method_exists($this, 'redirectTo')) {
-            dd('redirectTo');
             return $this->redirectTo();
         }
         $this->redirectTo = '/about';

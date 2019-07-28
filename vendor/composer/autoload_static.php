@@ -432,6 +432,7 @@ class ComposerStaticInitb927a65f37c795b022de9ee99b6dc1fa
         'App\\PaymentMethod' => __DIR__ . '/../..' . '/app/PaymentMethod.php',
         'App\\PaymentMethodOptionValue' => __DIR__ . '/../..' . '/app/PaymentMethodOptionValue.php',
         'App\\PaymentOptions' => __DIR__ . '/../..' . '/app/PaymentOptions.php',
+        'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Post' => __DIR__ . '/../..' . '/app/Post.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/product.php',
         'App\\ProductOptions' => __DIR__ . '/../..' . '/app/ProductOptions.php',
