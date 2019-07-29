@@ -5,7 +5,7 @@
 <form action="/ourTeam/{{$boards->id}}" method="post"  enctype = 'multipart/form-data'>
     @method('PUT')
     @csrf
-
+    
     <div class="form-group">
         <label for="mytitle">board name</label>
         <input type="text" name="name"  class = "form-control" placeholder = "Title" value="{{$boards->name}}">
