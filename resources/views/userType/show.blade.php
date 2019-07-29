@@ -81,7 +81,8 @@
                         <tbody>
                             @foreach ($UserType_permissions as $permission)
                                 <tr>
-                                    <td><a href="../permissions/{{$permission->id}}" style="color: brown; font-weight: bold;">{{$permission->name}}</a></td>
+                                    {{-- <td><a href="../permissions/{{$permission->id}}" style="color: brown; font-weight: bold;">{{$permission->name}}</a></td> --}}
+                                    <td>{{$permission->name}}</td>
                                     <td>{{$permission->created_at}}</td>
                                     <td>{{$permission->updated_at}}</td>
                                 </tr>
