@@ -8,7 +8,7 @@
 
     <div class="form-group">
         <label for="mytitle">board name</label>
-        <input type="text" name="name"  class = "form-control" placeholder = "Title">
+        <input type="text" name="name"  class = "form-control" placeholder = "Title" value="{{$boards->name}}">
     </div>
     <div class="form-group">
             <label for="mybody">board Description</label>

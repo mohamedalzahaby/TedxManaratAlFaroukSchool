@@ -1,4 +1,4 @@
-<?php
+ <?php
 use Illuminate\Support\Facades\Route;
 
 include('Globals.php');
@@ -14,11 +14,13 @@ include('Globals.php');
 // */
 Route::post('/posts/submit', 'PostController@store');
 // Route::post('/addboard/submit', 'BoardController@store'); 
-Route::post('/departments/submit', 'DepartmentController@store');
+//Route::post('/departments/submit', 'DepartmentController@store');
+
 
 
 Route::resource('posts', 'PostController');
 Route::resource('ourTeam', 'BoardController');
+Route::resource('departments', 'DepartmentController');
 
 Route::get('/', function () {
     return view('pages.about');

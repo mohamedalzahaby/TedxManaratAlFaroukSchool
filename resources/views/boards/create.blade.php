@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- @if (!Auth::guest()) --}}
+ @if (!Auth::guest())
         <h1 style="margin-left:650px;margin-top:130px">Add New Board</h1>
         <form id="form" action=" /ourTeam" method="POST" enctype = 'multipart/form-data'>
             @csrf
@@ -43,7 +43,7 @@
               <div class="col-md-4">
                   {{-- <label>academicYear: </label>
                   <select name="academicYearId"> --}}
-                    {{-- @foreach ( $boards as $board )
+                    {{-- @foreach ( $boards as $boad )
                     <option value={{ $board->id }}> {{  $board->name  }}</option>     
                     @endforeach --}}
                     
@@ -71,7 +71,7 @@
         </div>
   </form>
   <br><br><br><br><br>
-{{-- @endif --}}
+ @endif 
 @endsection
 
 

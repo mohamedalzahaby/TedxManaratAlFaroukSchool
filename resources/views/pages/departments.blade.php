@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@php
-  //  dd($departments);                           
-@endphp
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 @if (!Auth::guest())
 
