@@ -1,15 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\RegisterationForm;
 use App\RegistrationFormType;
 use App\UserType;
 use App\Event;
+use App\DataType;
 
 class RegistrationFormController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class RegistrationFormController extends Controller
     public function index()
     {
         $forms = RegisterationForm::all()->where('isdeleted' , 0);
-        return view('pages.UserView')
+        return view('registrationForm.index')
                 ->with( 'forms' , $forms )
                 ->with( 'formType' , new RegistrationFormType() )
                 ->with( 'event' , new Event() )
@@ -54,7 +60,13 @@ class RegistrationFormController extends Controller
      */
     public function show($id)
     {
-        //
+        $form = RegisterationForm::find($id);
+        $formQuestions = $form->options()->get()->where('isdeleted', 0);
+
+        return view('registrationForm.show')
+        ->with('form', $form)
+        ->with('formQuestions', $formQuestions)
+        ->with('dataTypesObj', new DataType());
     }
 
     /**

@@ -1,28 +1,125 @@
-@php
-    $css = '85px';
-@endphp
 @extends('layouts.app')
 @section('content')
-
-<a href="/posts" class="btn btn-default" style="margin-left:10px;border-color:black">Go Back</a>
-<h1 style="margin-left:250px;margin-bottom:10px">{{$posts->title}}</h1>
-<img src="/storage//cover_images/{{$posts->cover_Image}}" style="margin-left:250px;" alt="{{$posts->cover_Image}}">
-<br><br>
-<div style="margin-left:20px">
-    {!! $posts->body !!}
-</div>
-<hr>
-<small style="margin-left:20px">written on {{$posts->created_at}}</small>
-<hr>
-@if (!Auth::guest())
-    @if (Auth::user()->id == $posts->user_id)
-        <a href="/posts/{{$posts->id}}/edit" class="btn btn-default"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
-        <form action="../posts/{{$posts->id}}" method="post" class = 'pull-right'>
-            @csrf
-            @method("DELETE")
-            <input type="submit" value="Delete" class = 'btn btn-danger'style="color:white;border-radius:10px;background-color:#e62b1e">
-        </form>
-    @endif
-@endif
-@endsection
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <br><br><br><br><br><br><br>
+<div class="container">
+    <form action="../usertype/attach" method="post">
+        <input type="hidden" name="userTypeId" value="{{$userTypeId}}">
+            @csrf
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Attach Permission</legend>
+                <!-- Select Basic -->
+                @if ($Permissions->isEmpty())
+                    <h5>This User Type is attached to All permissions</h6>
+                @else
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="RegisterationType">Permissions</label>
+                        <div class="col-md-4">
+                                <select name="permissionId"  class="form-control">
+                                    @foreach ($Permissions as $permission)
+                                        <option value="{{$permission->id}}">{{$permission->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"></label>
+                        <div class="col-md-4">
+                            <input type="submit" id="singlebutton" value="Attach" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
+                        </div>
+                    </div>
+                @endif
+    </form>
+
+</div>
+<br><br>
+@if ($UserType_permissions->isEmpty())
+    <div class="container">
+        <h1>No Permissions Attached Yet</h1>
+    </div>
+@else
+<div class="container">
+        <form action="../usertype/detach" method="post">
+            <input type="hidden" name="userTypeId" value="{{$userTypeId}}">
+            @csrf
+            <fieldset>
+                <!-- Form Name -->
+                <legend>detach Permission</legend>
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="RegisterationType">Permissions</label>
+                    <div class="col-md-4">
+                            <select name="permissionId"  class="form-control">
+                                @foreach ($UserType_permissions as $permission)
+                                    <option value="{{$permission->id}}">{{$permission->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <input type="submit" id="singlebutton" value="detach" name="singlebutton" class="btn btn-primary"style="background-color:#e62b1e;border-radius:10px">
+                    </div>
+                </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>created At</th>
+                            <th>Updated At</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($UserType_permissions as $permission)
+                                <tr>
+                                    <td><a href="../permissions/{{$permission->id}}" style="color: brown; font-weight: bold;">{{$permission->name}}</a></td>
+                                    <td>{{$permission->created_at}}</td>
+                                    <td>{{$permission->updated_at}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="clearfix"></div>
+                    {{-- <ul class="pagination pull-right">
+                        <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                    </ul> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
+
+
+<script>
+    $(document).ready(function() {
+        $("#mytable #checkall").click(function() {
+            if ($("#mytable #checkall").is(':checked')) {
+                $("#mytable input[type=checkbox]").each(function() {
+                    $(this).prop("checked", true);
+                });
+            } else {
+                $("#mytable input[type=checkbox]").each(function() {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+        $("[data-toggle=tooltip]").tooltip();
+    });
+</script>
+@endsection

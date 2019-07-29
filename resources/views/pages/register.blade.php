@@ -49,9 +49,9 @@
                         <label class="col-md-4 control-label" for="RegisterationType">Registeration Type</label>
                         <div class="col-md-4">
                             <select name="registerationFormType" id="RegisterationType" class="form-control">
-                            @foreach ($RegistrationFormTypes as $type)
-                                <option value=" {{$type->id}} ">{{$type->name}}</option>
-                            @endforeach
+                                @foreach ($RegistrationFormTypes as $type)
+                                    <option value=" {{$type->id}} ">{{$type->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

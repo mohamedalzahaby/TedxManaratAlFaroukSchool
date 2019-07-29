@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 use App\UserType;
 use App\Permission;
-
+use PhpParser\Node\Stmt\Foreach_;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserTypeController extends Controller
 {
@@ -14,12 +15,7 @@ class UserTypeController extends Controller
 
     public function __construct()
     {
-
         $this->middleware('auth');
-
-
-
-
     }
 
 
@@ -47,7 +43,7 @@ class UserTypeController extends Controller
     public function index()
     {
 
-        return $this->autherization( 'contact' ,'show UserType');
+        // return $this->autherization( 'contact' ,'show UserType');
         $UserTypes = UserType::all()->where('isdeleted' , 0);
         return view('userType.index')
         ->with('userTypes',$UserTypes)
@@ -73,7 +69,6 @@ class UserTypeController extends Controller
     public function store(Request $request)
     {
         return $this->autherization( 'contact' ,'store UserType');
-        //
     }
 
     /**
@@ -84,8 +79,38 @@ class UserTypeController extends Controller
      */
     public function show($id)
     {
-        return $this->autherization( 'contact' ,'show UserType');
-        //
+        // return $this->autherization( 'contact' ,'show UserType');
+        $UserType = UserType::find($id);
+        $UserType_permissions = $UserType->permissions()->get();
+        $ids = [];
+        // dd($UserType_permissions);
+        foreach ($UserType_permissions as $key => $permission) {
+            array_push($ids , $permission->id);
+        }
+        $Permissions = Permission::all()->whereNotIn('id' , $ids)->where('isdeleted' , 0);
+        // dd($Permissions);
+
+        return view('userType.show')
+        ->with('UserType_permissions',$UserType_permissions)
+        ->with('Permissions', $Permissions)
+        ->with('userTypeId', $id);
+    }
+
+    public function attach(Request $request)
+    {
+        // return $this->autherization( 'contact' ,'attach permission');
+        $id = (integer)$request->input('userTypeId');
+        $UserType = UserType::find($id);
+        $UserType->permissions()->attach([$request->input('permissionId')]);
+        return redirect('usertype/'.$id)->with('seccuess' , 'permission attaches successfully');
+    }
+    public function detach(Request $request)
+    {
+        // return $this->autherization( 'contact' ,'detach permission');
+        $id = (integer)$request->input('userTypeId');
+        $UserType = UserType::find($id);
+        $UserType->permissions()->detach([$request->input('permissionId')]);
+        return redirect('usertype/'.$id)->with('seccuess' , 'permission attaches successfully');
     }
 
     /**
@@ -136,5 +161,20 @@ class UserTypeController extends Controller
     public function destroy($id)
     {
         return $this->autherization( 'contact' ,'delete UserType');
+        /* dettach permissions */
+        $Permissions = Permission::all()->where('isdeleted' , 0);
+        foreach ($Permissions as $key => $permission) {
+            $permission_userTypes = $permission->userTypes()->get();
+            foreach ($permission_userTypes as $key => $userType) {
+                if($userType->id == $id){
+                    $permission->userTypes()->detach([$id]);
+                }
+            }
+        }
+        /* delete Usertype */
+        $userType = UserType::find($id);
+        $userType->isdeleted = 1;
+        $userType->save();
+        return redirect('/usertype')->with('success' , 'User Type Deleted Successfully');
     }
 }

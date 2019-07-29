@@ -15,16 +15,14 @@
                         <th>parent</th>
                         <th>created At</th>
                         <th>Updated At</th>
-                        <th>permissions</th>
                     </thead>
                     <tbody>
                         @foreach ($userTypes as $userType)
                             <tr>
-                                <td><a href="userType/{{$userType->id}}" style="color: brown; font-weight: bold;">{{$userType->name}}</a></td>
+                                <td><a href="usertype/{{$userType->id}}" style="color: brown; font-weight: bold;">{{$userType->name}}</a></td>
                                 <td>{{$parent::find($userType->id)->name}}</td>
                                 <td>{{$userType->created_at}}</td>
                                 <td>{{$userType->updated_at}}</td>
-
                             </tr>
                         @endforeach
                     </tbody>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 use App\Board;
@@ -51,13 +52,15 @@ class RegisterationController extends Controller
      */
     public function index()
     {
-        $Columns = array('id' , 'name' );
+        $Columns = array('id', 'name');
         $openedForms = $this->RegisterationForm->getOpenedForms();
-        $userTypes = UserType::all()->where('isdeleted' , 0);
-        $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype' , $Columns);
-        $data = array('userTypes' => $userTypes,
-        'forms' => $openedForms);
-        return view('pages.register' , compact('RegistrationFormTypes'))->with('data' , $data);
+        $userTypes = UserType::all()->where('isdeleted', 0);
+        $RegistrationFormTypes = Parent::getCertainColumns('registrationformtype', $Columns);
+        $data = array(
+            'userTypes' => $userTypes,
+            'forms' => $openedForms
+        );
+        return view('pages.register', compact('RegistrationFormTypes'))->with('data', $data);
     }
 
 
@@ -66,18 +69,20 @@ class RegisterationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( Request $request )
+    public function create(Request $request)
     {
         $formTypeId = $request->input('registerationFormType');
         $events = $this->event_M->getEventsOpenedForRegistering();
         $Departments = $this->getDepartments_Of_CurrentBoard();
         $IsForEvent = $this->RegistrationFormType_M->getIsForEventValue($formTypeId);
-        $data = array('events' => $events ,
-        'Departments' => $Departments ,
-        'IsForEvent' => $IsForEvent,
-        'registerationFormType' => $formTypeId ,
-        'RegisterAs' => $request->input('RegisterAs'));
-        return view('pages.addForm')->with('data' , $data);
+        $data = array(
+            'events' => $events,
+            'Departments' => $Departments,
+            'IsForEvent' => $IsForEvent,
+            'registerationFormType' => $formTypeId,
+            'RegisterAs' => $request->input('RegisterAs')
+        );
+        return view('pages.addForm')->with('data', $data);
     }
 
     /**
@@ -89,14 +94,13 @@ class RegisterationController extends Controller
     public function store(Request $request)
     {
         $form = new RegisterationForm();
-        $this->storeInForm($form , $request);
-        $this->storeOptions($form , $request);
+        $this->storeInForm($form, $request);
+        $this->storeOptions($form, $request);
         // dd('register store');
-        return redirect('/registeration')->with('success' , 'Form Add Successfully');
-
+        return redirect('/registeration')->with('success', 'Form Add Successfully');
     }
 
-    public function storeInForm( $form ,  Request $request)
+    public function storeInForm($form,  Request $request)
     {
         $form->name = $request->input("name"); // => "tedx2019Form"
         $form->registrationFormTypeId = $request->input("registerationFormTypeId"); // => "3"
@@ -108,20 +112,19 @@ class RegisterationController extends Controller
         } else {
             $form->departments()->sync([$request->input("departmentId")]);
         }
-
     }
-    public function storeOptions( $form , Request $request)
+    public function storeOptions($form, Request $request)
     {
 
-        $ctr = (integer) $request->input("ctr"); // => "1"
+        $ctr = (int) $request->input("ctr"); // => "1"
 
         $ids = [];
-        for ($i=0; $i <= $ctr ; $i++) {
+        for ($i = 0; $i <= $ctr; $i++) {
             $option = new Options();
             $option->name = $request->input("OptionName$i");
             $option->dataTypeId = $request->input("OptionType$i");
             $option->save();
-            array_push($ids ,$option->id );
+            array_push($ids, $option->id);
         }
         $form->options()->attach($ids);
     }
@@ -135,10 +138,13 @@ class RegisterationController extends Controller
     public function show($id)
     {
         $form = RegisterationForm::find($id);
-        $formEvent = $form->events()->get()->where('isdeleted' , 0)->first();
-        $formQuestions = $form->options()->get()->where('isdeleted' , 0);
+        $formEvent = $form->events()->get()->where('isdeleted', 0)->first();
+        $formQuestions = $form->options()->get()->where('isdeleted', 0);
 
-        return view('pages.showForm')->with( 'form' , $form)->with( 'formEvent' , $formEvent)->with( 'formQuestions' , $formQuestions)->with( 'dataTypesObj' , new DataType());
+        return view('pages.showForm')
+        ->with('form', $form)
+        ->with('formEvent', $formEvent)
+        ->with('formQuestions', $formQuestions)->with('dataTypesObj', new DataType());
     }
 
     /**
@@ -186,9 +192,8 @@ class RegisterationController extends Controller
 
 
     public function getOptionsDataTypes()
-{
-    $data = DataType::all();
-    return view('pages.anotherQuestion')->with('data' , $data);
-
-}
+    {
+        $data = DataType::all();
+        return view('pages.anotherQuestion')->with('data', $data);
+    }
 }
