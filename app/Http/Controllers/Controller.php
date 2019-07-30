@@ -7,6 +7,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\UserType;
+use App\Permission;
 
 class Controller extends BaseController
 {
@@ -27,6 +29,22 @@ class Controller extends BaseController
 			echo '<option value="'.$option->$optionDataValue.'>'.$option->$optionDataName.'</option>';
 		}
 		echo '</select>';
-	}
+    }
+
+
+    public function autherization( $permissionName , $url = '/contact')
+    {
+        $redirect = true;
+        $userTypeId = auth()->user()->userTypeId;
+        $permission = Permission::all()->where('name' , $permissionName )->first();
+        $userTypes = $permission->userTypes()->get();
+        foreach ($userTypes as $key => $value) {
+            if ($value->id == $userTypeId) {
+                $redirect = false;
+            }
+        }
+        // dd($redirect);
+        if($redirect) { return redirect($url)->with('error' , 'Unauthorized Page');}
+    }
 
 }
