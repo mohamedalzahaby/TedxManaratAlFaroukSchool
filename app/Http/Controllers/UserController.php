@@ -16,8 +16,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all()->where('isdeleted' , 0);
+        $userTypes = UserType::all()->where('isdeleted' , 0)->where('parentId' , '!=' , 0);
         return view('users.index')
         ->with('users',$users)
+        ->with('userTypes',$userTypes)
         ->with('userType', new UserType());
     }
 
@@ -73,7 +75,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->userTypeId = $request->input('userTypeId');
+        $user->save();
+        // dd($user);
+        return redirect('/user')->with('success' , 'user added successfully');
     }
 
     /**

@@ -17,4 +17,5 @@ class UserType extends Model
     {
         return $this->belongsToMany('App\links');
     }
+
 }

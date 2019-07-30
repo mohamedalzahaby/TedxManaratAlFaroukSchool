@@ -42,11 +42,12 @@ class UserTypeController extends Controller
      */
     public function index()
     {
-
         // return $this->autherization( 'contact' ,'show UserType');
+        $parentTypes = UserType::all()->where('parentId',0)->where('isdeleted',0);
         $UserTypes = UserType::all()->where('isdeleted' , 0);
         return view('userType.index')
         ->with('userTypes',$UserTypes)
+        ->with('parentTypes',$parentTypes)
         ->with('parent',new UserType());
     }
 
@@ -57,7 +58,7 @@ class UserTypeController extends Controller
      */
     public function create()
     {
-        return $this->autherization( 'contact' ,'create UserType');
+        // return $this->autherization( 'contact' ,'create UserType');
     }
 
     /**
@@ -68,7 +69,12 @@ class UserTypeController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->autherization( 'contact' ,'store UserType');
+        return $this->autherization( 'contact' ,'add UserType');
+        $userType = new UserType();
+        $userType->name = $request->input('name');
+        $userType->parentId = $request->input('parent');
+        $userType->save();
+        return redirect('/usertype')->with('success' , 'user type added successfully');
     }
 
     /**
@@ -83,12 +89,10 @@ class UserTypeController extends Controller
         $UserType = UserType::find($id);
         $UserType_permissions = $UserType->permissions()->get();
         $ids = [];
-        // dd($UserType_permissions);
         foreach ($UserType_permissions as $key => $permission) {
             array_push($ids , $permission->id);
         }
         $Permissions = Permission::all()->whereNotIn('id' , $ids)->where('isdeleted' , 0);
-        // dd($Permissions);
 
         return view('userType.show')
         ->with('UserType_permissions',$UserType_permissions)
@@ -160,19 +164,26 @@ class UserTypeController extends Controller
      */
     public function destroy($id)
     {
-        return $this->autherization( 'contact' ,'delete UserType');
+        // return $this->autherization( 'contact' ,'delete UserType');
         /* dettach permissions */
-        $Permissions = Permission::all()->where('isdeleted' , 0);
-        foreach ($Permissions as $key => $permission) {
-            $permission_userTypes = $permission->userTypes()->get();
-            foreach ($permission_userTypes as $key => $userType) {
-                if($userType->id == $id){
-                    $permission->userTypes()->detach([$id]);
-                }
+        $userType = UserType::find($id);
+        $permissions = $userType->permissions()->get();
+        if (!$permissions->isEmpty()) {
+            foreach ($permissions as $key => $permission) {
+                $permission->userTypes()->detach([$id]);
             }
         }
+
+        // $Permissions = Permission::all()->where('isdeleted' , 0);
+        // foreach ($Permissions as $key => $permission) {
+        //     $permission_userTypes = $permission->userTypes()->get();
+        //     foreach ($permission_userTypes as $key => $userType) {
+        //         if($userType->id == $id){
+        //             $permission->userTypes()->detach([$id]);
+        //         }
+        //     }
+        // }
         /* delete Usertype */
-        $userType = UserType::find($id);
         $userType->isdeleted = 1;
         $userType->save();
         return redirect('/usertype')->with('success' , 'User Type Deleted Successfully');

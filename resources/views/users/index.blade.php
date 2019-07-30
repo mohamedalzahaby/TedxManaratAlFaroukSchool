@@ -22,28 +22,57 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td><a href="user/{{$user->id}}" style="color: brown; font-weight: bold;">{{$user->fname}}</a></td>
-                                <td><a href="user/{{$user->id}}" style="color: brown; font-weight: bold;">{{$user->lname}}</a></td>
+                                {{-- <td><a href="user/{{$user->id}}" style="color: brown; font-weight: bold;">{{$user->fname}}</a></td>
+                                <td><a href="user/{{$user->id}}" style="color: brown; font-weight: bold;">{{$user->lname}}</a></td> --}}
+                                <td>{{$user->fname}}</td>
+                                <td>{{$user->lname}}</td>
                                 <td>{{$userType::find($user->userTypeId)->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}</td>
                                 <td>{{$user->birthDate}}</td>
                                 <td>{{$user->created_at}}</td>
-
+                                <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit{{$user->id}}"><span class="glyphicon glyphicon-pencil"></span></button></p>
+                                </td>
                             </tr>
+                            <div class="modal fade" id="edit{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                                            </div>
+                                            <form action="user/{{$user->id}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                {{-- <input type="hidden" name="fname" value="{{$user->fname}}">
+                                                <input type="hidden" name="lname" value="{{$user->lname}}">
+                                                <input type="hidden" name="email" value="{{$user->email}}">
+                                                <input type="hidden" name="fname" value="{{$user->fname}}"> --}}
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>User Type</label>
+                                                        <select name="userTypeId">
+                                                            <option value="{{$userType->parentId}}" disabled selected>{{$userType::find($user->userTypeId)->name}}</option>
+                                                            @foreach ($userTypes as $type)
+                                                                <option value="{{$type->id}}">{{$type->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                    <button name="submit" type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
                         @endforeach
                     </tbody>
                 </table>
                 <div class="clearfix"></div>
-                {{-- <ul class="pagination pull-right">
-                    <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                </ul> --}}
             </div>
         </div>
     </div>

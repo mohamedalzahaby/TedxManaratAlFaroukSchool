@@ -35,85 +35,85 @@
                                 <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                             </tr>
                             <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-                                            </div>
-                                            @php
-                                                $where = array('isdeleted'=> 0 , array('parentId', '!=' , 0 ));
-                                                $userTypes = $userType::select(['id','name'])->where($where)->get();
-                                                $formTypes = $formType::select(['id','name'])->where('isdeleted' , 0)->get();
-                                                $CurrentformTypes = $formType::find($form->registrationFormTypeId);
-                                                $CurrentUserTypes = $userType::find($form->registerAs);
-                                            @endphp
-                                            <form action="registrationForm/{{$form->id}}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" name="name" value="{{$form->name}}" placeholder="{{$form->name}}" class="form-control ">
-                                                    </div>
-                                                    <div class="form-group">
-                                                            <label>Form Type</label>
-                                                            <select name="registrationFormTypeId" >
-                                                                <option value="{{$CurrentformTypes->id}}" disabled>{{$CurrentformTypes->name}}</option>
-                                                                @foreach ($formTypes as $type)
-                                                                    <option value="{{$type->id}}">{{$type->name}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Users register as</label>
-                                                        <select name="registerAs" >
-                                                            <option value="{{$CurrentUserTypes->id}}" disabled>{{$CurrentUserTypes->name}}</option>
-                                                            @foreach ($userTypes as $type)
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                            <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                                        </div>
+                                        @php
+                                            $where = array('isdeleted'=> 0 , array('parentId', '!=' , 0 ));
+                                            $userTypes = $userType::select(['id','name'])->where($where)->get();
+                                            $formTypes = $formType::select(['id','name'])->where('isdeleted' , 0)->get();
+                                            $CurrentformTypes = $formType::find($form->registrationFormTypeId);
+                                            $CurrentUserTypes = $userType::find($form->registerAs);
+                                        @endphp
+                                        <form action="registrationForm/{{$form->id}}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="name" value="{{$form->name}}" placeholder="{{$form->name}}" class="form-control ">
+                                                </div>
+                                                <div class="form-group">
+                                                        <label>Form Type</label>
+                                                        <select name="registrationFormTypeId" >
+                                                            <option value="{{$CurrentformTypes->id}}" disabled>{{$CurrentformTypes->name}}</option>
+                                                            @foreach ($formTypes as $type)
                                                                 <option value="{{$type->id}}">{{$type->name}}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Close registration</label>
-                                                        <select name="isRegistrationClosed">
-                                                            <option value="0">NO</option>
-                                                            <option value="1">YES</option>
-                                                        </select>
-                                                    </div>
                                                 </div>
-                                                <div class="modal-footer ">
-                                                    <button name="submit" type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                                                <div class="form-group">
+                                                    <label>Users register as</label>
+                                                    <select name="registerAs" >
+                                                        <option value="{{$CurrentUserTypes->id}}" disabled>{{$CurrentUserTypes->name}}</option>
+                                                        @foreach ($userTypes as $type)
+                                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                                                <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                                                <div class="form-group">
+                                                    <label>Close registration</label>
+                                                    <select name="isRegistrationClosed">
+                                                        <option value="0">NO</option>
+                                                        <option value="1">YES</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="modal-footer ">
-                                                <form action="registrationForm/{{$form->id}}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
-                                                </form>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                                                <button name="submit" type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                                             </div>
-                                        </div>
-                                        <!-- /.modal-content -->
+                                        </form>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <!-- /.modal-content -->
                                 </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                            <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <form action="registrationForm/{{$form->id}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                                            </form>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
