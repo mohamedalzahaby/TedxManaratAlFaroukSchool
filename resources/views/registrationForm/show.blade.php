@@ -10,7 +10,6 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">{{$question->name}}</label>
                     <div class="col-md-4">
-
                         <input type="{{$dataTypesObj->find($question->dataTypeId)->name}}"  name="{{$question->id}}" placeholder="{{$question->name}}" >
                     </div>
                 </div>

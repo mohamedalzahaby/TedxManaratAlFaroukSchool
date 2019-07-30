@@ -45,10 +45,6 @@
                                             <form action="user/{{$user->id}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                {{-- <input type="hidden" name="fname" value="{{$user->fname}}">
-                                                <input type="hidden" name="lname" value="{{$user->lname}}">
-                                                <input type="hidden" name="email" value="{{$user->email}}">
-                                                <input type="hidden" name="fname" value="{{$user->fname}}"> --}}
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>User Type</label>

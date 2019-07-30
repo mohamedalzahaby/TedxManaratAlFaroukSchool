@@ -59,7 +59,7 @@
                                                 <div class="form-group">
                                                         <label>Form Type</label>
                                                         <select name="registrationFormTypeId" >
-                                                            <option value="{{$CurrentformTypes->id}}" disabled>{{$CurrentformTypes->name}}</option>
+                                                            <option value="{{$CurrentformTypes->id}}" disabled selected>{{$CurrentformTypes->name}}</option>
                                                             @foreach ($formTypes as $type)
                                                                 <option value="{{$type->id}}">{{$type->name}}</option>
                                                             @endforeach
@@ -68,7 +68,7 @@
                                                 <div class="form-group">
                                                     <label>Users register as</label>
                                                     <select name="registerAs" >
-                                                        <option value="{{$CurrentUserTypes->id}}" disabled>{{$CurrentUserTypes->name}}</option>
+                                                        <option value="{{$CurrentUserTypes->id}}" disabled selected>{{$CurrentUserTypes->name}}</option>
                                                         @foreach ($userTypes as $type)
                                                             <option value="{{$type->id}}">{{$type->name}}</option>
                                                         @endforeach
@@ -77,7 +77,7 @@
                                                 <div class="form-group">
                                                     <label>Close registration</label>
                                                     <select name="isRegistrationClosed">
-                                                        <option value="0">NO</option>
+                                                        <option value="0" selected>NO</option>
                                                         <option value="1">YES</option>
                                                     </select>
                                                 </div>

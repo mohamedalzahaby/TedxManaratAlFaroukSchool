@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $css = '85px';
 @endphp
 @extends('layouts.app')
@@ -25,4 +25,4 @@
     @endif
 @endif
 @endsection
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br> --}}

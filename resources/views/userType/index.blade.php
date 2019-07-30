@@ -81,7 +81,7 @@
                                                 <div class="form-group">
                                                     <label>parent</label>
                                                     <select name="parent">
-                                                        <option value="{{$userType->parentId}}" disabled>{{$parent::find($userType->parentId)->name}}</option>
+                                                        <option value="{{$userType->parentId}}" disabled selected>{{$parent::find($userType->parentId)->name}}</option>
                                                         @foreach ($parentTypes as $type)
                                                             <option value="{{$type->id}}">{{$type->name}}</option>
                                                         @endforeach
