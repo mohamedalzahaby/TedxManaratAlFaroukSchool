@@ -66,3 +66,6 @@ Route::get('/showtable','RegistrationFormsOptionsValueController@showTables');
 Route::post('/usertype/attach','UserTypeController@attach');
 Route::post('/usertype/detach','UserTypeController@detach');
 
+Route::resource('ourTeam', 'BoardController');
+Route::resource('departments', 'DepartmentController');
+Route::resource('contactus', 'ContactController');
