@@ -44,7 +44,8 @@ class Controller extends BaseController
             }
         }
         // dd($redirect);
-        if($redirect) { return redirect($url)->with('error' , 'Unauthorized Page');}
+        // if($redirect) { return redirect($url)->with('error' , 'Unauthorized Page');}
+        return $redirect;
     }
 
 }
