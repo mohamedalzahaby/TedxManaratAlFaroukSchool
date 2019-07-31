@@ -5,29 +5,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registeration extends Model
 {
-    protected $userId;
+
+
+    protected $table = 'Registeration';
 
 
 
-    public function __construct($id = '')
+    public function store($userId , $currentAcademicYearId)
     {
-        $this->tableName = 'Registeration';
-        if ($id != '') {
-            $this->id = $id;
-            $row = getAllById($this->tableName,$this->id);
-            $this->userId = $row['userId'];
-            $this->academicYearId = $row['academicYearId'];
-        }
+        DB::insert('insert into registeration (userId, academicYearId) values (?, ?)', [$userId, $currentAcademicYearId]);
+
     }
 
-    public function store($id)
+
+    public function users()
     {
-        $db = Controller::getInstance();
-        $sql = "INSERT INTO `registeration`(`userId`, `academicYearId`) VALUES ($id , 1)";
-        $db->query($sql);
-        $lastId = $db->lastInsertId('registeration');
-        $this->id = $lastId;
+        return $this->belongsTo('App\User');
     }
+    
+    public function RegisterationDetails()
+    {
+        return $this->hasMany('App\RegisterationDetails');
+    }
+
+    
+
 
     public function getLastId()
     {

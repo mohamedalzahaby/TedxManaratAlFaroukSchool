@@ -26,6 +26,9 @@ class Addcolboard extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('board', function (Blueprint $table) {
+            $table->dropColumn('description');
+            $table->dropColumn('image');
+        });
     }
 }

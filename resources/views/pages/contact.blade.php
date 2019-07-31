@@ -32,11 +32,13 @@
           </p>
 
           <br>
-          <form name="contact" action="thank-you" method="post" id="form-contact" netlify>
+          <form  action="/contactus" method="post" id="form-contact" netlify>
+            @csrf
+            @method('POST')
             <div class="row margin-4 no-margin-rl">
               <input type="text" placeholder="Your Name" name="name" class="required" required>
               <input type="email" placeholder="Your Email" name="email" class="required email" required>
-              <textarea placeholder="Your Message" name="message" class="required" required></textarea>
+              <textarea placeholder="Your Message" name="messege" class="required" required></textarea>
             </div>
             <!-- //.row -->
 
@@ -54,6 +56,7 @@
             </div>
             <!-- //.row -->
           </form>
+          <a href="/contactus" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">show messeges</a><br>
         </div>
         <!-- //.col-md-5 -->
 

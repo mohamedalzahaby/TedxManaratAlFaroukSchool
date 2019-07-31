@@ -33,26 +33,8 @@ class Board extends Model
         }
         return $boards;
     }
-//     public function store($request)
-//    {
-//        $this->name = $request['name'];
-//        $this->academicYearId = $request['academicYearId'];
-//        $this->openingDate = $request['openingDate'];
-//        $this->closingDate = $request['closingDate'];
-//        $this->BoardImage = 'BoardImage';
-//        $db = Controller::getInstance();
-//        $sql = "INSERT INTO `board`(`name`, `academicYearId`, `openingDate`, `closingDate`)
-//        VALUES ('$this->name' , $this->academicYearId , $this->openingDate , $this->closingDate )";
-//        $db->query($sql);
-//     //    $this->columnValuesArr = array($this->name ,$this->academicYearId, $this->openingDate, $this->closingDate, $this->BoardImage);
-//     //    $this->insert($this->columnNamesArr , $this->columnValuesArr , $this->tableName);
-//         // $this->price = $request['price'];
-//         // $this->quantity = $request['quantity'];
-//         // $this->productTypeId = $request['productTypeId'];
-// 		// $this->columnValuesArr = array( $this->name, $this->price, $this->quantity, $this->productTypeId);
-// 		// $this->insert($this->columnNamesArr , $this->columnValuesArr , $this->tableName);
-//     }
-   public function returnCurrentBoard()
+
+    public function returnCurrentBoard()
     {
         $currentDate = date("Y-m-d");
         $where  =  array(
@@ -62,4 +44,6 @@ class Board extends Model
         $currentBoardId = DB::table($this->table)->select('id')->where($where)->first();
         return $currentBoardId->id;
     }
+
+
 }

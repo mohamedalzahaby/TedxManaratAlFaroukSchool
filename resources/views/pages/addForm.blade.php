@@ -13,9 +13,9 @@
             <p><b>Form Title</b></p>
             @csrf
             <input type="hidden" name="ctr" id ='hidden'>
-            <input type="text" name="name" placeholder="Enter product name here" required><br><br>
-            <input type="hidden" name="registerationFormTypeId" value="<?php echo $data['registerationFormType']; ?>">
-            <input type="hidden" name="RegisterAs" value="<?php echo $data['RegisterAs']; ?>">
+            <input type="text" name="name" placeholder="Enter Event name here" required><br><br>
+            <input type="hidden" name="registerationFormTypeId" value=" {{$data['registerationFormType']}}">
+            <input type="hidden" name="RegisterAs" value=" {{$data['RegisterAs']}}">
             <p><b>For which event</b></p>
             @if ($data['IsForEvent'])
                 <select name="eventId" id="eventId">

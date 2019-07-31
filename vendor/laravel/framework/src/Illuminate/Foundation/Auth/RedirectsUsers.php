@@ -11,10 +11,13 @@ trait RedirectsUsers
      */
     public function redirectPath()
     {
+
+
         if (method_exists($this, 'redirectTo')) {
             return $this->redirectTo();
         }
+        $this->redirectTo = '/about';
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/about';
     }
 }

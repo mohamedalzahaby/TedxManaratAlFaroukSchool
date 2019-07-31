@@ -13,12 +13,9 @@ class Departmentatt extends Migration
      */
     public function up()
     {
-        //
         Schema::table('department', function (Blueprint $table) {
             $table->string('image');
         });
-
-        
     }
 
     /**
@@ -28,6 +25,8 @@ class Departmentatt extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('department', function (Blueprint $table) {
+            $table->dropColumn('image');
+        });
     }
 }

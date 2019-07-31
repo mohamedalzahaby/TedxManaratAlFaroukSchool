@@ -3,7 +3,7 @@
 
     @if (!Auth::guest())
         <h1 style="margin-left:600px;margin-top:130px">Add New Event</h1>
-        <form id="form" action="/events" method="POST">
+        <form id="form" action="/events" method="POST" enctype = 'multipart/form-data'>
             @method('POST')
             @csrf
             <div class="col-md-12">
@@ -36,10 +36,10 @@
                 <div class="form-group">
                     <div class="col-md-4">
                         <label id="newAddressLabel">address: </label>
-                        <?php $data['eventController']->addressHtml($data); ?>
+                        <input type="text" name="address">
                     </div>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <div class="col-md-4">
                         <label>academicYear: </label>
                         <select name="academicYearId">
@@ -48,11 +48,11 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <div class="col-md-4">
                         <label>Event Cover Image: </label>
-                        <input type="file" name="coverImage" >
+                        <input type="file" name="cover_image" id="">
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -67,7 +67,7 @@
             <div class="col-md-12">
                     <label>Event description: </label>
                     <!-- <input type="text" name="description"> -->
-                    <textarea rows="7" cols="50"></textarea>
+                    <textarea rows="7" name="description" cols="50"></textarea>
             </div>
             <div class="form-group" style="margin-left:600px;">
                     <div class="col-md-4">
@@ -95,6 +95,7 @@
                 <div class="timeline-panel col-md-2">
                     <div class="timeline-heading">
                         <h1 style="padding-top:10px;padding-bottom:10px;margin-left:15px"><b> {{ $value->name }} </b></h1>
+                        {{-- /storage//cover_images/{{$post->cover_Image}} --}}
                         <img  src=" {{ asset('images/bg-home-2.jpg') }}"  />
                     </div>
                     <div class="timeline-body">

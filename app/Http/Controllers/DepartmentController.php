@@ -121,7 +121,7 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    { //permission
+    {  //permission
         $departments=Department::find($id);
         $departments->isdeleted = 1;
         $departments->save();

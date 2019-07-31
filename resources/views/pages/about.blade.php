@@ -1,3 +1,10 @@
+@php
+    $lastEventData = DB::table('Event')->latest()->first();
+    $ci = url("../images/$lastEventData->coverImage");
+    $style = "background-image: url('../images/$lastEventData->coverImage'); background-position: center bottom !important;";
+    // dd($ci);
+    // die();
+@endphp
 @extends('layouts.app')
 @section('content')
 
@@ -81,17 +88,17 @@
                 <div class="row">
                   <div class="col-md-10 col-md-offset-1 text-center">
                     <h2 class="font-family-alt font-weight-900 letter-spacing-2 text-white xs-title-extra-large sm-title-extra-large-3 title-extra-large-5">
-                      <span class="text-base-color">Igniting</span> Minds
+                      <span class="text-base-color">{{$lastEventData->name}}
                     </h2>
                     <br>
                     <h3 class="font-weight-700 letter-spacing-2 text-white xs-title-large sm-title-extra-large title-extra-large-3">
-                      October 16, 2017
+                            {{$lastEventData->date}}
                     </h3>
                     <p class="font-family-alt text-white sm-title-small title-medium">
                       at
                     </p>
                     <h4 class="font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-small sm-title-medium title-extra-large">
-                      Manarat Alfarouk Islamic School
+                            {{$lastEventData->address}}
                     </h4>
                     <!-- <br>
                     <a href="/register/" class="btn btn-base-color sm-btn-medium btn-large">
@@ -142,7 +149,7 @@
       <div class="row">
         <div class="col-sm-6 col-md-7">
           <h2 class="font-family-alt font-weight-700 sm-title-large title-extra-large-2 text-gray-dark-2">
-            About TEDxManaretAlfarouk
+            About TEDxManaretAlFaroukSchool
           </h2>
           <span class="bg-base-color margin-4 no-margin-bottom no-margin-rl separator-line-extra-thick-long"></span>
           <div class="row">
@@ -201,9 +208,11 @@
   </section>
   <!-- //Section - About End -->
 
+  {{-- "../images/dimensions.jpg" --}}
 
 
-  <section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100">
+  <section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" style = 'background-image: url("../images/$lastEventData->coverImage"); 
+background-position: center bottom !important;' >
     <div class="display-table-cell vertical-align-middle">
       <div class="container">
         <div class="row">
@@ -213,8 +222,7 @@
             </h3>
             <br>
             <p class="font-family-alt letter-spacing-1 margin-3 no-margin-bottom no-margin-rl text-white xs-title-small title-large text-uppercase font-weight-700">
-              Manarat AlFarouk School<br>
-              First Settlement
+              {{$lastEventData->address}}
             </p>
             <br>
             <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.248386076548!2d31.41383351497699!3d30.058413924867693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458473a2f638611%3A0x470a665556112987!2sManaret+Al+Farouk+Islamic+Language+School!5e0!3m2!1sen!2seg!4v1555595230804!5m2!1sen!2seg" target="_blank"

@@ -79,12 +79,11 @@ class EventController extends Controller
         }
         return $boards;
     }
-    // public function getAcademicYears()
-    // {
-    //     $academicYears = AcademicYear::all();
-    //     var_dump($academicYears);die();
-    //     return $academicYears['name'];
-    // }
+    public function getCurrentAcademicYear()
+    {
+        $academicYear = AcademicYear::all()->last()->first();
+        return $academicYear;
+    }
 
 
     public function GET_BOARDS()
@@ -135,20 +134,50 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $coverimage = 'cover_image';
+        // $this->validate($request ,[
+        //     'name' =>           'required',
+        //     'date' =>           'required',
+        //     'eventStart' =>     'required',
+        //     'eventEnd' =>       'required',
+        //     'address' =>        'required',
+        //     'academicYearId' => 'required',
+        //     'boardId' =>        'required',
+        //     $coverimage => 'image|nullable'
+        //     ]);
+        // check if file is selected
+        if ($request->hasFile($coverimage))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($coverimage)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($coverimage)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($coverimage)->storeAs('public/cover_images',$fileNameToStore);
+
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
+
+        $academicYrId = Board::find($request->input('boardId'))->academicYearId;
+
         $event=new Event();
         $event->name = $request->input("name");
         $event->date= $request->input("date");
         $event->eventStart= $request->input("eventStart");
         $event->eventEnd= $request->input("eventEnd");
-        $event->addressId= $request->input("addressId");
-        $event->academicYearId= $request->input("academicYearId");
-        $event->coverImage= $request->input("coverImage");
+        $event->address= $request->input("address");
+        $event->description= $request->input("description");
+        $event->academicYearId= $academicYrId;
         $event->boardId= $request->input("boardId");
+        $event->coverImage= $fileNameToStore;
         $event->save();
-        // $event->
-
-
+        return redirect('/events')->with('success' , "event added successfully");
     }
 
     /**
