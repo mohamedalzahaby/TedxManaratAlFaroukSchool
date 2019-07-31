@@ -18,16 +18,16 @@
       </div>
       <!-- //.row -->
       <a href="/ourTeam/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
-      <a href="/departments"class="btn btn-btn-primary" style="margin-left:10px;margin-bottom:10px;background-coloe.#e62b1e;border-radius:10px" > Departments</a> 
+      <a href="/departments"class="btn btn-btn-primary" style="margin-left:10px;margin-bottom:10px;background-coloe.#e62b1e;border-radius:10px" > Departments</a>
 @foreach ($boards as $board)
-    
+
       <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
           <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
           <a href="/ourTeam/{{ $board->id }}"> {{ $board->name }} </a>
           </h3>
           <p class="margin-5 no-margin-rl text-gray-dark-2">
-                {{ $board->description}}
+                {!! $board->description !!}
           </p>
         </div>
 
@@ -36,7 +36,7 @@
           <div class="overflow-hidden position-relative width-100">
             <div class="position-relative">
               <div class="img-wrapper">
-                <img src="/storage//cover_images/{{$board->cover_Image}}" alt=""/>
+                <img src="/storage//cover_images/{{$board->image}}" alt="{{$board->image}}"/>
               </div>
             </div>
             <!-- //.position-relative -->
@@ -53,7 +53,7 @@
       </div>
       <!-- //.row -->
 @endforeach
-     
+
     </div>
     <!-- //.container -->
   </section>

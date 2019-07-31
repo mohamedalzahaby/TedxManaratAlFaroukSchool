@@ -23,7 +23,7 @@
                     <a href="/ourTeam/{{ $event->id }}"> {{ $event->name }} </a>
                 </h3>
                 <p class="margin-5 no-margin-rl text-gray-dark-2">
-                    {{ $event->description}}
+                    {!! $event->description !!}
                 </p>
             </div>
 

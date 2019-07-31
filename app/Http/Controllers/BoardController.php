@@ -43,7 +43,7 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $image = 'cover_image';
         // dd($request);
 
@@ -73,23 +73,23 @@ class BoardController extends Controller
         else {
             $fileNameToStore ='noimage.jpg';
         }
-        
+
 
 
         // dd($request);
         $Board=new board();
 
         $Board->name=$request->input('name');
-        
+
         $Board->openingDate=$request->input('Opendate');
-        
+
         $Board->closingDate=$request->input('closedate');
-        
+
         $Board->description=$request->input('description');
-        
+
         // $Board->academicYearId = $request->input('academicYearId');
         $Board->academicYearId = 1;
-        
+
         // var_dump($request->input('academicYearId')); die();
         $Board->cover_Image  = $fileNameToStore;
         // dd($fileNameToStore);
@@ -106,14 +106,15 @@ class BoardController extends Controller
      */
     public function show($id)
     {
+
       $boards=Board::find($id);
       if($boards->isdeleted == 1)
       {
           return redirect('/ourTeam')->with('error','this board is removed');
-
       }
       else {
-          return view('boards.show')->with('boards',$boards)->with('id',$id);
+          return view('boards.show')->with('boards',$boards)
+          ->with('id',$id);
       }
 
     }
@@ -126,9 +127,13 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        $boards=Board::find($id);
+        $academicYrs = AcademicYear::all()->where('isdeleted',0);
 
-         return  view('boards.edit')->with('boards',$boards);
+        $boards=Board::find($id);
+         return  view('boards.edit')
+         ->with('boards',$boards)
+         ->with('academicYrs',$academicYrs)
+         ->with('year', new AcademicYear() );
     }
 
     /**
@@ -151,10 +156,9 @@ class BoardController extends Controller
         //     'description' => 'required'
         //     ]);
             // $Board= new board();
-            
+
             if ($request->hasFile($image))
             {
-                
                 # get file name with extension
                 $filenameWithExt = $request->file($image)->getClientOriginalName();
                 //get just filename
@@ -165,32 +169,30 @@ class BoardController extends Controller
                 $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 //upload
                 $path = $request->file($image)->storeAs('public/cover_images',$fileNameToStore);
-                
+                $Board->image  = $fileNameToStore;
             }
             else {
                 $fileNameToStore ='noimage.jpg';
             }
-            
-            
-            
+
+
+
             // dd($request);
-            
-            
+
+
         $Board->name=$request->input('name');
-        
-        
+
+
         $Board->openingDate=$request->input('Opendate');
-        
+
         $Board->closingDate=$request->input('closedate');
-        
+
         $Board->description=$request->input('description');
-        
+
         // $Board->academicYearId = $request->input('academicYearId');
         $Board->academicYearId = 1;
-        
-        // var_dump($request->input('academicYearId')); die();
-        $Board->cover_Image  = $fileNameToStore;
-        // dd($fileNameToStore);
+
+
 
         $Board->save();
        return redirect('/ourTeam');
@@ -205,7 +207,7 @@ class BoardController extends Controller
     public function destroy($id)
     {
         $boards=Board::find($id);
-        
+
         // if ($boards->cover_Image != 'noimage.jpg') {
         //     $imageRoute =  $this->imagesFolderRoutes.'/'.$boards->cover_Image;
         //     Storage::delete( $imageRoute );
