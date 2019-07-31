@@ -26,6 +26,7 @@ class RegistrationFormsOptionsValueController extends Controller
         $this->registeration_M = new Registeration();
         $this->registerationDetails_M = new RegisterationDetails();
         $this->RegistrationFormOptionsValue_M = new RegistrationFormOptionsValue();
+        $this->middleware('auth' , ['except' => ['index' , 'show']]);
 
     }
 

@@ -19,20 +19,20 @@ class UserTypeController extends Controller
     }
 
 
-    public function autherization($url , $permissionName)
-    {
-        $redirect = true;
-        $userTypeId = auth()->user()->userTypeId;
-        $permission = Permission::all()->where('name' , $permissionName )->first();
-        $userTypes = $permission->userTypes()->get();
-        foreach ($userTypes as $key => $value) {
-            if ($value->id == $userTypeId) {
-                $redirect = false;
-            }
-        }
-        // dd($redirect);
-        if($redirect) { return redirect('contact')->with('error' , 'Unauthorized Page');}
-    }
+    // public function autherization($url , $permissionName)
+    // {
+    //     $redirect = true;
+    //     $userTypeId = auth()->user()->userTypeId;
+    //     $permission = Permission::all()->where('name' , $permissionName )->first();
+    //     $userTypes = $permission->userTypes()->get();
+    //     foreach ($userTypes as $key => $value) {
+    //         if ($value->id == $userTypeId) {
+    //             $redirect = false;
+    //         }
+    //     }
+    //     // dd($redirect);
+    //     if($redirect) { return redirect('contact')->with('error' , 'Unauthorized Page');}
+    // }
 
 
     /**
@@ -69,7 +69,7 @@ class UserTypeController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->autherization( 'contact' ,'add UserType');
+        // return $this->autherization( 'contact' ,'add UserType');
         $userType = new UserType();
         $userType->name = $request->input('name');
         $userType->parentId = $request->input('parent');
@@ -125,7 +125,7 @@ class UserTypeController extends Controller
      */
     public function edit($id)
     {
-        return $this->autherization( 'contact' ,'edit UserType');
+        // return $this->autherization( 'contact' ,'edit UserType');
     }
     // public function test()
     // {
@@ -153,7 +153,7 @@ class UserTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->autherization( 'contact' ,'update UserType');
+        // return $this->autherization( 'contact' ,'update UserType');
     }
 
     /**

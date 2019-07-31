@@ -2,6 +2,7 @@
 
 @extends('layouts.app')
 @section('content')
+@if (!Auth::guest() && $isAccepted == true)
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <br><br><br><br><br><br><br>
@@ -96,4 +97,5 @@
         $("[data-toggle=tooltip]").tooltip();
     });
 </script>
+@endif
 @endsection

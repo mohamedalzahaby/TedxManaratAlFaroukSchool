@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Department;
 use App\Board;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
 
     public function __construct()
     {
-        // $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
 
@@ -23,8 +24,16 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+        if (Auth::guest()) {
+          
+        $isAccepted = false;
+        
+    }
+    else {
+        $isAccepted = Parent::autherization('show board' , true);
+    }
         $departments= Department::all()->where('isdeleted' ,0);
-        return view('departments.index')->with('departments',$departments);
+        return view('departments.index')->with('departments',$departments)->with('isAccepted', $isAccepted);
     }
 
     /**

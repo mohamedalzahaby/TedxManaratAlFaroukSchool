@@ -8,15 +8,33 @@ use App\contactus;
 
 class ContactController extends Controller
 {
+    
+
+    public function __construct()
+    {
+        $this->middleware('auth' , ['except' => [ 'store','show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+
     public function index()
     {
+        if (Auth::guest()) {
+          
+            $isAccepted = false;
+            
+        }
+        else {
+            $isAccepted = Parent::autherization('show board' , true);
+        }
+
         $forms= contactus::all()->where('isdeleted',0);
-        return view('pages.showmesseges')->with('forms',$forms);
+        return view('pages.showmesseges')->with('forms',$forms)->with('isAccepted',$isAccepted);
     }
 
     /**

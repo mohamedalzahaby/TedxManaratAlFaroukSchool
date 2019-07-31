@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -30,8 +31,16 @@ class PostController extends Controller
         // $posts = Post::where('title' , 'post two')->get();
         // $posts = Post::orderBy('title','asc')->take(1)->get();
         // $posts = Post::orderBy('title','asc')->paginate(1);
+        if (Auth::guest()) {
+          
+            $isAccepted = false;
+            
+        }
+        else {
+            $isAccepted = Parent::autherization('show board' , true);
+        }
         $posts = Post::all()->where('isdeleted', 0);
-        return view('posts.index')->with('posts' , $posts);
+        return view('posts.index')->with('posts' , $posts)->with('isAccepted',$isAccepted);
     }
 
     public function create()

@@ -1,5 +1,5 @@
 @php
-    $lastEventData = DB::table('Event')->latest()->first();
+    $lastEventData = DB::table('event')->latest()->first();
     $eventAddressString =  $lastEventData->address;
 @endphp
 <!-- Section - Event banner start -->

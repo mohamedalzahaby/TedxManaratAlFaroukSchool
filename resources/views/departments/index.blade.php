@@ -14,7 +14,9 @@
         <!-- //.col-md-10 -->
       </div>
       <!-- //.row -->
+      @if (!Auth::guest() && $isAccepted == true)
       <a href="/departments/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Department</a><br>
+      @endif
 @foreach ($departments as $department)
 
   <div class="row">

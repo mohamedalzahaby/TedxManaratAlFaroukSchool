@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2019 at 10:00 AM
+-- Generation Time: Jul 31, 2019 at 10:06 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -82,16 +82,18 @@ CREATE TABLE `board` (
   `closingDate` date NOT NULL,
   `isdeleted` int(11) NOT NULL DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `board`
 --
 
-INSERT INTO `board` (`id`, `name`, `academicYearId`, `openingDate`, `closingDate`, `isdeleted`, `updated_at`, `created_at`) VALUES
-(1, 'tedxsalon2019', 2, '2019-07-12', '2019-07-30', 0, '2019-07-12 18:04:14', '2019-07-12 18:04:14'),
-(2, 'tedx2018', 1, '2018-11-05', '2018-12-31', 0, '2019-07-12 18:04:14', '2019-07-12 18:04:14');
+INSERT INTO `board` (`id`, `name`, `academicYearId`, `openingDate`, `closingDate`, `isdeleted`, `updated_at`, `created_at`, `description`, `image`) VALUES
+(1, 'tedxsalon2019', 2, '2019-07-12', '2019-07-30', 0, '2019-07-12 18:04:14', '2019-07-12 18:04:14', '', ''),
+(2, 'tedx2018', 1, '2018-11-05', '2018-12-31', 0, '2019-07-12 18:04:14', '2019-07-12 18:04:14', '', '');
 
 -- --------------------------------------------------------
 
@@ -118,6 +120,22 @@ CREATE TABLE `contacttype` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `isdeleted` int(11) NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactus`
+--
+
+CREATE TABLE `contactus` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `messege` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isdeleted` tinyint(1) NOT NULL DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -201,15 +219,16 @@ CREATE TABLE `department` (
   `isdeleted` int(11) NOT NULL DEFAULT '0',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `board_id` int(11) NOT NULL
+  `board_id` int(11) NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `department`
 --
 
-INSERT INTO `department` (`id`, `name`, `jobDescribtion`, `isdeleted`, `updated_at`, `created_at`, `board_id`) VALUES
-(1, 'marketing', 'marketing describtion', 0, '2019-07-17 01:59:39', '2019-07-17 01:59:39', 1);
+INSERT INTO `department` (`id`, `name`, `jobDescribtion`, `isdeleted`, `updated_at`, `created_at`, `board_id`, `image`) VALUES
+(1, 'marketing', 'marketing describtion', 0, '2019-07-17 01:59:39', '2019-07-17 01:59:39', 1, '');
 
 -- --------------------------------------------------------
 
@@ -428,7 +447,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2019_07_22_023622_readd_table_users', 8),
 (29, '2019_07_22_024000_readd_table_regop', 9),
 (30, '2019_07_22_221146_event_address_id_to_address', 10),
-(31, '2019_07_26_194630_registration_forms_options_id', 11);
+(31, '2019_07_26_194630_registration_forms_options_id', 11),
+(32, '2019_07_27_231602_user_type_permissions', 12),
+(33, '2019_07_28_094014_permission_user_type', 13),
+(34, '2019_07_18_153721_addcolboard', 14),
+(35, '2019_07_18_234133_departmentatt', 14),
+(36, '2019_07_29_224058_contactus', 14);
 
 -- --------------------------------------------------------
 
@@ -539,6 +563,142 @@ CREATE TABLE `paymentmethodoptionvalue` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isdeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `isdeleted`, `updated_at`, `created_at`) VALUES
+(1, 'add UserType', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(2, 'update UserType', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(3, 'delete UserType', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(4, 'show UserType', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(5, 'add User', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(6, 'update User', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(7, 'delete User', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(8, 'show User', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(9, 'add Permission', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(10, 'update Permission', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(11, 'delete Permission', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(12, 'show Permissions', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(13, 'add post', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(14, 'update post', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(15, 'delete post', 0, '2019-07-28 07:52:21', '2019-07-28 07:52:21'),
+(16, 'show post', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(17, 'add event', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(18, 'update event', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(19, 'delete event', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(20, 'show event', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(21, 'add board', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(22, 'update board', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(23, 'delete board', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(24, 'show board', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(25, 'add department', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(26, 'update department', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(27, 'delete department', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(28, 'show department', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(29, 'add registrationFormTypes', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(30, 'update registrationFormTypes', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(31, 'delete registrationFormTypes', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(32, 'show registrationFormTypes', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(33, 'add registrationForm', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(34, 'update registrationForm', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(35, 'delete registrationForm', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(36, 'show registrationForm', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(37, 'add registrationFormValues', 0, '2019-07-28 07:52:22', '2019-07-28 07:52:22'),
+(38, 'update registrationFormValues', 0, '2019-07-28 07:52:23', '2019-07-28 07:52:23'),
+(39, 'delete registrationFormValues', 0, '2019-07-28 07:52:23', '2019-07-28 07:52:23'),
+(40, 'show registrationFormValues', 0, '2019-07-28 07:52:23', '2019-07-28 07:52:23'),
+(41, 'update about Page', 0, '2019-07-28 07:52:23', '2019-07-28 07:52:23'),
+(42, 'update contact Page', 0, '2019-07-28 07:52:23', '2019-07-28 07:52:23'),
+(43, 'attach permission', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
+(44, 'detach permission', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
+(45, 'attach user Type', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
+(46, 'detach user Type', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permission_user_type`
+--
+
+CREATE TABLE `permission_user_type` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_type_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  `isdeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `permission_user_type`
+--
+
+INSERT INTO `permission_user_type` (`id`, `user_type_id`, `permission_id`, `isdeleted`, `updated_at`, `created_at`) VALUES
+(2, 5, 2, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(3, 5, 3, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(4, 5, 4, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(5, 5, 5, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(6, 5, 6, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(7, 5, 7, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(8, 5, 8, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(9, 5, 9, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(10, 5, 10, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(11, 5, 11, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(12, 5, 12, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(13, 5, 13, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(14, 5, 14, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(15, 5, 15, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(16, 5, 16, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(17, 5, 17, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(18, 5, 18, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(19, 5, 19, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(20, 5, 20, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(21, 5, 21, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(22, 5, 22, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(23, 5, 23, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(24, 5, 24, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(25, 5, 25, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(26, 5, 26, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(27, 5, 27, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(28, 5, 28, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(29, 5, 29, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(30, 5, 30, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(31, 5, 31, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(32, 5, 32, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(33, 5, 33, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(34, 5, 34, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(35, 5, 35, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(36, 5, 36, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(37, 5, 37, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(38, 5, 38, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(39, 5, 39, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(40, 5, 40, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(41, 5, 41, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(42, 5, 42, 0, '2019-07-28 10:06:25', '2019-07-28 10:06:25'),
+(44, 5, 1, 0, '2019-07-29 23:09:22', '2019-07-29 23:09:22'),
+(45, 5, 43, 0, '2019-07-29 23:09:30', '2019-07-29 23:09:30'),
+(46, 5, 44, 0, '2019-07-29 23:09:34', '2019-07-29 23:09:34'),
+(47, 5, 45, 0, '2019-07-29 23:09:37', '2019-07-29 23:09:37'),
+(48, 5, 46, 0, '2019-07-29 23:09:40', '2019-07-29 23:09:40'),
+(49, 2, 1, 0, '2019-07-29 23:10:16', '2019-07-29 23:10:16'),
+(50, 2, 2, 0, '2019-07-29 23:10:21', '2019-07-29 23:10:21'),
+(51, 4, 20, 0, '2019-07-30 08:36:20', '2019-07-30 08:36:20');
 
 -- --------------------------------------------------------
 
@@ -886,7 +1046,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `email_verified_at`, `password`, `userTypeId`, `ismale`, `birthDate`, `remember_token`, `updated_at`, `created_at`, `isdeleted`) VALUES
-(1, 'mohamed', 'alzahaby', 'mohamedazahaby@gmail.com', NULL, '$2y$10$t.SXFyOt5qw.R5.KmoKhsuGLfr3mJ5suhRVrK.DNjJpS0pRsBIGrO', 1, 1, '1997-07-08', NULL, '2019-07-22 00:44:30', '2019-07-22 00:44:30', 0);
+(1, 'mohamed', 'alzahaby', 'mohamedazahaby@gmail.com', NULL, '$2y$10$t.SXFyOt5qw.R5.KmoKhsuGLfr3mJ5suhRVrK.DNjJpS0pRsBIGrO', 6, 1, '1997-07-08', 'T0YCkZ46yIzSp0ZAGJPysP6D8XZb9v5oBwWRldkrsvwuKhHk0rR7i8A4ylRt', '2019-07-30 09:03:24', '2019-07-22 00:44:30', 0);
 
 -- --------------------------------------------------------
 
@@ -926,7 +1086,9 @@ INSERT INTO `usertype` (`id`, `name`, `parentId`, `isdeleted`, `updated_at`, `cr
 (1, 'guest', 0, 0, '2019-07-16 13:18:54', '2019-07-16 13:18:54'),
 (2, 'participant', 0, 0, '2019-07-16 13:18:54', '2019-07-16 13:18:54'),
 (3, 'member', 2, 0, '2019-07-16 13:18:54', '2019-07-16 13:18:54'),
-(4, 'attendee', 1, 0, '2019-07-16 13:18:54', '2019-07-16 13:18:54');
+(4, 'attendee', 1, 0, '2019-07-30 06:26:53', '2019-07-16 13:18:54'),
+(5, 'admin', 2, 0, '2019-07-28 09:59:05', '2019-07-28 09:59:05'),
+(6, 'website guest', 1, 0, '2019-07-30 07:18:51', '2019-07-30 07:18:51');
 
 -- --------------------------------------------------------
 
@@ -975,6 +1137,12 @@ ALTER TABLE `contactnumber`
 -- Indexes for table `contacttype`
 --
 ALTER TABLE `contacttype`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contactus`
+--
+ALTER TABLE `contactus`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1107,6 +1275,18 @@ ALTER TABLE `paymentmethodoptions`
 -- Indexes for table `paymentmethodoptionvalue`
 --
 ALTER TABLE `paymentmethodoptionvalue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission_user_type`
+--
+ALTER TABLE `permission_user_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1264,6 +1444,12 @@ ALTER TABLE `contacttype`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `contactus`
+--
+ALTER TABLE `contactus`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `currency`
 --
 ALTER TABLE `currency`
@@ -1351,7 +1537,7 @@ ALTER TABLE `messageuser`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -1388,6 +1574,18 @@ ALTER TABLE `paymentmethodoptions`
 --
 ALTER TABLE `paymentmethodoptionvalue`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `permission_user_type`
+--
+ALTER TABLE `permission_user_type`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -1501,7 +1699,7 @@ ALTER TABLE `usersnotifications`
 -- AUTO_INCREMENT for table `usertype`
 --
 ALTER TABLE `usertype`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `usertypelinks`

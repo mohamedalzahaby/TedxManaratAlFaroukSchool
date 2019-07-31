@@ -4,6 +4,7 @@
 
 
 
+
   <!-- Section - Team Start -->
   <section id="team" class="bg-white">
     <div class="container">
@@ -17,7 +18,9 @@
         <!-- //.col-md-10 -->
       </div>
       <!-- //.row -->
-      <a href="/ourTeam/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
+      @if (!Auth::guest() && $isAccepted == true)
+        <a href="/ourTeam/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
+      @endif
       <a href="/departments"class="btn btn-btn-primary" style="margin-left:10px;margin-bottom:10px;background-coloe.#e62b1e;border-radius:10px" > Departments</a> 
 @foreach ($boards as $board)
     
@@ -55,6 +58,7 @@
 @endforeach
      
     </div>
+  
     <!-- //.container -->
   </section>
   <!-- //Section - Team End -->

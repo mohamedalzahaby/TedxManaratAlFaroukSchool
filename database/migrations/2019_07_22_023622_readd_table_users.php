@@ -22,6 +22,7 @@ class ReaddTableUsers extends Migration
         //     // $table->rememberToken();
         //     $table->timestamps();
         // });
+        Schema::dropIfExists('users');
         Schema::create('users', function (Blueprint $table) {
 		    $table->engine = 'InnoDB';
 		    $table->bigIncrements('id');

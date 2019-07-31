@@ -32,7 +32,7 @@ class Controller extends BaseController
     }
 
 
-    public function autherization( $permissionName , $url = '/contact')
+    public function autherization( $permissionName , $returnResponceOnly= false , $url = '/contact')
     {
         $redirect = true;
         $userTypeId = auth()->user()->userTypeId;
@@ -44,7 +44,35 @@ class Controller extends BaseController
             }
         }
         // dd($redirect);
-        if($redirect) { return redirect($url)->with('error' , 'Unauthorized Page');}
+        if(!$returnResponceOnly){
+            if($redirect) {
+                return redirect($url)->with('error' , 'Unauthorized Page');
+            }
+        }
+        else {
+            return $redirect;
+        }
     }
+    // public function autherization( $permissionName , $returnResponceOnly= false , $url = '/contact')
+    // {
+    //     $redirect = true;
+    //     $userTypeId = auth()->user()->userTypeId;
+    //     $permission = Permission::all()->where('name' , $permissionName )->first();
+    //     $userTypes = $permission->userTypes()->get();
+    //     foreach ($userTypes as $key => $value) {
+    //         if ($value->id == $userTypeId) {
+    //             $redirect = false;
+    //         }
+    //     }
+    //     // dd($redirect);
+    //     if(!$returnResponceOnly){
+    //         if($redirect) {
+    //             return redirect($url)->with('error' , 'Unauthorized Page');
+    //         }
+    //     }
+    //     else {
+    //         return $redirect;
+    //     }
+    // }
 
 }

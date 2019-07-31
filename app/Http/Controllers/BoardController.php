@@ -5,12 +5,14 @@ use Illuminate\Http\Request;
 use App\board;
 use App\AcademicYear;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 class BoardController extends Controller
 {
     protected $board;
 
     public function __construct()
     {
+        $this->middleware('auth' , ['except' => ['index' , 'show']]);
         $this->board = new Board();
     }
 
@@ -22,8 +24,16 @@ class BoardController extends Controller
      */
     public function index()
     {
+        if (Auth::guest()) {
+          
+            $isAccepted = false;
+            
+        }
+        else {
+            $isAccepted = Parent::autherization('show board' , true);
+        }
         $boards = Board::all()->where('isdeleted',0);
-        return view('boards.index')->with('boards' , $boards);
+        return view('boards.index')->with('boards' , $boards)->with('isAccepted', $isAccepted);
     }
 
     /**
@@ -33,6 +43,11 @@ class BoardController extends Controller
      */
     public function create()
     {
+      
+        if(Parent::autherization('show board')){
+            return Parent::autherization('show board');
+        }
+
         return view('boards.create');
     }
 
@@ -106,6 +121,17 @@ class BoardController extends Controller
      */
     public function show($id)
     {
+        
+        if (Auth::guest()) {
+            $isAccepted = false;
+        }
+        else {
+            $isAccepted = Parent::autherization('show board' , true);
+        }
+        $boards = Board::all()->where('isdeleted',0);
+        return view('boards.show')->with('boards' , $boards)->with('isAccepted', $isAccepted);
+
+
       $boards=Board::find($id);
       if($boards->isdeleted == 1)
       {

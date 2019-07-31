@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <!-- Section - ADD Registration start -->
-@if (!Auth::guest())
+@if (Auth::guest() && $isAccepted == true)
     <section id="registration" class="bg-white-2">
         <div class="container">
 

@@ -2,7 +2,9 @@
 @section('content')
 
 <h1 style="margin-top:130px;margin-left:20px;margin-bottom:10px">Posts</h1>
+@if (!Auth::guest() && $isAccepted == true)
 <a href="/posts/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Post</a><br>
+@endif
 @if (count($posts) > 0)
 @foreach ($posts as $post)
     <div class="well"style="margin:15px">

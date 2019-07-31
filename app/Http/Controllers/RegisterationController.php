@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Board;
 use App\Event;
@@ -15,8 +16,7 @@ use App\RegisterationForm;
 use App\RegisterationDetails;
 use App\RegistrationFormType;
 use App\RegistrationFormOptionsValue;
-
-
+use phpDocumentor\Reflection\Types\Parent_;
 
 class RegisterationController extends Controller
 {
@@ -43,6 +43,10 @@ class RegisterationController extends Controller
         $this->registrationDetails_M = new RegisterationDetails();
         $this->RegistrationFormType_M = new RegistrationFormType();
         $this->registrationFormOptionsValue_M = new RegistrationFormOptionsValue();
+        //if not login go to login page
+        $this->middleware('auth', ['except' => [ 'index']]);
+        //autherization
+        
     }
 
     /**
@@ -52,6 +56,13 @@ class RegisterationController extends Controller
      */
     public function index()
     {
+        //if not signed in
+        if (Auth::guest()) {
+            $isAccepted = false;
+        }
+        else {
+            $isAccepted = Parent::autherization('show registrationForm' , true);
+        }
         $Columns = array('id', 'name');
         $openedForms = $this->RegisterationForm->getOpenedForms();
         $userTypes = UserType::all()->where('isdeleted', 0);
@@ -60,7 +71,9 @@ class RegisterationController extends Controller
             'userTypes' => $userTypes,
             'forms' => $openedForms
         );
-        return view('pages.register', compact('RegistrationFormTypes'))->with('data', $data);
+        return view('pages.register', compact('RegistrationFormTypes'))
+        ->with('data', $data)
+        ->with('isAccepted', $isAccepted);
     }
 
 

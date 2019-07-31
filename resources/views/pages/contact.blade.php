@@ -56,7 +56,9 @@
             </div>
             <!-- //.row -->
           </form>
+          @if (!Auth::guest() && $isAccepted == true)
           <a href="/contactus" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">show messeges</a><br>
+          @endif
         </div>
         <!-- //.col-md-5 -->
 

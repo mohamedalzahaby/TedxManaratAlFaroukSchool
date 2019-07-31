@@ -13,10 +13,10 @@ class EditEventformTable extends Migration
      */
     public function up()
     {
-        // Schema::rename('eventform', 'event_registeration_form');
+        Schema::rename('eventform', 'event_registeration_form');
         Schema::table('event_registeration_form', function (Blueprint $table) {
-            $table->dropIfExists('eventId');
-            $table->dropIfExists('registerationFormId');
+            $table->dropColumn('eventId');
+            $table->dropColumn('registerationFormId');
             $table->integer('event_id');
             $table->integer('registeration_form_id');
         });
