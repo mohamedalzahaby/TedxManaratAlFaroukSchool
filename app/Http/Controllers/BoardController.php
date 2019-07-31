@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Storage;
 class BoardController extends Controller
 {
     protected $board;
+    private $imagesFolderRoutes;
 
     public function __construct()
     {
+        $this->imagesFolderRoutes = 'public/cover_images';
         $this->board = new Board();
     }
 
@@ -44,6 +46,10 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->input('Opendate') > $request->input('closedate')){
+            return redirect('/ourTeam/create')->with('error' , 'opening date can not be after closing date.');
+        }
+
         $image = 'cover_image';
         // dd($request);
 
@@ -75,27 +81,24 @@ class BoardController extends Controller
         }
 
 
+        $board=new Board();
 
-        // dd($request);
-        $Board=new board();
+        $board->name=$request->input('name');
 
-        $Board->name=$request->input('name');
+        $board->openingDate=$request->input('Opendate');
 
-        $Board->openingDate=$request->input('Opendate');
+        $board->closingDate=$request->input('closedate');
 
-        $Board->closingDate=$request->input('closedate');
+        $board->description=$request->input('description');
 
-        $Board->description=$request->input('description');
-
-        // $Board->academicYearId = $request->input('academicYearId');
-        $Board->academicYearId = 1;
+        // $board->academicYearId = $request->input('academicYearId');
+        $board->academicYearId = 1;
 
         // var_dump($request->input('academicYearId')); die();
-        $Board->cover_Image  = $fileNameToStore;
-        // dd($fileNameToStore);
+        $board->image  = $fileNameToStore;
 
-        $Board->save();
-       return redirect('/ourTeam');
+        $board->save();
+       return redirect('/ourTeam')->with('success' , 'Board Added Successfully');
     }
 
     /**
@@ -106,15 +109,16 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-
-      $boards=Board::find($id);
-      if($boards->isdeleted == 1)
-      {
-          return redirect('/ourTeam')->with('error','this board is removed');
+      $board=Board::find($id);
+      $departments = $board->departments()->where('isdeleted',0)->get();
+      if ($departments->isEmpty()) {
+        return redirect('/ourTeam');
+      }
+      if($board->isdeleted == 1){
+          return redirect('/ourTeam')->with('error','this board was removed');
       }
       else {
-          return view('boards.show')->with('boards',$boards)
-          ->with('id',$id);
+          return view('departments.index')->with('departments',$departments);
       }
 
     }
@@ -208,12 +212,10 @@ class BoardController extends Controller
     {
         $boards=Board::find($id);
 
-        // if ($boards->cover_Image != 'noimage.jpg') {
-        //     $imageRoute =  $this->imagesFolderRoutes.'/'.$boards->cover_Image;
-        //     Storage::delete( $imageRoute );
-        // }
-        // dd($boards);
-        // die();
+        if ($boards->cover_Image != 'noimage.jpg') {
+            $imageRoute =  $this->imagesFolderRoutes.'/'.$boards->image;
+            Storage::delete( $imageRoute );
+        }
         $boards->isdeleted = 1;
         $boards->save();
         return redirect('/ourTeam')->with('success' , 'board Deleted');

@@ -1,16 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Department;
 use App\Board;
 
 class DepartmentController extends Controller
 {
+    private $imagesFolderRoutes;
 
     public function __construct()
     {
+        $this->imagesFolderRoutes = 'public/cover_images';
         // $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
@@ -21,11 +23,11 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $departments= Department::all()->where('isdeleted' ,0);
-        return view('departments.index')->with('departments',$departments);
-    }
+    // public function index()
+    // {
+    //     $departments= Department::all()->where('isdeleted' ,0);
+    //     return view('departments.index')->with('departments',$departments);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -51,10 +53,8 @@ class DepartmentController extends Controller
         $Department->jobDescribtion=$request->input('jobDescribtion');
         $Department->image = $request->input('image');
         $Department->board_id=$request->input('board_id');
-        
         $Department->save();
-        return redirect('/departments')->with('departments','departments');
-        
+        return redirect('/departments')->with('success','Department Add Successfully');
     }
 
     /**
@@ -63,19 +63,19 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $departments=Department::find($id);
-        if ($departments->isdeleted ==1) 
-        {
-            return redirect('/departments')->with('Error','this department is removed');
+    // public function show($id)
+    // {
+    //     $departments=Department::find($id);
+    //     if ($departments->isdeleted ==1)
+    //     {
+    //         return redirect('/departments')->with('Error','this department is removed');
 
-        }
-        else {
-            return view('departments.show')->with('departments',$departments)->with('id',$id);
+    //     }
+    //     else {
+    //         return view('departments.show')->with('departments',$departments)->with('id',$id);
 
-        }
-    }
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -91,7 +91,6 @@ class DepartmentController extends Controller
         ->with('departments',$departments)
         ->with('boardObj', new Board() )
         ->with('boards', $boards );
-        
     }
 
     /**
@@ -104,14 +103,12 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $Department=Department::find($id);
-        
         $Department->name=$request->input('name');
         $Department->jobDescribtion=$request->input('jobDescribtion');
         $Department->image = $request->input('image');
-         $Department->board_id=$request->input('board_id');
-        
+        $Department->board_id=$request->input('board_id');
         $Department->save();
-        return redirect('/departments')->with('departments','departments');
+        return redirect('/departments')->with('success','Department Updated Successfully');
     }
 
     /**
@@ -122,9 +119,14 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {  //permission
-        $departments=Department::find($id);
-        $departments->isdeleted = 1;
-        $departments->save();
-        return redirect('/departments')->with('success' , 'Department Deleted');
+        $department=Department::find($id);
+        $department->isdeleted = 1;
+        $department->save();
+
+        if ($department->cover_Image != 'noimage.jpg') {
+            $imageRoute =  $this->imagesFolderRoutes.'/'.$department->image;
+            Storage::delete( $imageRoute );
+        }
+        return redirect('/ourTeam')->with('success' , 'Department Deleted Successfully');
     }
 }

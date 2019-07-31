@@ -20,11 +20,9 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
                 <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
-                    <a href="/ourTeam/{{ $event->id }}"> {{ $event->name }} </a>
+                    <a href="/events/{{ $event->id }}"> {{ $event->name }} </a>
                 </h3>
-                <p class="margin-5 no-margin-rl text-gray-dark-2">
-                    {!! $event->description !!}
-                </p>
+
             </div>
 
             <!-- Member Box Start -->
@@ -48,6 +46,9 @@
             <!-- //Member Box End -->
         </div>
         <!-- //.row -->
+        <p class="margin-5 no-margin-rl text-gray-dark-2">
+                {!! $event->description !!}
+            </p>
 
         <a href="/events/{{$event->id}}/edit" class="btn btn-primary"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
         <a href="{{$event->GPSURL}}" class="btn btn-default"style="color:white;background-color:black;margin-left:350px;margin-bottom:20px;border-radius:10px;">show on google maps</a>

@@ -176,7 +176,7 @@ background-position: center bottom !important;'>
                         {{$lastEventData->address}}
                     </p>
                     <br>
-                    <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.248386076548!2d31.41383351497699!3d30.058413924867693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458473a2f638611%3A0x470a665556112987!2sManaret+Al+Farouk+Islamic+Language+School!5e0!3m2!1sen!2seg!4v1555595230804!5m2!1sen!2seg" target="_blank" class="btn btn-outline-white sm-btn-medium btn-large margin-4-5 no-margin-bottom no-margin-rl">
+                    <a href="{{$lastEventData->GPSURL}}">
                         View location on map
                     </a>
                 </div>
