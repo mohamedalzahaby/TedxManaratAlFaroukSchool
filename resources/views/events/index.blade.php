@@ -49,7 +49,8 @@
         </div>
         <!-- //.row -->
 
-        <a href="/events/{{$event->id}}/edit" class="btn btn-default"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
+        <a href="/events/{{$event->id}}/edit" class="btn btn-primary"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
+        <a href="{{$event->GPSURL}}" class="btn btn-default"style="color:white;background-color:black;margin-left:350px;margin-bottom:20px;border-radius:10px;">show on google maps</a>
         <form action="/events/{{$event->id}}" method="post" class = 'pull-right'>
             @csrf
             @method("DELETE")

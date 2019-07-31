@@ -38,20 +38,10 @@
                     <input type="text" name="address">
                 </div>
             </div>
-            {{-- <div class="form-group">
-                <div class="col-md-4">
-                    <label>academicYear: </label>
-                    <select name="academicYearId">
-                        @foreach ($data['academicYears'] as $value)
-                            <option value="{{ $value->id }}">{{ $value->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div> --}}
             <div class="form-group">
                 <div class="col-md-4">
-                    <label>Event Cover Image: </label>
-                    <input type="file" name="cover_image" id="">
+                    <label id="newAddressLabel">GPS URl: </label>
+                    <input type="url" name="GPSURl">
                 </div>
             </div>
             <div class="col-md-12">
@@ -65,8 +55,13 @@
         </div>
         <div class="col-md-12">
                 <label>Event description: </label>
-                <!-- <input type="text" name="description"> -->
                 <textarea rows="7" name="description" id="article-ckeditor" cols="50"></textarea>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label>Event Cover Image: </label>
+                        <input type="file" name="cover_image">
+                    </div>
+                </div>
         </div>
         <div class="form-group" style="margin-left:450px;">
                 <div class="col-md-4">
@@ -75,5 +70,4 @@
         </div>
     </form>
 </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 @endsection
