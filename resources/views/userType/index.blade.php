@@ -22,7 +22,6 @@
                         </select>
                     </div>
                 </div>
-
             </fieldset>
             <!-- Button -->
             <div class="form-group">
@@ -88,7 +87,6 @@
                                                     </select>
                                                 </div>
                                             @endif
-
                                         </div>
                                         <div class="modal-footer ">
                                             <button name="submit" type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
@@ -130,7 +128,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
         $("#mytable #checkall").click(function() {
