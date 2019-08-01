@@ -57,8 +57,6 @@ Route::get('/home', function () {
     return view('pages.about');
 });
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('/events', 'EventController');
     // Route::get('/permissions',"UserTypeController@test");
 Route::post('/addquestion','AjaxController@myajaxagain');
 Route::get('/showtable','RegistrationFormsOptionsValueController@showTables');

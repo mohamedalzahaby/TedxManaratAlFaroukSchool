@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Department;
 use App\Board;
@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
+    private $imagesFolderRoutes;
 
     public function __construct()
     {
+        $this->imagesFolderRoutes = 'public/cover_images';
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
@@ -55,15 +57,30 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $image = 'cover_image';
+        if ($request->hasFile($image))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($image)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($image)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($image)->storeAs('public/cover_images',$fileNameToStore);
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
         $Department=new Department();
         $Department->name=$request->input('name');
         $Department->jobDescribtion=$request->input('jobDescribtion');
-        $Department->image = $request->input('image');
+        $Department->image = $fileNameToStore;
         $Department->board_id=$request->input('board_id');
-        
         $Department->save();
-        return redirect('/departments')->with('departments','departments');
-        
+        return redirect('/ourTeam/'.$request->input('board_id'))->with('success','Department Add Successfully');
     }
 
     /**
@@ -72,19 +89,19 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $departments=Department::find($id);
-        if ($departments->isdeleted ==1) 
-        {
-            return redirect('/departments')->with('Error','this department is removed');
+    // public function show($id)
+    // {
+    //     $departments=Department::find($id);
+    //     if ($departments->isdeleted ==1)
+    //     {
+    //         return redirect('/departments')->with('Error','this department is removed');
 
-        }
-        else {
-            return view('departments.show')->with('departments',$departments)->with('id',$id);
+    //     }
+    //     else {
+    //         return view('departments.show')->with('departments',$departments)->with('id',$id);
 
-        }
-    }
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -100,7 +117,6 @@ class DepartmentController extends Controller
         ->with('departments',$departments)
         ->with('boardObj', new Board() )
         ->with('boards', $boards );
-        
     }
 
     /**
@@ -113,14 +129,29 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $Department=Department::find($id);
-        
+        $image = 'cover_image';
+        if ($request->hasFile($image))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($image)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($image)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($image)->storeAs('public/cover_images',$fileNameToStore);
+            $Department->image  = $fileNameToStore;
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
         $Department->name=$request->input('name');
         $Department->jobDescribtion=$request->input('jobDescribtion');
-        $Department->image = $request->input('image');
-         $Department->board_id=$request->input('board_id');
-        
+        $Department->board_id=$request->input('board_id');
         $Department->save();
-        return redirect('/departments')->with('departments','departments');
+        return redirect('/departments')->with('success','Department Updated Successfully');
     }
 
     /**
@@ -131,9 +162,14 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {  //permission
-        $departments=Department::find($id);
-        $departments->isdeleted = 1;
-        $departments->save();
-        return redirect('/departments')->with('success' , 'Department Deleted');
+        $department=Department::find($id);
+        $department->isdeleted = 1;
+        $department->save();
+
+        if ($department->cover_Image != 'noimage.jpg') {
+            $imageRoute =  $this->imagesFolderRoutes.'/'.$department->image;
+            Storage::delete( $imageRoute );
+        }
+        return redirect('/ourTeam')->with('success' , 'Department Deleted Successfully');
     }
 }

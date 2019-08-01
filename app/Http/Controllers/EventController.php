@@ -33,30 +33,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        /*GET COUNTRIES*/
-        $addresses = $this->GET_COUNTRIES();
-
-        /*GET ACADEMIC YEARS NAME+ID*/
-        $academicYears = $this->GET_ACADEMIC_YEARS();
-
-        /*GET BOARDS NAME+ID*/
-        $boards = $this->GET_BOARDS();
-
-        /*GET EVENTS AND ADDRESSES STRINGS NAME+ID*/
-        $events = $this->getAllEventsAndItsAdresses();
-
-
-        $data = array('academicYears' => $academicYears,
-                        'boards' => $boards,
-                        'addresses' => $addresses,
-                        'events' => $events,
-                        'eventController' => new EventController());
-
-
-        // return view('pages.addEvent')->with('data' , $data);
-
-        return view('pages.addEvent')->with('data' , $data);
-        // Controller::view('event', $allEvents);
+        $events = Event::orderBy('date' , 'desc')->where('isdeleted',0)->get();
+        return view('events.index')->with('events' , $events);
     }
 
 
@@ -84,8 +62,6 @@ class EventController extends Controller
         $academicYear = AcademicYear::all()->last()->first();
         return $academicYear;
     }
-
-
     public function GET_BOARDS()
     {
         $boardColumns = array('id' , 'name' );
@@ -103,18 +79,15 @@ class EventController extends Controller
         $addresses = $this->getChilds(0);
         return $addresses;
     }
+    // public function getAllEventsAndItsAdresses()
+    // {
+    //     $allEvents = Event::all();
+    //     foreach ($allEvents as $key => $event) {
 
-
-
-    public function getAllEventsAndItsAdresses()
-    {
-        $allEvents = Event::all();
-        foreach ($allEvents as $key => $event) {
-
-            $event['eventAddressString'] =  $this->Address->getWholeAddress($event['addressId']);
-        }
-        return $allEvents;
-    }
+    //         $event['eventAddressString'] =  $this->Address->getWholeAddress($event['addressId']);
+    //     }
+    //     return $allEvents;
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -123,7 +96,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        /*GET BOARDS NAME+ID*/
+        $boards = $this->GET_BOARDS();
+        return view('events.create')->with('boards' , $boards);
     }
 
     /**
@@ -175,7 +150,9 @@ class EventController extends Controller
         $event->description= $request->input("description");
         $event->academicYearId= $academicYrId;
         $event->boardId= $request->input("boardId");
-        $event->coverImage= $fileNameToStore;
+        $event->GPSURl= $request->input("GPSURl");
+        $event->facebookURL= $request->input("Event_URl");
+        $event->EventURl= $fileNameToStore;
         $event->save();
         return redirect('/events')->with('success' , "event added successfully");
     }
@@ -188,7 +165,12 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+        if ($event->isdeleted ==1)
+        {
+            return redirect('/events')->with('Error','this event was removed');
+        }
+        return view('events.show')->with('event' , $event);
     }
 
     /**
@@ -199,7 +181,10 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        /*GET BOARDS NAME+ID*/
+        $boards = $this->GET_BOARDS();
+        $event = Event::find($id);
+        return view('events.edit')->with('boards' , $boards)->with('event' , $event);
     }
 
     /**
@@ -211,17 +196,53 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
-        $event=new Event();
+        $coverimage = 'cover_image';
+        $event = Event::find($id);
+        // $this->validate($request ,[
+        //     'name' =>           'required',
+        //     'date' =>           'required',
+        //     'eventStart' =>     'required',
+        //     'eventEnd' =>       'required',
+        //     'address' =>        'required',
+        //     'academicYearId' => 'required',
+        //     'boardId' =>        'required',
+        //     $coverimage => 'image|nullable'
+        //     ]);
+        // check if file is selected
+        if ($request->hasFile($coverimage))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($coverimage)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($coverimage)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($coverimage)->storeAs('public/cover_images',$fileNameToStore);
+            $event->coverImage  = $fileNameToStore;
+
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
+
+        $academicYrId = Board::find($request->input('boardId'))->academicYearId;
+
+
         $event->name = $request->input("name");
         $event->date= $request->input("date");
         $event->eventStart= $request->input("eventStart");
         $event->eventEnd= $request->input("eventEnd");
-        $event->addressId= $request->input("addressId");
-        $event->academicYearId= $request->input("academicYearId");
-        $event->coverImage= $request->input("coverImage");
+        $event->address= $request->input("address");
+        $event->description= $request->input("description");
+        $event->academicYearId= $academicYrId;
         $event->boardId= $request->input("boardId");
+        $event->GPSURl= $request->input("GPSURl");
+        $event->facebookURL= $request->input("Event_URl");
         $event->save();
+        return redirect('/events')->with('success' , "event updated successfully");
     }
 
     /**
@@ -232,7 +253,10 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->isdeleted = 1;
+        $event->save();
+        return redirect('/events')->with('success' , "event deleted successfully");
     }
 
 

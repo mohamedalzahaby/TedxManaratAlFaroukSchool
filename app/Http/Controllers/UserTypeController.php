@@ -42,7 +42,7 @@ class UserTypeController extends Controller
      */
     public function index()
     {
-        // return $this->autherization( 'contact' ,'show UserType');
+        // return Parent::autherization( 'contact' ,'show UserType');
         $parentTypes = UserType::all()->where('parentId',0)->where('isdeleted',0);
         $UserTypes = UserType::all()->where('isdeleted' , 0);
         return view('userType.index')
@@ -58,7 +58,7 @@ class UserTypeController extends Controller
      */
     public function create()
     {
-        // return $this->autherization( 'contact' ,'create UserType');
+        // return Parent::autherization( 'contact' ,'create UserType');
     }
 
     /**
@@ -69,7 +69,7 @@ class UserTypeController extends Controller
      */
     public function store(Request $request)
     {
-        // return $this->autherization( 'contact' ,'add UserType');
+        return Parent::autherization( 'contact' ,'add UserType');
         $userType = new UserType();
         $userType->name = $request->input('name');
         $userType->parentId = $request->input('parent');
@@ -85,7 +85,7 @@ class UserTypeController extends Controller
      */
     public function show($id)
     {
-        // return $this->autherization( 'contact' ,'show UserType');
+        // return Parent::autherization( 'contact' ,'show UserType');
         $UserType = UserType::find($id);
         $UserType_permissions = $UserType->permissions()->get();
         $ids = [];
@@ -102,7 +102,7 @@ class UserTypeController extends Controller
 
     public function attach(Request $request)
     {
-        // return $this->autherization( 'contact' ,'attach permission');
+        // return Parent::autherization( 'contact' ,'attach permission');
         $id = (integer)$request->input('userTypeId');
         $UserType = UserType::find($id);
         $UserType->permissions()->attach([$request->input('permissionId')]);
@@ -110,7 +110,7 @@ class UserTypeController extends Controller
     }
     public function detach(Request $request)
     {
-        // return $this->autherization( 'contact' ,'detach permission');
+        // return Parent::autherization( 'contact' ,'detach permission');
         $id = (integer)$request->input('userTypeId');
         $UserType = UserType::find($id);
         $UserType->permissions()->detach([$request->input('permissionId')]);
@@ -125,7 +125,7 @@ class UserTypeController extends Controller
      */
     public function edit($id)
     {
-        // return $this->autherization( 'contact' ,'edit UserType');
+        return Parent::autherization( 'contact' ,'edit UserType');
     }
     // public function test()
     // {
@@ -153,7 +153,7 @@ class UserTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $this->autherization( 'contact' ,'update UserType');
+        return Parent::autherization( 'contact' ,'update UserType');
     }
 
     /**
@@ -164,7 +164,7 @@ class UserTypeController extends Controller
      */
     public function destroy($id)
     {
-        // return $this->autherization( 'contact' ,'delete UserType');
+        // return Parent::autherization( 'contact' ,'delete UserType');
         /* dettach permissions */
         $userType = UserType::find($id);
         $permissions = $userType->permissions()->get();

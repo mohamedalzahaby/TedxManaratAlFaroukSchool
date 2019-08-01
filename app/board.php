@@ -7,17 +7,7 @@ use DB;
 
 class Board extends Model
 {
-    protected $name;
     protected $table = 'board';
-    protected $academicYearId;
-    protected $openingDate;
-    protected $closingDate;
-    protected $BoardImage;
-    // public function __construct()
-    // {
-    //     $this->table = 'board';
-    //     $this->columnNamesArr = array('name','academicYearId','openingDate','closingDate');
-    // }
     public function departments()
     {
         return $this->hasMany('App\Department');

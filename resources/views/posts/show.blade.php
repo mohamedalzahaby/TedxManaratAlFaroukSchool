@@ -3,10 +3,12 @@
 @endphp
 @extends('layouts.app')
 @section('content')
+<div class="container">
+
 
 <a href="/posts" class="btn btn-default" style="margin-left:10px;border-color:black">Go Back</a>
-<h1 style="margin-left:250px;margin-bottom:10px">{{$posts->title}}</h1>
-<img src="/storage//cover_images/{{$posts->cover_Image}}" style="margin-left:250px;" alt="{{$posts->cover_Image}}">
+<h1 style="margin-left:20px;margin-bottom:10px">{{$posts->title}}</h1>
+<img src="/storage//cover_images/{{$posts->cover_Image}}" style="margin-left:20px;" alt="{{$posts->cover_Image}}">
 <br><br>
 <div style="margin-left:20px">
     {!! $posts->body !!}
@@ -24,5 +26,6 @@
         </form>
     @endif
 @endif
+</div>
 @endsection
 <br><br><br><br><br><br><br>
