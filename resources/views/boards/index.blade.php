@@ -18,6 +18,7 @@
       </div>
       <!-- //.row -->
       <a href="/ourTeam/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Board</a><br>
+      <a href="/departments/create" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Department</a><br>
       @foreach ($boards as $board)
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">

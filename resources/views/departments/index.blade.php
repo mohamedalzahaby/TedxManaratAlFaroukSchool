@@ -1,16 +1,12 @@
 @extends('layouts.app')
 @section('content')
-
-
-
-
   <!-- Section - Team Start -->
   <section id="team" class="bg-white">
     <div class="container">
       <div class="row no-padding-rl no-padding-top padding-4">
         <div class="col-md-12">
           <h2 class="font-family-alt font-weight-700 sm-title-large title-extra-large-2 text-gray-dark-2">
-            Our Team
+            {{$board->name}}
           </h2>
           <span class="bg-base-color xs-margin-6 xs-no-margin-rl margin-3 no-margin-rl no-margin-bottom separator-line-extra-thick-long"></span>
         </div>
@@ -38,7 +34,7 @@
                     <!-- //.position-relative -->
                     <div class="bg-gray-light no-padding-rl padding-6 position-relative text-center">
                     <span class="display-block font-family-alt font-weight-700 letter-spacing-2 text-gray-dark-2 text-small text-uppercase">
-                            {{ $department->jobDescribtion }}
+                            {!! $department->jobDescribtion !!}
                     </span>
                     </div>
                     <!-- //.bg-gray-light -->
@@ -60,7 +56,4 @@
     <!-- //.container -->
   </section>
   <!-- //Section - Team End -->
-
-
-
 @endsection

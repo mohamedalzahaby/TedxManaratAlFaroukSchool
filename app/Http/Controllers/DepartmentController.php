@@ -48,13 +48,30 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $image = 'cover_image';
+        if ($request->hasFile($image))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($image)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($image)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($image)->storeAs('public/cover_images',$fileNameToStore);
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
         $Department=new Department();
         $Department->name=$request->input('name');
         $Department->jobDescribtion=$request->input('jobDescribtion');
-        $Department->image = $request->input('image');
+        $Department->image = $fileNameToStore;
         $Department->board_id=$request->input('board_id');
         $Department->save();
-        return redirect('/departments')->with('success','Department Add Successfully');
+        return redirect('/ourTeam/'.$request->input('board_id'))->with('success','Department Add Successfully');
     }
 
     /**
@@ -103,9 +120,26 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $Department=Department::find($id);
+        $image = 'cover_image';
+        if ($request->hasFile($image))
+        {
+            # get file name with extension
+            $filenameWithExt = $request->file($image)->getClientOriginalName();
+            //get just filename
+            $filename =pathinfo($filenameWithExt , PATHINFO_FILENAME);
+            //get just extension
+            $extension = $request->file($image)->getClientOriginalExtension();//get extension
+            //fileNameToStore
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            $path = $request->file($image)->storeAs('public/cover_images',$fileNameToStore);
+            $Department->image  = $fileNameToStore;
+        }
+        else {
+            $fileNameToStore ='noimage.jpg';
+        }
         $Department->name=$request->input('name');
         $Department->jobDescribtion=$request->input('jobDescribtion');
-        $Department->image = $request->input('image');
         $Department->board_id=$request->input('board_id');
         $Department->save();
         return redirect('/departments')->with('success','Department Updated Successfully');

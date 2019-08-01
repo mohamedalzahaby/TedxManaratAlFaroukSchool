@@ -168,8 +168,7 @@ class EventController extends Controller
         $event = Event::find($id);
         if ($event->isdeleted ==1)
         {
-            return redirect('/event')->with('Error','this event was removed');
-
+            return redirect('/events')->with('Error','this event was removed');
         }
         return view('events.show')->with('event' , $event);
     }

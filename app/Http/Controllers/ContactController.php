@@ -43,7 +43,7 @@ class ContactController extends Controller
         $contact->messege=$request->input('messege');
         $contact->save();
         return redirect('/contact');
-        
+
     }
 
     /**
@@ -54,9 +54,9 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        
+
         $form=contactus::find($id);
-        
+
         return view('contactus.show')->with('form',$form);
     }
 

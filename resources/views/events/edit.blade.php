@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="form-group" style="margin-top:20px">
-                <div class="col-md-4">
+                <div class="col-md-4">  
                     <label>board: </label>
                     <select name="boardId">
                         @foreach ($boards as $value)
