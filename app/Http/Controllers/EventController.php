@@ -151,7 +151,8 @@ class EventController extends Controller
         $event->academicYearId= $academicYrId;
         $event->boardId= $request->input("boardId");
         $event->GPSURl= $request->input("GPSURl");
-        $event->coverImage= $fileNameToStore;
+        $event->facebookURL= $request->input("Event_URl");
+        $event->EventURl= $fileNameToStore;
         $event->save();
         return redirect('/events')->with('success' , "event added successfully");
     }
@@ -240,6 +241,7 @@ class EventController extends Controller
         $event->academicYearId= $academicYrId;
         $event->boardId= $request->input("boardId");
         $event->GPSURl= $request->input("GPSURl");
+        $event->facebookURL= $request->input("Event_URl");
         $event->save();
         return redirect('/events')->with('success' , "event updated successfully");
     }

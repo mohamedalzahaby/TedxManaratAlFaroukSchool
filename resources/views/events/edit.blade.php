@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 style="margin-left:650px;margin-top:130px">Add New Event</h1>
+<h1 style="margin-left:650px;margin-top:130px">Edit Event</h1>
 <div class = "container">
     <form id="form" action="/events/{{$event->id}}" method="POST" enctype = 'multipart/form-data'>
         @method('PUT')
@@ -38,30 +38,40 @@
                     <input type="text" name="address" value = "{{$event->address}}">
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label id="newAddressLabel">GPS URl: </label>
-                    <input type="url" name="GPSURl" value="{{ $event->GPSURL }}">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label id="newAddressLabel">GPS URl: </label>
+                        <input type="url" name="GPSURl" value="{{ $event->GPSURL }}">
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group" style="margin-top:20px">
+                <div class="col-md-4" >
+                    <label>Event URL: </label>
+                <input type="url" name="Event_URl" value="{{$event->facebookURL}}">
                 </div>
             </div>
-            <div class="col-md-12">
-                <label>board: </label>
-                <select name="boardId">
-                    @foreach ($boards as $value)
-                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                    @endforeach
-                </select>
+            <div class="form-group" style="margin-top:20px">
+                <div class="col-md-4">
+                    <label>board: </label>
+                    <select name="boardId">
+                        @foreach ($boards as $value)
+                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label>Event Cover Image: </label>
+                    <input type="file" name="cover_image">
+                </div>
             </div>
         </div>
         <div class="col-md-12">
                 <label>Event description: </label>
                 <textarea rows="7" name="description" id="article-ckeditor" cols="50">{{$event->description}}</textarea>
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label>Event Cover Image: </label>
-                        <input type="file" name="cover_image">
-                    </div>
-                </div>
         </div>
         <div class="form-group" style="margin-left:450px;">
                 <div class="col-md-4">

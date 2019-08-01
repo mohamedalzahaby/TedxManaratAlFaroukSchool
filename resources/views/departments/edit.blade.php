@@ -28,7 +28,7 @@
         <div class="form-group" style="margin-top:20px">
             <div class="col-md-4">
                 <label>Cover Image: </label>
-                <input type="file" name="name" style="height:55px" value="{{$departments->image}}">
+                <input type="file" name="name" style="height:55px" >
             </div>
         </div>
       </div>

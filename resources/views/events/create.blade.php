@@ -40,28 +40,39 @@
             </div>
             <div class="form-group">
                 <div class="col-md-4">
-                    <label id="newAddressLabel">GPS URl: </label>
+                    <label>GPS URL: </label>
                     <input type="url" name="GPSURl">
                 </div>
             </div>
-            <div class="col-md-12">
-                <label>board: </label>
-                <select name="boardId">
-                    @foreach ($boards as $value)
-                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                    @endforeach
-                </select>
-            </div>
         </div>
         <div class="col-md-12">
-                <label>Event description: </label>
-                <textarea rows="7" name="description" id="article-ckeditor" cols="50"></textarea>
-                <div class="form-group">
+            <div class="form-group" style="margin-top:20px">
+                <div class="col-md-4" >
+                    <label>Event URL: </label>
+                    <input type="url" name="Event_URl">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                        <label>board: </label>
+                        <select name="boardId">
+                            @foreach ($boards as $value)
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                </div>
+            </div>
+            <div class="form-group">
                     <div class="col-md-4">
                         <label>Event Cover Image: </label>
                         <input type="file" name="cover_image">
                     </div>
                 </div>
+        </div>
+        <div class="col-md-12">
+                <label>Event description: </label>
+                <textarea rows="7" name="description" id="article-ckeditor" cols="50"></textarea>
+
         </div>
         <div class="form-group" style="margin-left:450px;">
                 <div class="col-md-4">

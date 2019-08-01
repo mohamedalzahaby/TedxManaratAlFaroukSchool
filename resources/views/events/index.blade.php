@@ -16,15 +16,15 @@
         <!-- //.row -->
         <a href="/events/create" class="btn btn-primary" style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">Create Event</a><br>
 
-        @foreach ($events as $event)
+        {{-- @foreach ($events as $event) --}}
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-                <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
+                {{-- <h3 class="font-family-alt font-weight-700 letter-spacing-2 text-uppercase xs-title-small title-medium title-sideline-base-color">
                     <a href="/events/{{ $event->id }}"> {{ $event->name }} </a>
-                </h3>
+                </h3> --}}
 
             </div>
-
+            @foreach ($events as $event)
             <!-- Member Box Start -->
             <div class="member-box col-xs-6 col-sm-4 col-md-3">
                 <div class="overflow-hidden position-relative width-100" >
@@ -36,7 +36,10 @@
                     <!-- //.position-relative -->
                     <div class="bg-gray-light no-padding-rl padding-6 position-relative text-center">
                         <span class="display-block font-family-alt font-weight-700 letter-spacing-2 text-gray-dark-2 text-small text-uppercase">
-                                <label>Date: </label>{{$event->date}}<br>{{'from: '.$event->eventStart. ' - to:'. $event->eventEnd }}
+                            <br><h4><a href="/events/{{ $event->id }}"> {{ $event->name }} </a></h4><br>
+                            <label>Date:  </label>{{$event->date}}<br>
+                            {{'from: '.$event->eventStart. ' - to: '. $event->eventEnd }}
+                            <label><a style="color: #3b5998"  href="{{$event->facebookURL}}">Facebook Link</a></label>
                         </span>
                     </div>
                     <!-- //.bg-gray-light -->
@@ -44,21 +47,14 @@
                 <!-- //.overflow-hidden -->
             </div>
             <!-- //Member Box End -->
+            @endforeach
         </div>
         <!-- //.row -->
-        <p class="margin-5 no-margin-rl text-gray-dark-2">
-                {!! $event->description !!}
-            </p>
 
-        <a href="/events/{{$event->id}}/edit" class="btn btn-primary"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
-        <a href="{{$event->GPSURL}}" class="btn btn-default"style="color:white;background-color:black;margin-left:350px;margin-bottom:20px;border-radius:10px;">show on google maps</a>
-        <form action="/events/{{$event->id}}" method="post" class = 'pull-right'>
-            @csrf
-            @method("DELETE")
-            <input type="submit" value="Delete" class = 'btn btn-danger'style="color:white;border-radius:10px;background-color:#e62b1e">
-        </form>
 
-        @endforeach
+
+
+        {{-- @endforeach --}}
 
     </div>
     <!-- //.container -->
