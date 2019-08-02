@@ -26,16 +26,16 @@
             </div>
             @foreach ($events as $event)
             <!-- Member Box Start -->
-            <div class="member-box col-xs-6 col-sm-4 col-md-3">
-                <div class="overflow-hidden position-relative width-100" >
+            <div class="member-box col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="overflow-hidden position-relative width-100">
                     <div class="position-relative" >
-                        <div class="img-wrapper">
-                            <img src="/storage//cover_images/{{$event->coverImage}}" alt="{{$event->coverImage}}"  />
+                        <div>
+                            <img src="/storage//cover_images/{{$event->coverImage}}" alt="{{$event->coverImage}}"style="height:300px;width:800px"   />
                         </div>
                     </div>
                     <!-- //.position-relative -->
                     <div class="bg-gray-light no-padding-rl padding-6 position-relative text-center">
-                        <span class="display-block font-family-alt font-weight-700 letter-spacing-2 text-gray-dark-2 text-small text-uppercase">
+                        <span  class="display-block font-family-alt font-weight-700 letter-spacing-2 text-gray-dark-2 text-small text-uppercase">
                             <br><h4><a href="/events/{{ $event->id }}"> {{ $event->name }} </a></h4><br>
                             <label>Date:  </label>{{$event->date}}<br>
                             {{'from: '.$event->eventStart. ' - to: '. $event->eventEnd }}

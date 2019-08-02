@@ -152,7 +152,7 @@ class EventController extends Controller
         $event->boardId= $request->input("boardId");
         $event->GPSURl= $request->input("GPSURl");
         $event->facebookURL= $request->input("Event_URl");
-        $event->EventURl= $fileNameToStore;
+        $event->coverImage= $fileNameToStore;
         $event->save();
         return redirect('/events')->with('success' , "event added successfully");
     }

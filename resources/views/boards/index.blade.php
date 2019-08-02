@@ -28,11 +28,11 @@
             </div>
 
             <!-- Member Box Start -->
-            <div class="member-box col-xs-6 col-sm-4 col-md-3">
+            <div class="member-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="overflow-hidden position-relative width-100">
                 <div class="position-relative">
-                <div class="img-wrapper">
-                    <img src="/storage//cover_images/{{$board->image}}" alt="{{$board->image}}"/>
+                <div>
+                    <img src="/storage//cover_images/{{$board->image}}" alt="{{$board->image}}"style="height:400px;width:100%"/>
                 </div>
                 </div>
                 <!-- //.position-relative -->
@@ -48,7 +48,7 @@
             <!-- //Member Box End -->
         </div>
         <!-- //.row -->
-        <a href="/ourTeam/{{$board->id}}/edit" class="btn btn-primary"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
+        <a href="/ourTeam/{{$board->id}}/edit" class="btn btn-primary"style="margin-left:15px;margin-bottom:100px;border-radius:10px;">Edit</a>
         @if (!$board->departments()->where('isdeleted',0)->get()->isEmpty())
             <a href="/ourTeam/{{$board->id}}" class="btn btn-default"style="color:white;background-color:black;margin-left:350px;margin-bottom:20px;border-radius:10px;">Board's Departments</a>
         @endif

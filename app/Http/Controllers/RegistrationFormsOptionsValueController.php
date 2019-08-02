@@ -31,24 +31,20 @@ class RegistrationFormsOptionsValueController extends Controller
     public function index()
     {
     }
-    public function showTables()
+    public function showTables($formId)
     {
-        $formId = 1;
         $form = RegisterationForm::find($formId);
         $questions = $form->options()->get();
         $All_Users_QandA = [] ;
         $values = [] ;
         $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
-        // dd($allRegisterationDetails);
-        foreach ($allRegisterationDetails as $key => $RegisterationDetails)
-        {
+        foreach ($allRegisterationDetails as $key => $RegisterationDetails){
             // select userId where regid id regDetails
             $Registeration = Registeration::find($RegisterationDetails->registerationId);
             $userId = $Registeration->userId;
             $user = User::find($Registeration->userId);
             //get user question and answers
-            foreach ($questions as $key => $question)
-            {
+            foreach ($questions as $key => $question){
                 $relation = RegistrationFormsOptions::all()->where('registeration_form_id' , $formId)->where('options_id' , $question->id)->first();
                 $value = RegistrationFormOptionsValue::all()->where('registration_forms_options_id' ,$relation->rid )->first();
                 array_push($values, $value);
@@ -147,7 +143,7 @@ class RegistrationFormsOptionsValueController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
     /**
      * Show the form for editing the specified resource.
