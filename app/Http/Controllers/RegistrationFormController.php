@@ -5,6 +5,8 @@ use App\RegisterationForm;
 use App\RegistrationFormType;
 use App\UserType;
 use App\Event;
+
+
 use App\DataType;
 
 class RegistrationFormController extends Controller
@@ -79,6 +81,8 @@ class RegistrationFormController extends Controller
     {
         //
     }
+
+
 
     /**
      * Update the specified resource in storage.

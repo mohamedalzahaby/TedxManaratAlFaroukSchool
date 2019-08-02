@@ -26,11 +26,11 @@
             </div>
             @foreach ($events as $event)
             <!-- Member Box Start -->
-            <div class="member-box col-xs-6 col-sm-4 col-md-3">
+            <div class="member-box col-xs-6 col-sm-6 col-md-6 col-lg-6" style="height:500px"  >
                 <div class="overflow-hidden position-relative width-100" >
                     <div class="position-relative" >
                         <div class="img-wrapper">
-                            <img src="/storage//cover_images/{{$event->coverImage}}" alt="{{$event->coverImage}}"  />
+                            <img src="/storage//cover_images/{{$event->coverImage}}" alt="{{$event->coverImage}}"   />
                         </div>
                     </div>
                     <!-- //.position-relative -->

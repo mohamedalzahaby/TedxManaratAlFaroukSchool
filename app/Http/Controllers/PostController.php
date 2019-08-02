@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use PDF;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -28,6 +28,7 @@ class PostController extends Controller
      */
     public function index()
     {
+<<<<<<< Updated upstream
         // $posts = Post::where('title' , 'post two')->get();
         // $posts = Post::orderBy('title','asc')->take(1)->get();
         // $posts = Post::orderBy('title','asc')->paginate(1);
@@ -39,8 +40,28 @@ class PostController extends Controller
         else {
             $isAccepted = Parent::autherization('show board' , true);
         }
+=======
+>>>>>>> Stashed changes
         $posts = Post::all()->where('isdeleted', 0);
         return view('posts.index')->with('posts' , $posts)->with('isAccepted',$isAccepted);
+    }
+
+    public function pdfview()
+    {
+        $posts = Post::all();
+        view()->share('posts',$posts);
+        // $postsbodys = Post::select('body')->get();
+        // $poststitles = Post::select('title')->get();
+        // view()->share('posts',$posts);
+
+        // dd($request);
+        // $arrayName = array(
+        //     'postsbodys' => $postsbodys ,
+        //     'poststitles' => $poststitles
+        // );
+        $pdf = PDF::loadView('index');
+        return $pdf->download('pdfview.pdf');
+        return 'done';
     }
 
     public function create()
