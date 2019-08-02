@@ -1,5 +1,6 @@
 @php
     $lastEventData = DB::table('Event')->latest()->first();
+    // dd($lastEventData);
     $ci = url("../images/$lastEventData->coverImage");
     $style = "background-image: url('../images/$lastEventData->coverImage'); background-position: center bottom !important;";
     // dd($ci);
@@ -162,7 +163,7 @@
 {{-- "../images/dimensions.jpg" --}}
 
 
-<section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" style='background-image: url("../images/$lastEventData->coverImage");
+<section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" style='background-image: url("../storage/cover_images/{{$lastEventData->coverImage}}");
 background-position: center bottom !important;'>
     <div class="display-table-cell vertical-align-middle">
         <div class="container">

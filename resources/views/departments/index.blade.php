@@ -24,11 +24,11 @@
                 </div>
 
                 <!-- Member Box Start -->
-                <div class="member-box col-xs-6 col-sm-4 col-md-3">
+                <div class="member-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="overflow-hidden position-relative width-100">
                     <div class="position-relative">
-                    <div class="img-wrapper">
-                        <img src="/storage//cover_images/{{$department->image}}" alt="{{$department->image}}"/>
+                    <div>
+                        <img src="/storage//cover_images/{{$department->image}}" alt="{{$department->image}}" style="height:300px;width:100%"/>
                     </div>
                     </div>
                     <!-- //.position-relative -->

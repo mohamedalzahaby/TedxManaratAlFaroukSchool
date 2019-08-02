@@ -30,17 +30,17 @@
                 </a>
             </div>
             <!-- //.navbar-header -->
-            <div id="navbar" class="navbar-collapse collapse col-lg-9 col-sm-12 col-md-12 pull-right" style="height: 20px !important;">
+            <div id="navbar" class="navbar-collapse collapse col-lg-12 col-sm-12 col-md-12 pull-right" style="height:30px!important;">
                 <ul class="nav navbar-nav font-family-alt letter-spacing-1 text-uppercase font-weight-700" style="position:relative;
               top:-70px">
-                    <li><a href="/about" class="line-height-unset headerTextcolor" style="margin-right:20px;margin-top:75px">About</a></li>
-                    <li><a href="/posts" class="line-height-unset headerTextcolor" style="margin-right:20px;margin-top:75px">Blog</a></li>
-                    <li><a href="/contact" class="line-height-unset headerTextcolor" style="margin-right:20px;margin-top:75px">contact</a></li>
-                    <li><a href="/ourTeam" class="line-height-unset headerTextcolor" style="margin-right:20px;margin-top:75px">ourTeam</a></li>
+                    <li><a href="/about" class="line-height-unset headerTextcolor"style="margin-top:70px;margin-right:20px" >About</a></li>
+                    <li><a href="/posts" class="line-height-unset headerTextcolor"style="margin-top:70px;margin-right:20px" >Blog</a></li>
+                    <li><a href="/contact" class="line-height-unset headerTextcolor"style="margin-top:70px;margin-right:20px" >contact</a></li>
+                    <li><a href="/ourTeam" class="line-height-unset headerTextcolor"style="margin-top:70px;margin-right:20px" >ourTeam</a></li>
                     {{-- <li><a href="/sendMail" class="line-height-unset headerTextcolor"style="margin-right:20pxmargin-top:75px">sendMail</a></li> --}}
-                    <li><a href="/events" class="line-height-unset headerTextcolor" style="margin-right:20px;margin-top:75px">events</a></li>
+                    <li><a href="/events" class="line-height-unset headerTextcolor" style="margin-top:70px;margin-right:20px">events</a></li>
                     <li class="bg-base-color">
-                        <a href="/registeration" class="line-height-unset headerTextcolor width-100" style="margin-top:70px">
+                        <a href="/registeration" class="line-height-unset headerTextcolor width-100"style="margin-top:70px;margin-right:20px;padding-left:15px">
                             Register
                         </a>
                     </li>
@@ -95,29 +95,35 @@
                         </div>
                     </li> --}}
 
-                    <li>
-                        <a style="margin-top:70px" class="line-height-unset headerTextcolor" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    {{-- <li>
+                        <a class="line-height-unset headerTextcolor" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"style=";margin-right:20px">{{ __('Logout') }} </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a   id="navbarDropdown" class="nav-link dropdown-toggle line-height-unset headerTextcolor  " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-top:70px;margin-right:20px;">
                             {{ Auth::user()->fname }} <span class="caret"></span>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding-left:10px">
+                            <ul class="list-item">
+                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
+                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
+                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
+                                <li>
+                                    <a style="color:black; font-size:15px;" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <b>{{ __('Logout') }}</b>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf  </form>
+                                </li>
+                            </ul>
                         </div>
+
+
                     </li>
+
                 </ul>
             </div>
             <!-- //.navbar-collapse -->
