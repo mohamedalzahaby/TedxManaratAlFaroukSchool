@@ -1,0 +1,67 @@
+body {
+    padding: 50px;
+  }
+  
+  td, th {
+    padding: 0 20px;
+    line-height: 40px;
+  }
+  td:nth-child(even), th:nth-child(even) {
+    background: #eee;
+  }
+  
+  th {
+    padding-bottom: 16px;
+  }
+  
+  .scroll-wrapper {
+    width: 700px;
+    background: #ddd;
+    position: relative;
+  }
+  
+  .scroll-overflow {
+    margin-left: 200px;
+    overflow-x: hidden;
+  }
+  
+  .scroll-table {
+    background: #fff;
+    position: relative;
+  }
+  
+  .scroll-scroller {
+    position: absolute;
+    top: 35px;
+    left: 200px;
+    right: 0;
+    height: 15px;
+    overflow-x: scroll;
+    z-index: 1;
+  }
+  .scroll-scroller .scroll-scroller-inner {
+    height: 1px;
+  }
+  
+  .scroll-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .scroll-legend li {
+    line-height: 40px;
+    text-align: center;
+  }
+  .scroll-legend li.scroll-legend-title {
+    padding-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .legend-highlight {
+    background: #fcc !important;
+  }
+  

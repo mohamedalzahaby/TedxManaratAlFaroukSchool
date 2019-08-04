@@ -1,0 +1,178 @@
+
+
+/* 
+*
+{
+	margin:0;
+	padding:0;
+	font-family:sans-serif;
+	
+
+} */
+
+/* header
+{
+	background:url(..\images\addproduct.jpg);
+	height:150vh;
+	background-size:cover;
+	background-position:center;
+	
+} */
+
+
+/* .logo img
+{
+	float:left;
+	width:300px;
+	height:auto;
+} */
+/* 
+ul
+{	
+	float:right;
+	margin-top:25px;
+}
+
+ul li
+{
+	
+	display: inline-block;
+}
+
+
+ul li a
+{
+	text-decoration: none;
+	color: white;
+	padding: 5px 20px;
+	border:2px solid white;
+	border-radius:200px
+	
+}
+
+
+ul li a:hover
+{
+		background-color:white;
+		color:black;
+		text-decoration: none;
+} */
+
+
+
+.addproduct
+{
+	
+	width:500px;
+	height:900px;
+	margin: auto;
+	
+	
+	/* background:white; */
+	color:#b30000;
+	/* top:20%;
+	left:37%; */
+	/* position:absolute; */
+	transform:traslate(-50%,-50%);
+	box-sizing:border-box;
+	padding:70px 30px;
+	/* border:2px solid white; */
+	border-radius:20px
+}
+
+select 
+{
+	padding: 6px;
+	height: 32px;
+	width:400px;
+	border-radius: 2px;
+  }
+
+fieldset 
+{
+	margin-bottom: 30px;
+	border: none;
+  }
+
+  label 
+  {
+	display: block;
+	margin-bottom: 8px;
+	padding:0 0 20px;
+	text-align:left;
+	font-size:20px;
+
+  }
+  
+  label.light 
+  {
+	font-weight: 300;
+	display: inline;
+  }
+h1
+{
+	font-family:Times New Roman; 
+	margin:0;
+	padding:0 0 20px;
+	text-align:center;
+	font-size:50px;
+	font-weight:3000;
+}
+
+p
+{
+	margin:0;
+	padding:0 0 20px;
+	text-align:left;
+	font-size:20px;
+}
+
+input
+{
+	background: rgba(255,255,255,0.1);
+	border: none;
+	font-size: 20px;
+	height: auto;
+	margin: 0;
+	outline: 0;
+	padding: 15px;
+	width: 100%;
+	background-color: #e8eeef;
+	color: #000000;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	margin-bottom: 30px;
+}
+
+
+button 
+{
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	background-color: #b30000;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #b30000;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+	margin-bottom: 10px;
+  }
+
+  button:hover 
+  {
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	background-color: #b62020;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #b30000;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+	margin-bottom: 10px;
+  }
+
