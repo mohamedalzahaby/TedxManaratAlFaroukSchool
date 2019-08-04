@@ -49,10 +49,10 @@ Route::resource('/user', 'UserController');
 Route::resource('/usertype', 'UserTypeController');
 Route::get('/tedx/addNewProduct','ProductTypeController@index');
 Auth::routes(['verify' => true]);
-Route::get('profile', function () {
-    // Only verified users may enter...
-})->middleware('verified');
-// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('profile', function () {
+//     return "Only verified users may enter...";
+// })->middleware('verified');
+// Route::get('/profile', 'HomeController@index');
 Route::post('/addquestion','AjaxController@myajaxagain');
 Route::get('/showtable/{formId}','RegistrationFormsOptionsValueController@showTables');
 Route::post('/usertype/attach','UserTypeController@attach');
