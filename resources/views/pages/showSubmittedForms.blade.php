@@ -16,6 +16,7 @@
           <span class="bg-base-color xs-margin-6 xs-no-margin-rl margin-3 no-margin-rl no-margin-bottom separator-line-extra-thick-long"></span>
         </div>
     </div>
+<a href="/download_All_PDF_Files/{{$form->id}}" class="btn btn-primary"style="margin-left:10px;margin-bottom:10px;background-color:#e62b1e;border-radius:10px">download All PDF Files</a><br>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -44,11 +45,16 @@
                     </thead>
                     <tbody>
                         @foreach ($All_Users_QandA as $item)
+                            <form action="../valuesPdf" method="post">
+                                @csrf
                                 @php
                                     $user = $item['user'];
+                                    $questions = $item['questions'];
                                     $answers = $item['values'];
                                 @endphp
+
                             <tr>
+
                                     <td>{{$ctr++}}</td>
                                     <td>{{$user->fname}}</td>
                                     <td>{{$user->lname}}</td>
@@ -56,14 +62,24 @@
                                     <td>{{$userType::find($user->userTypeId)->name }}</td>
                                     <td>{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}</td>
                                     <td>{{$user->birthDate}}</td>
-                                @foreach ($answers as $answer)
-                                    <td>{{$answer->value}}</td>
-                                @endforeach
-                                <td>
-                                    <p data-placement="top" data-toggle="tooltip" title="pdf"><button class="btn btn-danger btn-xs" data-title="pdf" data-toggle="modal" data-target="#pdf{{$user->id}}"><span class="fa fa-file-pdf-o" aria-hidden="true"></span></button></p>
-                                </td>
+                                    <input type="hidden" name="fname" value="{{$user->fname}}">
+                                    <input type="hidden" name="lname" value="{{$user->lname}}">
+                                    <input type="hidden" name="email" value="{{$user->email}}">
+                                    <input type="hidden" name="" value="">
+                                    <input type="hidden" name="gender" value="{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}">
+                                    <input type="hidden" name="birthDate" value="{{$user->birthDate}}">
+                                    <?php for ($i=0; $i <sizeof($questions) ; $i++) {  ?>
+                                        <input type='hidden' name='{{$questions[$i]->name}}' value='{{$answers[$i]->value}}'>
+                                    <?php } ?>
+                                    @foreach ($answers as $answer)
+                                        <td>{{$answer->value}}</td>
+                                    @endforeach
+                                    <td>
+                                        <p data-placement="top" data-toggle="tooltip" title="pdf"><button type="submit" name="submit" class="btn btn-danger btn-xs" data-title="pdf" data-toggle="modal" data-target="#pdf{{$user->id}}"><span class="fa fa-file-pdf-o" aria-hidden="true"></span></button></p>
+                                    </td>
+                                </form>
                             </tr>
-                            <div class="modal fade" id="pdf{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                            {{-- <div class="modal fade" id="pdf{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -98,7 +114,7 @@
                                     <!-- /.modal-content -->
                                 </div>
                                 <!-- /.modal-dialog -->
-                            </div>
+                            </div> --}}
                         @endforeach
                     </tbody>
                 </table>

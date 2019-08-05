@@ -56,6 +56,8 @@ Auth::routes(['verify' => true]);
 // Route::get('/profile', 'HomeController@index');
 Route::post('/addquestion','AjaxController@myajaxagain');
 Route::get('/showtable/{formId}','RegistrationFormsOptionsValueController@showTables');
+Route::post('/valuesPdf','RegistrationFormsOptionsValueController@pdfview');
+Route::get('/download_All_PDF_Files/{formId}','RegistrationFormsOptionsValueController@downloadAllPDFs');
 Route::post('/usertype/attach','UserTypeController@attach');
 Route::post('/usertype/detach','UserTypeController@detach');
 Route::resource('ourTeam', 'BoardController');

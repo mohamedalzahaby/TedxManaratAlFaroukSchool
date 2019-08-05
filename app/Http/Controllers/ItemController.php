@@ -16,8 +16,8 @@ class ItemController extends Controller
      */
     public function pdfview(Request $request)
     {
-        $items = DB::table("posts")->get();
-        view()->share('items',$items);
+        $posts = DB::table("posts")->get();
+        view()->share('posts',$posts);
 
         // dd($request);
 

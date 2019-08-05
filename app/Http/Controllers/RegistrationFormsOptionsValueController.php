@@ -1,7 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use DB;
+use PDF;
+use File;
+use Response;
 use App\User;
 use App\Board;
 use App\UserType;
@@ -61,15 +65,77 @@ class RegistrationFormsOptionsValueController extends Controller
         ->with('form',$form)
         ->with('userType', new UserType());
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showTableData($formId)
     {
-        //
+        $form = RegisterationForm::find($formId);
+        $questions = $form->options()->get();
+        $All_Users_QandA = [] ;
+        $values = [] ;
+        $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
+        foreach ($allRegisterationDetails as $key => $RegisterationDetails){
+            // select userId where regid id regDetails
+            $Registeration = Registeration::find($RegisterationDetails->registerationId);
+            $userId = $Registeration->userId;
+            $user = User::find($Registeration->userId);
+            //get user question and answers
+            foreach ($questions as $key => $question){
+                $relation = RegistrationFormsOptions::all()->where('registeration_form_id' , $formId)->where('options_id' , $question->id)->first();
+                $value = RegistrationFormOptionsValue::all()->where('registration_forms_options_id' ,$relation->rid )->first();
+                array_push($values, $value);
+            }
+            $AllQandA_of_One_User = array(
+                'user' => $user ,
+                'questions' => $questions,
+                'values' => $values
+            );
+            array_push($All_Users_QandA, $AllQandA_of_One_User);
+        }
+
+        return $All_Users_QandA;
     }
+
+
+
+    public function pdfview(Request $request)
+    {
+        $data = $request->input();
+        array_forget($data , ['_token' , 'submit']);
+        $data = [ 'data' => $data];
+        $pdf = PDF::loadView('valuespdf' , $data);
+        return $pdf->download('pdfview.pdf');
+    }
+
+
+
+    public function downloadAllPDFs($formId)
+    {
+        $data = $this->showTableData($formId);
+        dd($data);
+
+        //logged in user id
+        $id = auth::user()->id;
+        //get just filename
+        $filename = 'user_Form_Value';
+        //get just extension
+        $extension = 'pdf';
+        foreach ($data as $key => $userData) {
+            //fileNameToStore
+            $fileName = $filename.'_'.$id.'_'.$key.'_'.time().'.'.$extension;
+            $pdf_Html = PDF::loadView('valuespdf' , $userData);
+            $path = $pdf_Html->storeAs('public/users_pdf_Files',$fileName);
+    //         File::put(public_path('/upload/json/'.$fileName),$data);
+	//   return Response::download(public_path('/upload/jsonfile/'.$fileName));
+
+
+            //upload
+        }
+
+
+
+
+        return $pdf->download('pdfview.pdf');
+    }
+    public function create(){}
     public function calcAge($birthDate)
     {
         //date in mm/dd/yyyy format; or it can be in other formats as well
@@ -82,12 +148,7 @@ class RegistrationFormsOptionsValueController extends Controller
             : (date("Y") - $birthDate[2]));
         return $age;
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         /* get current BoardID */
@@ -135,45 +196,8 @@ class RegistrationFormsOptionsValueController extends Controller
             }
         }
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    public function show($id){}
+    public function edit($id){}
+    public function update(Request $request, $id){}
+    public function destroy($id){}
 }
