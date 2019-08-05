@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\Board;
 use App\Event;
 use App\Options;
@@ -71,6 +72,9 @@ class RegisterationController extends Controller
      */
     public function create(Request $request)
     {
+        if($this->isThereACurrentBoard() == null){
+            return redirect('registeration')->with('error' , 'no current Boards opening');
+        }
         $formTypeId = $request->input('registerationFormType');
         $events = $this->event_M->getEventsOpenedForRegistering();
         $Departments = $this->getDepartments_Of_CurrentBoard();
@@ -93,6 +97,9 @@ class RegisterationController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->input('ctr') == null){
+            return redirect('/registeration')->with('error' , 'You Must Add Questions');
+        }
         $form = new RegisterationForm();
         $this->storeInForm($form, $request);
         $this->storeOptions($form, $request);
@@ -182,10 +189,21 @@ class RegisterationController extends Controller
     }
 
 
+    public function isThereACurrentBoard()
+    {
+        $currentDate = date("Y-m-d");
+        // var_dump($currentDate);die();
+        $currentBoard = DB::table('board')->where('closingDate' , ">=" , $currentDate)->where('isdeleted' , 0)->first();
+        //  dd($currentBoard);
+        return $currentBoard;
+    }
 
     public function getDepartments_Of_CurrentBoard()
     {
         $boardId = $this->board_M->returnCurrentBoard();
+        if ($boardId == null) {
+            return redirect('registeration')->with('error' , 'no current Boards opening');
+        }
         $board = Board::find($boardId);
         return  $board->departments;
     }

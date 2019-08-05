@@ -38,8 +38,8 @@ class Controller extends BaseController
         $userTypeId = auth()->user()->userTypeId;
         $permission = Permission::all()->where('name' , $permissionName )->first();
         $userTypes = $permission->userTypes()->get();
-        foreach ($userTypes as $key => $value) {
-            if ($value->id == $userTypeId) {
+        foreach ($userTypes as $key => $userType) {
+            if ($userType->id == $userTypeId) {
                 $redirect = false;
             }
         }

@@ -1,4 +1,6 @@
 @php
+use App\Http\Controllers\Controller;
+$controller = new Controller();
     $css = '55px';
     if (strstr($_SERVER['REQUEST_URI'], "/posts/") != false) {
         if (strstr($_SERVER['REQUEST_URI'], "/posts/create") != true) {
@@ -106,12 +108,17 @@
                         <a   id="navbarDropdown" class="nav-link dropdown-toggle line-height-unset headerTextcolor  " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="margin-top:70px;margin-right:20px;">
                             {{ Auth::user()->fname }} <span class="caret"></span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="padding-left:10px">
                             <ul class="list-item">
-                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
-                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
-                                <li><a style="color:black; font-size:15px;" href=""><b>mohamed</b></a></li>
+                                @if (!$controller->autherization( 'Show All Registration Forms'))
+                                    <li><a style="color:black; font-size:15px;" href="/registrationForm"><b>All Forms</b></a></li>
+                                @endif
+                                @if (!$controller->autherization( 'show UserType'))
+                                    <li><a style="color:black; font-size:15px;" href="/usertype"><b>User Types</b></a></li>
+                                @endif
+                                @if (!$controller->autherization( 'Show All Users'))
+                                    <li><a style="color:black; font-size:15px;" href="/user"><b>All Users</b></a></li>
+                                @endif
                                 <li>
                                     <a style="color:black; font-size:15px;" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <b>{{ __('Logout') }}</b>

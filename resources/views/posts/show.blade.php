@@ -16,15 +16,13 @@
 <hr>
 <small style="margin-left:20px">written on {{$posts->created_at}}</small>
 <hr>
-@if (!Auth::guest())
-    @if (Auth::user()->id == $posts->user_id)
-        <a href="/posts/{{$posts->id}}/edit" class="btn btn-default"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
-        <form action="../posts/{{$posts->id}}" method="post" class = 'pull-right'>
-            @csrf
-            @method("DELETE")
-            <input type="submit" value="Delete" class = 'btn btn-danger'style="color:white;border-radius:10px;background-color:#e62b1e">
-        </form>
-    @endif
+@if (!Auth::guest() && Auth::user()->id == $posts->user_id)
+    <a href="/posts/{{$posts->id}}/edit" class="btn btn-default"style="margin-left:15px;margin-bottom:20px;border-radius:10px;">Edit</a>
+    <form action="../posts/{{$posts->id}}" method="post" class = 'pull-right'>
+        @csrf
+        @method("DELETE")
+        <input type="submit" value="Delete" class = 'btn btn-danger'style="color:white;border-radius:10px;background-color:#e62b1e">
+    </form>
 @endif
 </div>
 @endsection

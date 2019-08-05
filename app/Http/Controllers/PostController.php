@@ -17,7 +17,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->imagesFolderRoutes = 'public/cover_images';
-        $this->middleware(['auth','verified']);
+        // $this->middleware(['auth','verified']);
         // $this->middleware('auth' , ['except' => ['index' , 'show']]);
     }
 

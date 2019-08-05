@@ -1,5 +1,6 @@
 <?php
 use App\DataType;
+
 include('Globals.php');
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,4 @@ Route::resource('departments', 'DepartmentController');
 Route::resource('contactus', 'ContactController');
 Route::get('pdfview',array('as'=>'pdfview','uses'=>'ItemController@pdfview'));
 Route::get('formv','PostController@pdfview');
+
