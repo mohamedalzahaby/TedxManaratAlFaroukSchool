@@ -19,45 +19,53 @@ class RegistrationFormsOptionsValueController extends Controller
 {
     protected $registrationFormsOptionsValue_M;
     protected $board_M;
-    public function __construct()
-    {
+
+
+    public function __construct(){
         $this->board_M = new Board();
         $this->AcademicYear_M = new AcademicYear();
         $this->registeration_M = new Registeration();
         $this->registerationDetails_M = new RegisterationDetails();
         $this->RegistrationFormOptionsValue_M = new RegistrationFormOptionsValue();
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
-    public function showTables($formId)
-    {
+
+
+    public function index(){}
+
+
+    public function showTables($formId){
         $form = RegisterationForm::find($formId);
         $questions = $form->options()->get();
         $All_Users_QandA = [] ;
         $values = [] ;
-        $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
+        $allRegisterationDetails = RegisterationDetails::all()
+                                    ->where('registrationFormId', $formId)
+                                    ->where('isdeleted', 0);
         foreach ($allRegisterationDetails as $key => $RegisterationDetails){
             // select userId where regid id regDetails
             $Registeration = Registeration::find($RegisterationDetails->registerationId);
-            $userId = $Registeration->userId;
             $user = User::find($Registeration->userId);
             //get user question and answers
-            foreach ($questions as $key => $question){
-                $relation = RegistrationFormsOptions::all()->where('registeration_form_id' , $formId)->where('options_id' , $question->id)->first();
-                $value = RegistrationFormOptionsValue::all()->where('registration_forms_options_id' ,$relation->rid )->first();
+            foreach ($questions as $key => $question)
+            {
+                $relation = RegistrationFormsOptions::all()
+                    ->where('registeration_form_id' , $formId)
+                    ->where('options_id' , $question->id)->first();
+
+                $value = RegistrationFormOptionsValue::all()
+                    ->where('registration_forms_options_id' ,$relation->rid )
+                    ->where('registrationDetailsId' ,$RegisterationDetails->id )
+                    ->first();
                 array_push($values, $value);
             }
             $AllQandA_of_One_User = array(
-                'user' => $user ,
-                'questions' => $questions,
-                'values' => $values
-            );
+                        'user' => $user ,
+                        'questions' => $questions,
+                        'values' => $values
+                    );
+            $values = [] ;
+
+
             array_push($All_Users_QandA, $AllQandA_of_One_User);
         }
         return view('pages.showSubmittedForms')
@@ -65,8 +73,9 @@ class RegistrationFormsOptionsValueController extends Controller
         ->with('form',$form)
         ->with('userType', new UserType());
     }
-    public function showTableData($formId)
-    {
+
+
+    public function showTableData($formId){
         $form = RegisterationForm::find($formId);
         $questions = $form->options()->get();
         $All_Users_QandA = [] ;
@@ -96,8 +105,7 @@ class RegistrationFormsOptionsValueController extends Controller
 
 
 
-    public function pdfview(Request $request)
-    {
+    public function pdfview(Request $request){
         $data = $request->input();
         array_forget($data , ['_token' , 'submit']);
         $data = [ 'data' => $data];
@@ -106,23 +114,21 @@ class RegistrationFormsOptionsValueController extends Controller
     }
 
 
-
-    public function downloadAllPDFs($formId)
-    {
-        $data = $this->showTableData($formId);
-        dd($data);
-
+    public function downloadAllPDFs($formId){
+        $tableData = $this->showTableData($formId);
         //logged in user id
-        $id = auth::user()->id;
+        $id = auth()->user()->id;
         //get just filename
         $filename = 'user_Form_Value';
         //get just extension
         $extension = 'pdf';
-        foreach ($data as $key => $userData) {
+        foreach ($tableData as $key => $data) {
+            $data = array('data' => $data);
             //fileNameToStore
             $fileName = $filename.'_'.$id.'_'.$key.'_'.time().'.'.$extension;
-            $pdf_Html = PDF::loadView('valuespdf' , $userData);
+            $pdf_Html = PDF::loadView('viewValuesPdf' , $data);
             $path = $pdf_Html->storeAs('public/users_pdf_Files',$fileName);
+            dd($path);
     //         File::put(public_path('/upload/json/'.$fileName),$data);
 	//   return Response::download(public_path('/upload/jsonfile/'.$fileName));
 
@@ -135,9 +141,12 @@ class RegistrationFormsOptionsValueController extends Controller
 
         return $pdf->download('pdfview.pdf');
     }
+
+
     public function create(){}
-    public function calcAge($birthDate)
-    {
+
+
+    public function calcAge($birthDate){
         //date in mm/dd/yyyy format; or it can be in other formats as well
         // $birthDate = "12/17/1983";
         //explode the date to get month, day and year
@@ -149,8 +158,9 @@ class RegistrationFormsOptionsValueController extends Controller
         return $age;
     }
 
-    public function store(Request $request)
-    {
+
+
+    public function store(Request $request){
         /* get current BoardID */
         $currentboardId = $this->board_M->returnCurrentBoard();
         /* get current AcademicYearID */
@@ -161,26 +171,30 @@ class RegistrationFormsOptionsValueController extends Controller
         $this->registrationDetailsStore($currentboardId, 1 , $this->registeration_M->id , $request->input('formId'));
         /* get last registrationDetailsId */
         $registrationDetailsLastId = $this->registerationDetails_M->id;
+        $this->registerationDetails_M = new RegisterationDetails();
         /* store values by regformId and $_POST(optionId with its answer) */
         $this->storeValues($request , $request->input('formId') , $registrationDetailsLastId);
         return redirect('/registeration')->with(['success'=> 'Form Submitted Successfuly']);
     }
-    public function registrationStore($userId, $currentAcademicYearId)
-    {
+
+
+    public function registrationStore($userId, $currentAcademicYearId){
         $this->registeration_M->userId = $userId;
         $this->registeration_M->academicYearId = $currentAcademicYearId;
         $this->registeration_M->save();
     }
-    public function registrationDetailsStore($boardId, $statusId , $registerationId, $registrationFormId)
-    {
+
+
+    public function registrationDetailsStore($boardId, $statusId , $registerationId, $registrationFormId){
         $this->registerationDetails_M->boardId = $boardId;
         $this->registerationDetails_M->statusId = $statusId;
         $this->registerationDetails_M->registerationId = $registerationId;
         $this->registerationDetails_M->registrationFormId = $registrationFormId;
         $this->registerationDetails_M->save();
     }
-    public function storeValues(Request $request , $registrationDetailsId)
-    {
+
+
+    public function storeValues(Request $request , $registrationDetailsId){
         $formId = $request->input('formId');
         $rids = [];
         foreach ($request->input() as $key => $value) {
@@ -196,8 +210,16 @@ class RegistrationFormsOptionsValueController extends Controller
             }
         }
     }
+
+
     public function show($id){}
-    public function edit($id){}
-    public function update(Request $request, $id){}
-    public function destroy($id){}
+
+
+        public function edit($id){}
+
+
+        public function update(Request $request, $id){}
+
+
+        public function destroy($id){}
 }
