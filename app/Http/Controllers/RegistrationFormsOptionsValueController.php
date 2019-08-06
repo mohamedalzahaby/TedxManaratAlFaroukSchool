@@ -123,18 +123,33 @@ class RegistrationFormsOptionsValueController extends Controller
     public function downloadAllPDFs($formId)
     {
         $form = RegisterationForm::find($formId);
-        $path = storage_path('app\public\Forms_pdf_File');
-        $this->storeAllPDFs($formId);
+        $path = storage_path('app\public\Forms_pdf_File_user_').auth()->user()->id;
+        $relativePath = 'public\Forms_pdf_File_user_'.auth()->user()->id;
+        // dd($relativePath);
+        // if directory  exist  delete directory
+        // if(File::exists($relativePath)) {
+        //     Storage::deleteDirectory($relativePath);
+        // }
+        // else{
+        //     Storage::makeDirectory($relativePath);
+        // }
+        // Storage::makeDirectory($relativePath);
+        if(File::exists($path)) {
+            Storage::deleteDirectory($relativePath);
+            Storage::makeDirectory($relativePath);
+        }
+        else{
+            Storage::makeDirectory($relativePath);
+        }
+        $this->storeAllPDFs($formId , $path);
         return $this->store_And_Download_zipFile($form->name , $path);
     }
-    public function delete($path)
+
+
+
+    public function storeAllPDFs($formId , $relativePath)
     {
-        $path = storage_path('app\public\Forms_pdf_File');
-        $imageRoute =  $path.'/'.$post->cover_Image;
-        Storage::delete( $imageRoute );
-    }
-    public function storeAllPDFs($formId)
-    {
+        // dd($relativePath);
         $tableData = $this->showTableData($formId);
         //logged in user id
         $id = auth()->user()->id;
@@ -146,14 +161,15 @@ class RegistrationFormsOptionsValueController extends Controller
         {
             $data = array('data' => $data);
             $fileName = $filename.'_'.$id.'_'.$key.'_'.time().'.'.$extension;
-            $pdf_File = PDF::loadView('viewValuesPdf' , $data)->save('storage\Forms_pdf_File/'.$fileName);
+            $pdf_File = PDF::loadView('viewValuesPdf' , $data)->save($relativePath.'/'.$fileName);
         }
     }
 
     public function store_And_Download_zipFile($formName , $path )
     {
-        $zip_fileName = $formName.'_submissions.zip';
-        $zip_file = "storage/Forms_pdf_File/".$zip_fileName;
+        $zip_fileName = '/'.$formName.'_submissions.zip';
+        $zip_file = $path.$zip_fileName;
+        // dd($zip_file);
         $zip = new \ZipArchive();
         $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
