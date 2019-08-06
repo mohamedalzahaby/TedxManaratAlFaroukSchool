@@ -30,18 +30,56 @@ class RegistrationFormsOptionsValueController extends Controller
     }
 
 
-    public function index(){}
+    public function showTables($formId)
+    {
+        $form = RegisterationForm::find($formId);
+        $questions = $form->options()->get();
+        $All_Users_QandA = [];
+        $values = [];
+        $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
+        foreach ($allRegisterationDetails as $key => $RegisterationDetails)
+        {
+            // select userId where regid id regDetails
+            $Registeration = Registeration::find($RegisterationDetails->registerationId);
+            $user = User::find($Registeration->userId);
+            //get user question and answers
+            foreach ($questions as $key => $question)
+            {
+                $relation = RegistrationFormsOptions::all()
+                    ->where('registeration_form_id' , $formId)
+                    ->where('options_id' , $question->id)->first();
+
+                $value = RegistrationFormOptionsValue::all()
+                    ->where('registration_forms_options_id' ,$relation->rid )
+                    ->where('registrationDetailsId' ,$RegisterationDetails->id )
+                    ->first();
+                array_push($values, $value);
+            }
+            $AllQandA_of_One_User = array(
+                        'user' => $user ,
+                        'questions' => $questions,
+                        'values' => $values
+                    );
+            $values = [] ;
+            array_push($All_Users_QandA, $AllQandA_of_One_User);
+        }
+        return view('pages.showSubmittedForms')
+        ->with('All_Users_QandA' , $All_Users_QandA)
+        ->with('form',$form)
+        ->with('userType', new UserType());
+    }
 
 
-    public function showTables($formId){
+    public function showTableData($formId){
+
         $form = RegisterationForm::find($formId);
         $questions = $form->options()->get();
         $All_Users_QandA = [] ;
         $values = [] ;
-        $allRegisterationDetails = RegisterationDetails::all()
-                                    ->where('registrationFormId', $formId)
-                                    ->where('isdeleted', 0);
-        foreach ($allRegisterationDetails as $key => $RegisterationDetails){
+        $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
+
+        foreach ($allRegisterationDetails as $key => $RegisterationDetails)
+        {
             // select userId where regid id regDetails
             $Registeration = Registeration::find($RegisterationDetails->registerationId);
             $user = User::find($Registeration->userId);
@@ -68,38 +106,6 @@ class RegistrationFormsOptionsValueController extends Controller
 
             array_push($All_Users_QandA, $AllQandA_of_One_User);
         }
-        return view('pages.showSubmittedForms')
-        ->with('All_Users_QandA' , $All_Users_QandA)
-        ->with('form',$form)
-        ->with('userType', new UserType());
-    }
-
-
-    public function showTableData($formId){
-        $form = RegisterationForm::find($formId);
-        $questions = $form->options()->get();
-        $All_Users_QandA = [] ;
-        $values = [] ;
-        $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
-        foreach ($allRegisterationDetails as $key => $RegisterationDetails){
-            // select userId where regid id regDetails
-            $Registeration = Registeration::find($RegisterationDetails->registerationId);
-            $userId = $Registeration->userId;
-            $user = User::find($Registeration->userId);
-            //get user question and answers
-            foreach ($questions as $key => $question){
-                $relation = RegistrationFormsOptions::all()->where('registeration_form_id' , $formId)->where('options_id' , $question->id)->first();
-                $value = RegistrationFormOptionsValue::all()->where('registration_forms_options_id' ,$relation->rid )->first();
-                array_push($values, $value);
-            }
-            $AllQandA_of_One_User = array(
-                'user' => $user ,
-                'questions' => $questions,
-                'values' => $values
-            );
-            array_push($All_Users_QandA, $AllQandA_of_One_User);
-        }
-
         return $All_Users_QandA;
     }
 
@@ -114,7 +120,21 @@ class RegistrationFormsOptionsValueController extends Controller
     }
 
 
-    public function downloadAllPDFs($formId){
+    public function downloadAllPDFs($formId)
+    {
+        $form = RegisterationForm::find($formId);
+        $path = storage_path('app\public\Forms_pdf_File');
+        $this->storeAllPDFs($formId);
+        return $this->store_And_Download_zipFile($form->name , $path);
+    }
+    public function delete($path)
+    {
+        $path = storage_path('app\public\Forms_pdf_File');
+        $imageRoute =  $path.'/'.$post->cover_Image;
+        Storage::delete( $imageRoute );
+    }
+    public function storeAllPDFs($formId)
+    {
         $tableData = $this->showTableData($formId);
         //logged in user id
         $id = auth()->user()->id;
@@ -122,28 +142,37 @@ class RegistrationFormsOptionsValueController extends Controller
         $filename = 'user_Form_Value';
         //get just extension
         $extension = 'pdf';
-        foreach ($tableData as $key => $data) {
+        foreach ($tableData as $key => $data)
+        {
             $data = array('data' => $data);
-            //fileNameToStore
             $fileName = $filename.'_'.$id.'_'.$key.'_'.time().'.'.$extension;
-            $pdf_Html = PDF::loadView('viewValuesPdf' , $data);
-            $path = $pdf_Html->storeAs('public/users_pdf_Files',$fileName);
-            dd($path);
-    //         File::put(public_path('/upload/json/'.$fileName),$data);
-	//   return Response::download(public_path('/upload/jsonfile/'.$fileName));
-
-
-            //upload
+            $pdf_File = PDF::loadView('viewValuesPdf' , $data)->save('storage\Forms_pdf_File/'.$fileName);
         }
-
-
-
-
-        return $pdf->download('pdfview.pdf');
     }
 
+    public function store_And_Download_zipFile($formName , $path )
+    {
+        $zip_fileName = $formName.'_submissions.zip';
+        $zip_file = "storage/Forms_pdf_File/".$zip_fileName;
+        $zip = new \ZipArchive();
+        $zip->open($zip_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
-    public function create(){}
+        $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+        foreach ($files as $name => $file)
+        {
+            // We're skipping all subfolders
+            if (!$file->isDir()) {
+                //single pdf file path
+                $filePath = $file->getRealPath();
+                //extracting filename with substr/strlen
+                $relativePath = substr($filePath, strlen($path) + 1);
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+        $zip->close();
+        return response()->download($zip_file);
+    }
+
 
 
     public function calcAge($birthDate){
@@ -170,10 +199,13 @@ class RegistrationFormsOptionsValueController extends Controller
         /* store in registration Details */
         $this->registrationDetailsStore($currentboardId, 1 , $this->registeration_M->id , $request->input('formId'));
         /* get last registrationDetailsId */
-        $registrationDetailsLastId = $this->registerationDetails_M->id;
-        $this->registerationDetails_M = new RegisterationDetails();
+        $registeration = Registeration::all()->where( 'userId' , auth()->user()->id)->last();
+        $rd = RegisterationDetails::all()
+                    ->where( 'registrationFormId' , $request->input('formId') )
+                    ->where('registerationId', $registeration->id)
+                    ->first();
         /* store values by regformId and $_POST(optionId with its answer) */
-        $this->storeValues($request , $request->input('formId') , $registrationDetailsLastId);
+        $this->storeValues($request , $rd->id);
         return redirect('/registeration')->with(['success'=> 'Form Submitted Successfuly']);
     }
 
@@ -211,15 +243,10 @@ class RegistrationFormsOptionsValueController extends Controller
         }
     }
 
-
+    public function create(){}
+    public function index(){}
     public function show($id){}
-
-
-        public function edit($id){}
-
-
-        public function update(Request $request, $id){}
-
-
-        public function destroy($id){}
+    public function edit($id){}
+    public function update(Request $request, $id){}
+    public function destroy($id){}
 }

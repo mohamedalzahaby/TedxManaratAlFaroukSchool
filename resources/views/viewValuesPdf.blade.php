@@ -1,37 +1,35 @@
-@foreach ($data as $value)
-    @php
-        dd($data);
-        $user = $value['user'];
-        $questions = $value['questions'];
-        $answers = $value['values'];
-    @endphp
-    <form>
+@php
+    $user = $data['user'];
+    $questions = $data['questions'];
+    $answers = $data['values'];
+@endphp
+<form>
+    <div>
+        <label><b>first Name :</b></label>
+        <p>{{$user->fname}}</p>
+    </div>
+    <div>
+        <label><b>Last Name :</b></label>
+        <p>{{$user->lname}}</p>
+    </div>
+    <div>
+        <label><b>Email :</b></label>
+        <p>{{$user->email}}</p>
+    </div>
+    <div>
+        <label><b>Gender :</b></label>
+        <p>{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}</p>
+    </div>
+    <div>
+        <label><b>Birth Date :</b></label>
+        <p>{{$user->birthDate}}</p>
+    </div>
+    @foreach ($questions as $key => $question)
         <div>
-            <b><label>first Name :</label></b>
-            <p>{{$user->fname}}</p>
+            <label><b>{{$question->name}} :</b></label>
+            <p>{{$answers[$key]->value}}</p>
         </div>
-        <div>
-            <b><label>Last Name :</label></b>
-            <p>{{$user->lname}}</p>
-        </div>
-        <div>
-            <b><label>Email :</label></b>
-            <p>{{$user->email}}</p>
-        </div>
-        <div>
-            <b><label>Gender :</label></b>
-            <p>{{$user->ismale = ($user->ismale)? 'Male': 'Female'}}</p>
-        </div>
-        <div>
-            <b><label>Birth Date :</label></b>
-            <p>{{$user->birthDate}}</p>
-        </div>
-        @foreach ($questions as $key => $question)
-            <div>
-                <b><label>{{$question->name}} :</label></b>
-                <p>{{$answers[$key]->value}}</p>
-            </div>
-        @endforeach
-    </form>
-@endforeach
+    @endforeach
+</form>
+
 
