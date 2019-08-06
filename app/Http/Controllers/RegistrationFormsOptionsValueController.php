@@ -125,15 +125,6 @@ class RegistrationFormsOptionsValueController extends Controller
         $form = RegisterationForm::find($formId);
         $path = storage_path('app\public\Forms_pdf_File_user_').auth()->user()->id;
         $relativePath = 'public\Forms_pdf_File_user_'.auth()->user()->id;
-        // dd($relativePath);
-        // if directory  exist  delete directory
-        // if(File::exists($relativePath)) {
-        //     Storage::deleteDirectory($relativePath);
-        // }
-        // else{
-        //     Storage::makeDirectory($relativePath);
-        // }
-        // Storage::makeDirectory($relativePath);
         if(File::exists($path)) {
             Storage::deleteDirectory($relativePath);
             Storage::makeDirectory($relativePath);
