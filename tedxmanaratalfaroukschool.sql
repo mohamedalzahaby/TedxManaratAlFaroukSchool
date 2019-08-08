@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2019 at 02:19 AM
+-- Generation Time: Aug 08, 2019 at 10:26 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -93,8 +93,11 @@ CREATE TABLE `board` (
 
 INSERT INTO `board` (`id`, `name`, `academicYearId`, `openingDate`, `closingDate`, `isdeleted`, `updated_at`, `created_at`, `description`, `image`) VALUES
 (1, 'tedxsalon2019', 1, '2019-07-12', '2019-07-30', 0, '2019-07-31 11:58:30', '2019-07-12 18:04:14', '<p>description</p>', 'maxresdefault_1564581510.jpg'),
-(2, 'tedx2018', 1, '2018-11-05', '2018-12-31', 0, '2019-07-12 18:04:14', '2019-07-12 18:04:14', '', ''),
-(3, 'Event Registration Form', 1, '1212-12-12', '2019-02-02', 0, '2019-07-31 20:25:30', '2019-07-31 20:25:30', '<p>sdsd</p>', 'maxresdefault_1564611930.jpg');
+(2, 'tedx2018', 1, '2018-11-05', '2018-12-31', 1, '2019-08-02 16:40:42', '2019-07-12 18:04:14', '', ''),
+(3, 'Event Registration Form', 1, '1212-12-12', '2019-02-02', 1, '2019-08-02 16:44:19', '2019-07-31 20:25:30', '<p>sdsd</p>', 'maxresdefault_1564611930.jpg'),
+(4, 'ayhaga', 1, '0122-12-02', '1212-12-12', 0, '2019-08-02 16:44:51', '2019-08-02 16:44:51', '<p>easdasdasd</p>', 'noimage.jpg'),
+(5, 'tedxLive2019', 1, '2019-02-02', '2019-11-02', 1, '2019-08-05 05:12:32', '2019-08-05 05:10:23', '<p>description</p>', 'tedx_1564989023.jpg'),
+(6, 'tedx Event 2019', 1, '2018-12-12', '2020-02-02', 0, '2019-08-05 05:39:20', '2019-08-05 05:39:20', '<p>description</p>', 'tedx_1564990760.jpg');
 
 -- --------------------------------------------------------
 
@@ -229,7 +232,10 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `name`, `jobDescribtion`, `isdeleted`, `updated_at`, `created_at`, `board_id`, `image`) VALUES
-(1, 'marketing', 'marketing describtion', 1, '2019-07-31 20:41:04', '2019-07-17 01:59:39', 1, '');
+(1, 'marketing', 'marketing describtion', 1, '2019-07-31 20:41:04', '2019-07-17 01:59:39', 1, ''),
+(2, 'marketing', '<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Cras ultricies ligula sed magna dictum porta.</p>', 0, '2019-08-01 05:09:15', '2019-08-01 05:09:15', 1, 'noimage.jpg'),
+(3, 'hr', '<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Cras ultricies ligula sed magna dictum porta.</p>', 0, '2019-08-01 05:11:19', '2019-08-01 05:11:19', 1, 'noimage.jpg'),
+(4, 'design', '<p>department description</p>', 0, '2019-08-02 16:50:27', '2019-08-02 16:50:27', 4, 'noimage.jpg');
 
 -- --------------------------------------------------------
 
@@ -283,7 +289,12 @@ INSERT INTO `event` (`id`, `name`, `date`, `eventStart`, `eventEnd`, `descriptio
 (5, 'tedx Event 2019', '2019-12-10', '09:01:00', '22:00:00', 'event description', 2, 1, 1, 1, '2019-07-31 18:17:51', '2019-07-25 11:21:23', 'levi_s_one_and_only__levi_x_reader__by_aenafarooq-d9x1cur_1564060883.png', 'Manarat Alfarouk School, first Settlement, Cairo', '', ''),
 (6, 'tedx', '2019-12-12', '02:12:00', '00:12:00', '<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ante ipsum primis in faucibus orci luctu</p>', 2, 1, 1, 1, '2019-07-31 18:17:46', '2019-07-31 09:17:44', 'aot_1564579582.png', 'mohamed house', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', ''),
 (7, 'salon', '2211-12-12', '00:12:00', '14:11:00', '<p>description</p>', 1, 1, 1, 0, '2019-07-31 21:09:39', '2019-07-31 18:14:17', 'maxresdefault_1564604057.jpg', 'dddd', 'https://goo.gl/maps/XLqLWqm2XThjS2GJ9', ''),
-(8, 'nourhan eventy', '2222-12-12', '00:00:00', '00:12:00', '<p>Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Nulla porttitor accumsan tincidunt.</p>\r\n\r\n<p>Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla quis lorem ut libero malesuada feugiat. Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>\r\n\r\n<p>Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget malesuada.</p>\r\n\r\n<p>Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Sed porttitor lectus nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh.</p>', 1, 1, 1, 0, '2019-07-31 22:17:36', '2019-07-31 21:15:58', 'tedx_1564615388.jpg', '3afroto', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/');
+(8, 'nourhan eventy', '2222-12-12', '00:00:00', '00:12:00', '<p>Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla quis lorem ut libero malesuada feugiat. Nulla porttitor accumsan tincidunt.</p>\r\n\r\n<p>Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec rutrum congue leo eget malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla quis lorem ut libero malesuada feugiat. Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>\r\n\r\n<p>Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Donec rutrum congue leo eget malesuada.</p>\r\n\r\n<p>Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Proin eget tortor risus. Sed porttitor lectus nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh.</p>', 1, 1, 1, 1, '2019-08-01 04:45:13', '2019-07-31 21:15:58', 'tedx_1564615388.jpg', '3afroto', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/'),
+(9, 'hazem event', '0122-12-12', '00:12:00', '00:12:00', '<p>masdd</p>', 1, 1, 1, 0, '2019-08-02 15:39:51', '2019-08-02 15:39:51', 'noimage.jpg', 'mohamed', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/'),
+(10, 'hazem event again', '2019-07-16', '00:12:00', '02:12:00', '<p>ddd</p>', 1, 1, 1, 0, '2019-08-02 19:04:05', '2019-08-02 17:41:21', 'tedx_1564779733.jpg', 'asas', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/'),
+(11, 'hazem event again', '2019-07-16', '24:00:00', '36:00:00', 'sdsd', 1, 1, 1, 0, '2019-08-02 17:41:26', '2019-08-02 17:41:26', 'noimage.jpg', 'asas', 'sssd', 'sdsdsd'),
+(12, 'hazem event again', '2019-07-16', '00:12:00', '00:12:00', '<p>sdsd</p>', 1, 1, 1, 0, '2019-08-02 17:31:09', '2019-08-02 17:41:47', 'tedx_1564774269.jpg', 'asas', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/'),
+(13, 'Event Registration Form', '1212-12-12', '00:12:00', '00:12:00', '<p>wesdsds</p>', 1, 1, 1, 0, '2019-08-02 17:28:48', '2019-08-02 17:28:48', 'tedx_1564774128.jpg', 'wewe', 'https://goo.gl/maps/2qzY7E6Cda3vWkpQA', 'https://www.facebook.com/events/2381559635498480/');
 
 -- --------------------------------------------------------
 
@@ -311,12 +322,12 @@ INSERT INTO `eventform` (`id`, `event_id`, `registeration_form_id`, `isdeleted`,
 (4, 1, 24, 0, '2019-07-22 02:43:57', '2019-07-22 02:43:57'),
 (5, 1, 25, 0, '2019-07-24 12:39:56', '2019-07-24 12:39:56'),
 (6, 1, 26, 0, '2019-07-25 13:50:48', '2019-07-25 13:50:48'),
-(7, 1, 1, 0, '2019-07-26 14:03:43', '2019-07-26 14:03:43'),
-(8, 1, 2, 0, '2019-07-26 14:10:12', '2019-07-26 14:10:12'),
-(9, 1, 3, 0, '2019-07-26 14:11:53', '2019-07-26 14:11:53'),
 (10, 1, 4, 0, '2019-07-26 14:12:44', '2019-07-26 14:12:44'),
 (11, 1, 5, 0, '2019-07-26 14:18:08', '2019-07-26 14:18:08'),
-(12, 1, 6, 0, '2019-07-26 14:18:16', '2019-07-26 14:18:16');
+(12, 1, 6, 0, '2019-07-26 14:18:16', '2019-07-26 14:18:16'),
+(13, 7, 2, 0, '2019-08-05 08:00:04', '2019-08-05 08:00:04'),
+(14, 7, 3, 0, '2019-08-05 09:49:49', '2019-08-05 09:49:49'),
+(15, 7, 1, 0, '2019-08-05 13:01:18', '2019-08-05 13:01:18');
 
 -- --------------------------------------------------------
 
@@ -497,8 +508,8 @@ CREATE TABLE `options` (
 --
 
 INSERT INTO `options` (`id`, `name`, `dataTypeId`, `isDeleted`, `updated_at`, `created_at`) VALUES
-(1, 'what is your favourite color?', 14, 0, '2019-07-26 17:13:42', '2019-07-26 17:13:42'),
-(2, 'what is your secret?', 14, 0, '2019-07-26 17:13:42', '2019-07-26 17:13:42');
+(1, 'what is your favourite color?', 14, 0, '2019-08-05 11:44:19', '2019-08-05 11:44:19'),
+(2, 'what is your secret?', 14, 0, '2019-08-05 11:44:19', '2019-08-05 11:44:19');
 
 -- --------------------------------------------------------
 
@@ -636,7 +647,9 @@ INSERT INTO `permissions` (`id`, `name`, `isdeleted`, `updated_at`, `created_at`
 (43, 'attach permission', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
 (44, 'detach permission', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
 (45, 'attach user Type', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
-(46, 'detach user Type', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58');
+(46, 'detach user Type', 0, '2019-07-29 20:54:58', '2019-07-29 20:54:58'),
+(47, 'Show All Users', 0, '2019-08-05 06:46:28', '2019-08-05 06:46:28'),
+(48, 'Show All Registration Forms', 0, '2019-08-05 06:48:43', '2019-08-05 06:48:43');
 
 -- --------------------------------------------------------
 
@@ -706,7 +719,9 @@ INSERT INTO `permission_user_type` (`id`, `user_type_id`, `permission_id`, `isde
 (48, 5, 46, 0, '2019-07-29 23:09:40', '2019-07-29 23:09:40'),
 (49, 2, 1, 0, '2019-07-29 23:10:16', '2019-07-29 23:10:16'),
 (50, 2, 2, 0, '2019-07-29 23:10:21', '2019-07-29 23:10:21'),
-(51, 4, 20, 0, '2019-07-30 08:36:20', '2019-07-30 08:36:20');
+(51, 4, 20, 0, '2019-07-30 08:36:20', '2019-07-30 08:36:20'),
+(52, 5, 47, 0, '2019-08-05 07:00:07', '2019-08-05 07:00:07'),
+(53, 5, 48, 0, '2019-08-05 07:00:11', '2019-08-05 07:00:11');
 
 -- --------------------------------------------------------
 
@@ -864,7 +879,8 @@ CREATE TABLE `registeration` (
 --
 
 INSERT INTO `registeration` (`id`, `userId`, `academicYearId`, `isdeleted`, `updated_at`, `created_at`) VALUES
-(1, 1, 2, 0, '2019-07-26 17:13:59', '2019-07-26 17:13:59');
+(1, 1, 1, 0, '2019-08-06 04:40:08', '2019-08-06 04:40:08'),
+(9, 14, 1, 0, '2019-08-06 05:26:29', '2019-08-06 05:26:29');
 
 -- --------------------------------------------------------
 
@@ -888,7 +904,8 @@ CREATE TABLE `registerationdetails` (
 --
 
 INSERT INTO `registerationdetails` (`id`, `registerationId`, `statusId`, `registrationFormId`, `isdeleted`, `updated_at`, `created_at`, `boardId`) VALUES
-(1, 1, 1, 1, 0, '2019-07-26 17:13:59', '2019-07-26 17:13:59', 1);
+(1, 1, 1, 1, 0, '2019-08-06 04:40:08', '2019-08-06 04:40:08', 6),
+(9, 9, 1, 1, 0, '2019-08-06 05:26:30', '2019-08-06 05:26:30', 6);
 
 -- --------------------------------------------------------
 
@@ -912,7 +929,7 @@ CREATE TABLE `registerationform` (
 --
 
 INSERT INTO `registerationform` (`id`, `name`, `registrationFormTypeId`, `registerAs`, `isRegistrationClosed`, `isdeleted`, `updated_at`, `created_at`) VALUES
-(1, 'zahaby form', 1, 4, 0, 0, '2019-07-27 10:57:45', '2019-07-26 17:13:42');
+(1, 'zahabyon', 1, 4, 0, 0, '2019-08-05 11:44:19', '2019-08-05 11:44:19');
 
 -- --------------------------------------------------------
 
@@ -934,8 +951,8 @@ CREATE TABLE `registrationformoptions` (
 --
 
 INSERT INTO `registrationformoptions` (`rid`, `registeration_form_id`, `options_id`, `isdeleted`, `updated_at`, `created_at`) VALUES
-(1, 1, 1, 0, '2019-07-26 19:13:42', '2019-07-26 19:13:42'),
-(2, 1, 2, 0, '2019-07-26 19:13:42', '2019-07-26 19:13:42');
+(1, 1, 1, 0, '2019-08-05 13:44:19', '2019-08-05 13:44:19'),
+(2, 1, 2, 0, '2019-08-05 13:44:19', '2019-08-05 13:44:19');
 
 -- --------------------------------------------------------
 
@@ -958,8 +975,10 @@ CREATE TABLE `registrationformoptionsvalue` (
 --
 
 INSERT INTO `registrationformoptionsvalue` (`id`, `value`, `registrationDetailsId`, `isdeleted`, `updated_at`, `created_at`, `registration_forms_options_id`) VALUES
-(1, 'red', 1, 0, '2019-07-26 17:13:59', '2019-07-26 17:13:59', 1),
-(2, 'i love tedx', 1, 0, '2019-07-26 17:13:59', '2019-07-26 17:13:59', 2);
+(1, 'red', 1, 0, '2019-08-06 04:40:08', '2019-08-06 04:40:08', 1),
+(2, 'i love tedx', 1, 0, '2019-08-06 04:40:08', '2019-08-06 04:40:08', 2),
+(7, 'black', 9, 0, '2019-08-06 05:26:30', '2019-08-06 05:26:30', 1),
+(8, 'mama', 9, 0, '2019-08-06 05:26:30', '2019-08-06 05:26:30', 2);
 
 -- --------------------------------------------------------
 
@@ -1054,7 +1073,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `email_verified_at`, `password`, `userTypeId`, `ismale`, `birthDate`, `remember_token`, `updated_at`, `created_at`, `isdeleted`) VALUES
-(1, 'mohamed', 'alzahaby', 'mohamedazahaby@gmail.com', NULL, '$2y$10$t.SXFyOt5qw.R5.KmoKhsuGLfr3mJ5suhRVrK.DNjJpS0pRsBIGrO', 6, 1, '1997-07-08', 'T0YCkZ46yIzSp0ZAGJPysP6D8XZb9v5oBwWRldkrsvwuKhHk0rR7i8A4ylRt', '2019-07-30 09:03:24', '2019-07-22 00:44:30', 0);
+(1, 'mohamed', 'alzahaby', 'mohamedazahaby@gmail.com', NULL, '$2y$10$t.SXFyOt5qw.R5.KmoKhsuGLfr3mJ5suhRVrK.DNjJpS0pRsBIGrO', 5, 1, '1997-07-08', 'GVeUUB7nUkeF7jFvK2IM1xVHR5cE2snnplr8OIHt0w8zrp5ptWD4t11boccf', '2019-08-05 04:59:37', '2019-07-22 00:44:30', 0),
+(13, 'mohamed', 'alzahaby', 'mohamed1501643@miuegypt.edu.eg', '2019-08-04 21:36:25', '$2y$10$38TgsTPbfmZeROfGZGGEy.PeUf0yU7j5vKim/A8uRxl0bgREXa/Fy', 1, 1, '2019-08-13', NULL, '2019-08-04 21:36:25', '2019-08-04 20:34:42', 0),
+(14, 'mohamed', 'alzahaby', 'mohamedazahaby@hotmail.com', NULL, '$2y$10$qfEQAUnCaWREpmYI3zkkIuqQMKYINkyhWFjVqmXml/yNwZNA4t7F.', 1, 1, '2019-12-12', NULL, '2019-08-05 10:38:03', '2019-08-05 10:38:03', 0);
 
 -- --------------------------------------------------------
 
@@ -1437,7 +1458,7 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `board`
 --
 ALTER TABLE `board`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `contactnumber`
@@ -1479,7 +1500,7 @@ ALTER TABLE `datepurchase`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `departmentform`
@@ -1491,13 +1512,13 @@ ALTER TABLE `departmentform`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `eventform`
 --
 ALTER TABLE `eventform`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `interests`
@@ -1587,13 +1608,13 @@ ALTER TABLE `paymentmethodoptionvalue`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `permission_user_type`
 --
 ALTER TABLE `permission_user_type`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -1641,13 +1662,13 @@ ALTER TABLE `purchasedetails`
 -- AUTO_INCREMENT for table `registeration`
 --
 ALTER TABLE `registeration`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `registerationdetails`
 --
 ALTER TABLE `registerationdetails`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `registerationform`
@@ -1665,7 +1686,7 @@ ALTER TABLE `registrationformoptions`
 -- AUTO_INCREMENT for table `registrationformoptionsvalue`
 --
 ALTER TABLE `registrationformoptionsvalue`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `registrationformtype`
@@ -1695,7 +1716,7 @@ ALTER TABLE `userinterests`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `usersnotifications`

@@ -1,37 +1,38 @@
 @php
-    $lastEventData = DB::table('Event')->latest()->first();
-    $eventAddressString =  $lastEventData->address;
+    $lastEvent = DB::table('Event')->where('isdeleted',0)->latest()->first();
 @endphp
-<!-- Section - Event banner start -->
-<section id="event-banner" class="bg-white pull-up">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4 text-center">
-          <i class="fa fa-clock-o display-block text-base-color title-extra-large-2"></i>
-          <span class="display-block font-family-alt font-weight-700 letter-spacing-1 margin-5 no-margin-bottom no-margin-rl text-large text-uppercase">
-            Date &amp; Time
-          </span>
-          <p class="margin-3 font-family-alt no-margin-bottom no-margin-rl title-small text-gray-dark-2">
-            {{ $lastEventData->date }}<br>
-            {{ $lastEventData->eventStart.' to '.$lastEventData->eventEnd  }}
-          </p>
+@if ($lastEvent != null)
+    <!-- Section - Event banner start -->
+    <section id="event-banner" class="bg-white pull-up">
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+            <i class="fa fa-clock-o display-block text-base-color title-extra-large-2"></i>
+            <span class="display-block font-family-alt font-weight-700 letter-spacing-1 margin-5 no-margin-bottom no-margin-rl text-large text-uppercase">
+                Date &amp; Time
+            </span>
+            <p class="margin-3 font-family-alt no-margin-bottom no-margin-rl title-small text-gray-dark-2">
+                {{ $lastEvent->date }}<br>
+                {{ $lastEvent->eventStart.' to '.$lastEvent->eventEnd  }}
+            </p>
+            </div>
+            <!-- //.col-sm-4 -->
+            <div class="col-sm-4 xs-margin-8 xs-no-margin-bottom xs-no-margin-rl text-center">
+            <i class="fa fa-map-marker display-block text-base-color title-extra-large-2"></i>
+            <span class="display-block font-family-alt font-weight-700 letter-spacing-1 margin-5 no-margin-bottom no-margin-rl text-large text-uppercase">
+                Venue
+            </span>
+            <p class="margin-3 font-family-alt no-margin-bottom no-margin-rl title-small text-gray-dark-2">
+                    {{$lastEvent->address}}
+            </p>
+            </div>
+            <!-- //.col-sm-4 -->
         </div>
-        <!-- //.col-sm-4 -->
-        <div class="col-sm-4 xs-margin-8 xs-no-margin-bottom xs-no-margin-rl text-center">
-          <i class="fa fa-map-marker display-block text-base-color title-extra-large-2"></i>
-          <span class="display-block font-family-alt font-weight-700 letter-spacing-1 margin-5 no-margin-bottom no-margin-rl text-large text-uppercase">
-            Venue
-          </span>
-          <p class="margin-3 font-family-alt no-margin-bottom no-margin-rl title-small text-gray-dark-2">
-                {{$eventAddressString}}
-          </p>
+        <!-- //.row -->
         </div>
-        <!-- //.col-sm-4 -->
-      </div>
-      <!-- //.row -->
-    </div>
-  </section>
-  <!-- //Section - Event banner end -->
+    </section>
+    <!-- //Section - Event banner end -->
+@endif
 
 
 

@@ -20,6 +20,8 @@
     @endforeach
     {{-- {{$posts->links()}} --}}
 @else
-    <p>no Posts</p>
+    <div class="container" >
+        <h1>No Posts Yet</h1>
+    </div>
 @endif
 @endsection

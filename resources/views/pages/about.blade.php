@@ -1,10 +1,9 @@
 @php
-    $lastEventData = DB::table('Event')->latest()->first();
-    // dd($lastEventData);
-    $ci = url("../images/$lastEventData->coverImage");
-    $style = "background-image: url('../images/$lastEventData->coverImage'); background-position: center bottom !important;";
-    // dd($ci);
-    // die();
+$lastEvent = DB::table('Event')->where('isdeleted',0)->latest()->first();
+if ($lastEvent != null) {
+    $ci = url("../images/$lastEvent->coverImage");
+    $style = "background-image: url('../images/$lastEvent->coverImage'); background-position: center bottom !important;";
+}
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -45,42 +44,43 @@
             </div>
             <!-- //.bg-cover -->
 
-
-            <div class="bg-cover bg-overlay-black-7 display-block height-100 width-100">
-                <div class="display-table height-100 position-absolute position-top position-left width-100">
-                    <div class="display-table-cell vertical-align-middle">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1 text-center">
-                                    <h2 class="font-family-alt font-weight-900 letter-spacing-2 text-white xs-title-extra-large sm-title-extra-large-3 title-extra-large-5">
-                                        <span class="text-base-color">{{$lastEventData->name}}
-                                    </h2>
-                                    <br>
-                                    <h3 class="font-weight-700 letter-spacing-2 text-white xs-title-large sm-title-extra-large title-extra-large-3">
-                                        {{$lastEventData->date}}
-                                    </h3>
-                                    <p class="font-family-alt text-white sm-title-small title-medium">
-                                        at
-                                    </p>
-                                    <h4 class="font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-small sm-title-medium title-extra-large">
-                                        {{$lastEventData->address}}
-                                    </h4>
-                                    <!-- <br>
-                    <a href="/register/" class="btn btn-base-color sm-btn-medium btn-large">
-                      Register Now
-                    </a> -->
+            @if ($lastEvent != null)
+                <div class="bg-cover bg-overlay-black-7 display-block height-100 width-100">
+                    <div class="display-table height-100 position-absolute position-top position-left width-100">
+                        <div class="display-table-cell vertical-align-middle">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1 text-center">
+                                        <h2 class="font-family-alt font-weight-900 letter-spacing-2 text-white xs-title-extra-large sm-title-extra-large-3 title-extra-large-5">
+                                            <span class="text-base-color">{{$lastEvent->name}}
+                                        </h2>
+                                        <br>
+                                        <h3 class="font-weight-700 letter-spacing-2 text-white xs-title-large sm-title-extra-large title-extra-large-3">
+                                            {{$lastEvent->date}}
+                                        </h3>
+                                        <p class="font-family-alt text-white sm-title-small title-medium">
+                                            at
+                                        </p>
+                                        <h4 class="font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-small sm-title-medium title-extra-large">
+                                            {{$lastEvent->address}}
+                                        </h4>
+                                        <!-- <br>
+                        <a href="/register/" class="btn btn-base-color sm-btn-medium btn-large">
+                        Register Now
+                        </a> -->
+                                    </div>
+                                    <!-- //.col-md-10 -->
                                 </div>
-                                <!-- //.col-md-10 -->
+                                <!-- //.row -->
                             </div>
-                            <!-- //.row -->
+                            <!-- //.container -->
                         </div>
-                        <!-- //.container -->
+                        <!-- //.display-table-cell -->
                     </div>
-                    <!-- //.display-table-cell -->
+                    <!-- //.display-table -->
                 </div>
-                <!-- //.display-table -->
-            </div>
-            <!-- //.bg-cover -->
+                <!-- //.bg-cover -->
+            @endif
         </div>
         <!-- //.slides -->
     </div>
@@ -162,34 +162,35 @@
 
 {{-- "../images/dimensions.jpg" --}}
 
-
-<section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" style='background-image: url("../storage/cover_images/{{$lastEventData->coverImage}}");
-background-position: center bottom !important;'>
-    <div class="display-table-cell vertical-align-middle">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 text-center">
-                    <h3 class="display-block font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-extra-large-4 title-extra-large-4">
-                        Venue
-                    </h3>
-                    <br>
-                    <p class="font-family-alt letter-spacing-1 margin-3 no-margin-bottom no-margin-rl text-white xs-title-small title-large text-uppercase font-weight-700">
-                        {{$lastEventData->address}}
-                    </p>
-                    <br>
-                    <a href="{{$lastEventData->GPSURL}}">
-                        View location on map
-                    </a>
+@if ($lastEvent != null)
+    <section id="venue" class="bg-cover bg-overlay-black-4 display-table height-100 no-padding width-100" style='background-image: url("../storage/cover_images/{{$lastEvent->coverImage}}");
+    background-position: center bottom !important;'>
+        <div class="display-table-cell vertical-align-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <h3 class="display-block font-family-alt font-weight-900 letter-spacing-2 text-uppercase text-white xs-title-extra-large-4 title-extra-large-4">
+                            Venue
+                        </h3>
+                        <br>
+                        <p class="font-family-alt letter-spacing-1 margin-3 no-margin-bottom no-margin-rl text-white xs-title-small title-large text-uppercase font-weight-700">
+                            {{$lastEvent->address}}
+                        </p>
+                        <br>
+                        <a href="{{$lastEvent->GPSURL}}">
+                            View location on map
+                        </a>
+                    </div>
+                    <!-- //.col-md-8 -->
                 </div>
-                <!-- //.col-md-8 -->
+                <!-- //.row -->
             </div>
-            <!-- //.row -->
+            <!-- //.container -->
         </div>
-        <!-- //.container -->
-    </div>
-    <!-- //.display-table-cell -->
-</section>
-<!-- //Section - Venue End -->
+        <!-- //.display-table-cell -->
+    </section>
+    <!-- //Section - Venue End -->
+@endif
 
 
 
