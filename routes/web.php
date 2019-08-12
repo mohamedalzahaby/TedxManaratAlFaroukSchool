@@ -1,7 +1,7 @@
 <?php
 use App\DataType;
 
-include('Globals.php');
+// include('Globals.php');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +29,6 @@ Route::get('/product', function () {
 });
 Route::get('/ourTeam', function () {
     return view('pages.ourTeam');
-});
-Route::get('/sendMail', function () {
-    return view('pages.sendMail');
 });
 Route::get('/signUp', function () {
     return view('auth.register');

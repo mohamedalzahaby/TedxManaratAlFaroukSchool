@@ -72,7 +72,7 @@
 /* Home BG Slideshow */
 
 #home-bg-slideshow .bg-slideshow-wrapper .slides>.bg-cover:nth-child(1) {
-    background: url("../images/tedxCoverImg.jpg");
+    background: url("../storage/logos/tedxCoverImg.jpg");
 }
 
 #home-bg-slideshow .bg-slideshow-wrapper .slides>.bg-cover:nth-child(2) {
@@ -216,11 +216,11 @@
   Section - Venue
   ---------------
 */
-
+/*
 #venue {
-    background-image: url("../images/dimensions.jpg");
+    background-image: url("../storage/logos/dimensions.jpg");
     background-position: center bottom !important;
-}
+} */
 
 
 /*

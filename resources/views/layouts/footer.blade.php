@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="footer-logo xs-text-center">
-            <img src="{{ asset('images/logos/TEDx.png') }}" alt="tedxLogo">
+            <img src="{{ asset('storage/logos/TEDx.png') }}" alt="tedxLogo">
           </div>
           <!-- //.footer-logo -->
           <p class="disclaimer xs-text-center">

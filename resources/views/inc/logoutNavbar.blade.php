@@ -11,7 +11,7 @@
           </button>
 
           <a class="navbar-brand font-family-alt letter-spacing-1 text-extra-large text-uppercase" href="/about">
-            <img class="logo-navbar-dark" src="{{ asset('images/logos/tedxWhite.png') }}" alt="TEDx"/>
+            <img class="logo-navbar-dark" src="{{ asset('storage/logos/tedxWhite.png') }}" alt="TEDx"/>
 
           </a>
         </div>
