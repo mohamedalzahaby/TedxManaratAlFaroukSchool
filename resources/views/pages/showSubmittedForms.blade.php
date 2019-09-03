@@ -1,7 +1,7 @@
-{{-- @php
-dd($All_Users_QandA);
+@php
+dd($All_Users_QandA[0]->values);
 
-@endphp --}}
+@endphp
 
 @php
     $ctr=1;

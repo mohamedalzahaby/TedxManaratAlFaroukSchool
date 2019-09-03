@@ -37,6 +37,10 @@ class RegistrationFormsOptionsValueController extends Controller
         $All_Users_QandA = [];
         $values = [];
         $allRegisterationDetails = RegisterationDetails::all()->where('registrationFormId', $formId);
+
+        if ( $allRegisterationDetails->isEmpty() ) {
+            return redirect('registrationForm/'.$formId)->with('error' , 'No users submitted the form yet.');
+        }
         foreach ($allRegisterationDetails as $key => $RegisterationDetails)
         {
             // select userId where regid id regDetails
@@ -63,6 +67,7 @@ class RegistrationFormsOptionsValueController extends Controller
             $values = [] ;
             array_push($All_Users_QandA, $AllQandA_of_One_User);
         }
+
         return view('pages.showSubmittedForms')
         ->with('All_Users_QandA' , $All_Users_QandA)
         ->with('form',$form)
